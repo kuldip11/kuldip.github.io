@@ -19,6 +19,7 @@ export function Header() {
     }
 
     document.addEventListener('keydown', handleKeyDown);
+
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [menuOpen]);
 
@@ -28,8 +29,10 @@ export function Header() {
         <span className="grid size-[38px] place-items-center rounded-full border border-[#71f6b5] font-mono text-xs font-bold text-[#71f6b5]">
           KS
         </span>
+
         <p className="m-0 font-bold tracking-[-.02em] max-[650px]:hidden">
           {siteConfig.shortName}
+
           <small className="block font-mono text-[9px] leading-[1.4] font-medium tracking-[.12em] text-[#8fa29a] uppercase">
             Frontend systems
           </small>
@@ -49,7 +52,7 @@ export function Header() {
 
       <a
         className="justify-self-end rounded-full border border-[#71f6b570] bg-[#71f6b5] px-[15px] py-2.5 text-[13px] font-semibold text-[#07110f] shadow-[0_6px_24px_rgba(113,246,181,.12)] transition hover:-translate-y-0.5 hover:bg-[#9affcc] max-[650px]:hidden"
-        href={`mailto:${siteConfig.email}`}
+        href={siteConfig.contactHref}
       >
         Let&apos;s talk <ExternalArrow />
       </a>
@@ -63,6 +66,7 @@ export function Header() {
         type="button"
       >
         <span className="sr-only">Menu</span>
+
         <span className="grid gap-1.5" aria-hidden="true">
           <span className={`block h-px w-5 bg-current transition ${menuOpen ? 'translate-y-[7px] rotate-45' : ''}`} />
           <span className={`block h-px w-5 bg-current transition ${menuOpen ? 'opacity-0' : ''}`} />
@@ -81,12 +85,14 @@ export function Header() {
             onClick={() => setMenuOpen(false)}
             type="button"
           />
+
           <aside
             id="mobile-navigation-drawer"
             aria-label="Mobile navigation"
             className="absolute top-0 right-0 flex h-[calc(100vh-70px)] w-[min(86vw,360px)] flex-col border-l border-[#71f6b526] bg-[#091613f7] px-6 py-7 shadow-[-24px_0_70px_rgba(0,0,0,.45)]"
           >
             <p className="font-mono text-[9px] tracking-[.16em] text-[#71f6b5] uppercase">Navigation</p>
+
             <nav className="mt-6 grid" aria-label="Mobile main navigation">
               {headerNavigation.map((item, index) => (
                 <Link
@@ -96,19 +102,22 @@ export function Header() {
                   onClick={() => setMenuOpen(false)}
                 >
                   <span>{item.label}</span>
+
                   <span className="font-mono text-xs text-[#668077]" aria-hidden="true">
                     0{index + 1}
                   </span>
                 </Link>
               ))}
             </nav>
+
             <div className="mt-auto rounded-2xl border border-[#71f6b52e] bg-[#10201c] p-5">
               <p className="text-sm leading-6 text-[#aebdb6]">
                 Have a role, product challenge, or frontend problem worth discussing?
               </p>
+
               <a
                 className="mt-4 inline-flex items-center gap-2 rounded-full bg-[#71f6b5] px-4 py-2.5 text-sm font-semibold text-[#07110f]"
-                href={`mailto:${siteConfig.email}`}
+                href={siteConfig.contactHref}
               >
                 Let&apos;s talk <ExternalArrow />
               </a>

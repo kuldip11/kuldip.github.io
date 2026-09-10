@@ -8,14 +8,30 @@ export const siteConfig = {
   name: 'Kuldip Kumar Sah',
   shortName: 'Kuldip Sah',
   role: 'Senior Frontend Engineer',
+
   description:
     'Kuldip Kumar Sah is a Senior Frontend Engineer specializing in React, Next.js, TypeScript, frontend architecture and high-performance web applications.',
+
   socialDescription: 'I build frontend systems that stay fast as products get complex.',
+
   email: 'kuldipkumarsah112@gmail.com',
+
+  contactHref: `mailto:kuldipkumarsah112@gmail.com?subject=${encodeURIComponent(
+    'Portfolio enquiry',
+  )}&body=${encodeURIComponent(
+    `Hi Kuldip,
+
+I came across your portfolio and wanted to get in touch.
+
+`,
+  )}`,
+
   github: 'https://github.com/kuldip11',
   linkedin: 'https://linkedin.com/in/kuldip-kumar-sah',
   location: 'India',
+
   url: configuredSiteUrl ?? 'http://localhost:3000',
+
   image: '/og.png',
   personId: '#person',
 } as const;
@@ -28,19 +44,39 @@ export const socialImage = {
 } as const;
 
 export const servoraLinks = [
-  { label: 'Website', href: 'https://servora-one.vercel.app/', description: 'Marketing website' },
+  {
+    label: 'Website',
+    href: 'https://servora-one.vercel.app/',
+    description: 'Marketing website',
+  },
   {
     label: 'Admin / POS',
     href: 'https://servora-web-lyart.vercel.app',
     description: 'Restaurant administration and POS',
   },
-  { label: 'Kitchen', href: 'https://servora-kitchen.vercel.app', description: 'Kitchen display system' },
-  { label: 'Waiter', href: 'https://servora-waiter.vercel.app', description: 'Waiter ordering application' },
+  {
+    label: 'Kitchen',
+    href: 'https://servora-kitchen.vercel.app',
+    description: 'Kitchen display system',
+  },
+  {
+    label: 'Waiter',
+    href: 'https://servora-waiter.vercel.app',
+    description: 'Waiter ordering application',
+  },
   {
     label: 'Customer',
     href: 'https://servora-customer.vercel.app',
     description: 'Customer QR ordering application',
   },
-  { label: 'GitHub', href: 'https://github.com/kuldip11/Servora', description: 'Source repository' },
-  { label: 'API', href: 'https://servora-api-5198.onrender.com', description: 'Deployed backend service' },
+  {
+    label: 'GitHub',
+    href: 'https://github.com/kuldip11/Servora',
+    description: 'Source repository',
+  },
+  {
+    label: 'API',
+    href: 'https://servora-api-5198.onrender.com',
+    description: 'Deployed backend service',
+  },
 ] as const;
