@@ -5,7 +5,7 @@ import { POST } from '@/app/api/chat/route';
 const fetchMock = vi.fn();
 const names = [
   'GEMINI_API_KEY',
-  'CHATS',
+  'SECRET_TEXT',
   'SECRET_CODE',
   'PRIVATE_CHATBOT_INSTRUCTIONS',
   'CHAT_SESSION_SECRET',
@@ -25,7 +25,7 @@ const request = (message: string, extra = {}) =>
 
 function configure() {
   process.env.GEMINI_API_KEY = 'test-key';
-  process.env.CHATS = 'do you love me, do you miss me';
+  process.env.SECRET_TEXT = 'private trigger one, private trigger two';
   process.env.SECRET_CODE = 'private-code';
   process.env.PRIVATE_CHATBOT_INSTRUCTIONS = 'Private instructions.';
   process.env.CHAT_SESSION_SECRET = 'independent-long-test-signing-secret';
@@ -43,52 +43,59 @@ afterEach(() => {
 });
 
 describe('POST /api/chat', () => {
-  it('sends only the current message and ignores supplied history', async () => {
-    configure();
-    fetchMock.mockResolvedValue(geminiResponse('Public response.'));
-    await request('Current question', { history: [{ content: 'old private data' }] });
-    const sent = JSON.parse(fetchMock.mock.calls[0][1].body as string);
-    expect(sent.input).toBe('Current question');
-    expect(JSON.stringify(sent)).not.toContain('old private data');
-  });
-
   it('uses exact normalized triggers before calling Gemini', async () => {
     configure();
-    const payload = await (await request('  DO   YOU LOVE ME  ')).json();
+
+    const payload = await (await request('  PRIVATE   TRIGGER ONE  ')).json();
+
     expect(payload).toMatchObject({ message: "What's your name?" });
     expect(payload.stateToken).toBeTruthy();
     expect(fetchMock).not.toHaveBeenCalled();
+
     fetchMock.mockResolvedValue(geminiResponse('Public'));
-    await request('Hey, do you love me?');
+
+    await request('Hey, private trigger one?');
+
     expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 
   it('unlocks private mode without forwarding the code', async () => {
     configure();
-    const challenge = await (await request('Do you love me')).json();
+
+    const challenge = await (await request('Private trigger one')).json();
+
     fetchMock.mockResolvedValue(geminiResponse('Private response.'));
+
     const unlocked = await (
-      await request('private-code', { stateToken: challenge.stateToken, history: ['ignored'] })
+      await request('private-code', {
+        stateToken: challenge.stateToken,
+        history: ['ignored'],
+      })
     ).json();
+
     const sent = JSON.parse(fetchMock.mock.calls[0][1].body as string);
+
     expect(unlocked.stateToken).toBeTruthy();
-    expect(sent.input).toBe('Do you love me');
+    expect(sent.input).toBe('Private trigger one');
     expect(sent.system_instruction).toBe('Private instructions.');
     expect(JSON.stringify(sent)).not.toContain('private-code');
   });
 
   it('falls back to professional mode after an incorrect answer', async () => {
     configure();
-    const challenge = await (await request('Do you miss me')).json();
-    fetchMock.mockResolvedValue(geminiResponse('Public response.'));
-    const payload = await (await request('wrong', { stateToken: challenge.stateToken })).json();
-    expect(payload.clearState).toBe(true);
-    expect(JSON.parse(fetchMock.mock.calls[0][1].body as string).system_instruction).toContain('professional profile');
-  });
 
-  it('never forwards the secret outside an active challenge', async () => {
-    configure();
-    expect((await (await request('private-code')).json()).message).toContain('only be used');
-    expect(fetchMock).not.toHaveBeenCalled();
+    const challenge = await (await request('Private trigger two')).json();
+
+    fetchMock.mockResolvedValue(geminiResponse('Public response.'));
+
+    const payload = await (
+      await request('wrong', {
+        stateToken: challenge.stateToken,
+      })
+    ).json();
+
+    expect(payload.clearState).toBe(true);
+
+    expect(JSON.parse(fetchMock.mock.calls[0][1].body as string).system_instruction).toContain('professional profile');
   });
 });

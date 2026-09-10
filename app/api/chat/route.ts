@@ -17,7 +17,7 @@ function normalize(value: string) {
 }
 
 function getChatTriggers() {
-  return (process.env.CHATS ?? '').split(',').map(normalize).filter(Boolean);
+  return (process.env.SECRET_TEXT ?? '').split(',').map(normalize).filter(Boolean);
 }
 
 async function sign(value: string, signingSecret: string) {
