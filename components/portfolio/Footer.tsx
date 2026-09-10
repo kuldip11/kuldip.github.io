@@ -1,15 +1,9 @@
 import Link from 'next/link';
 
-import { siteConfig } from '@/data/site';
+import { footerNavigation } from '@/constants/navigation';
+import { siteConfig } from '@/constants/site';
 
 import { ExternalArrow } from './ExternalArrow';
-
-const footerNavigation = [
-  { label: 'Projects', href: '/projects' },
-  { label: 'Articles', href: '/articles' },
-  { label: 'About', href: '/about' },
-  { label: 'Résumé', href: '/resume' },
-] as const;
 
 export function Footer() {
   return (

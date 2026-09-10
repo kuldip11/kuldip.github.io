@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
 import ProjectCaseStudy, { generateMetadata, generateStaticParams } from '@/app/projects/[slug]/page';
-import { servoraLinks } from '@/data/site';
+import { servoraLinks } from '@/constants/site';
 
 describe('Project case study', () => {
   it('generates routes for every project', () => {
@@ -21,5 +21,6 @@ describe('Project case study', () => {
   it('generates project metadata', async () => {
     const metadata = await generateMetadata({ params: Promise.resolve({ slug: 'servora' }) });
     expect(metadata.alternates).toEqual({ canonical: '/projects/servora' });
+    expect(metadata.keywords).toBeUndefined();
   });
 });

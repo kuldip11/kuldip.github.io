@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
 import { Projects } from '@/components/portfolio/Projects';
-import { servoraLinks } from '@/data/site';
+import { servoraLinks } from '@/constants/site';
 
 describe('Projects', () => {
   it('renders case-study links and live Servora demos', () => {

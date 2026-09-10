@@ -8,5 +8,6 @@ describe('About page', () => {
     render(<AboutPage />);
     expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument();
     expect(metadata.alternates).toEqual({ canonical: '/about' });
+    expect(metadata.keywords).toBeUndefined();
   });
 });

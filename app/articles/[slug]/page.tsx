@@ -3,8 +3,8 @@ import { notFound } from 'next/navigation';
 
 import { Footer } from '@/components/portfolio/Footer';
 import { Header } from '@/components/portfolio/Header';
+import { siteConfig } from '@/constants/site';
 import { articles } from '@/data/articles';
-import { siteConfig } from '@/data/site';
 
 import type { Metadata } from 'next';
 type Params = Promise<{ slug: string }>;
@@ -24,9 +24,16 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
       url: `/articles/${article.slug}`,
       title: article.title,
       description: article.description,
-      publishedTime: article.date,
+      publishedTime: article.publishedAt,
+      modifiedTime: article.updatedAt,
       authors: [siteConfig.name],
-      images: ['/og.png'],
+      images: [siteConfig.image],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.title,
+      description: article.description,
+      images: [siteConfig.image],
     },
   };
 }
@@ -39,11 +46,26 @@ export default async function ArticlePage({ params }: { params: Params }) {
     '@type': 'BlogPosting',
     headline: article.title,
     description: article.description,
-    datePublished: article.date,
-    dateModified: article.date,
-    author: { '@type': 'Person', name: siteConfig.name, url: siteConfig.url },
+    datePublished: article.publishedAt,
+    dateModified: article.updatedAt,
+    author: {
+      '@type': 'Person',
+      '@id': `${siteConfig.url}/${siteConfig.personId}`,
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+    publisher: {
+      '@type': 'Person',
+      '@id': `${siteConfig.url}/${siteConfig.personId}`,
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${siteConfig.url}/articles/${article.slug}`,
+    },
     url: `${siteConfig.url}/articles/${article.slug}`,
-    image: `${siteConfig.url}/og.png`,
+    image: `${siteConfig.url}${siteConfig.image}`,
   };
   return (
     <main className="min-h-screen bg-[#07110f] text-[#f2f4ee]">
@@ -56,8 +78,11 @@ export default async function ArticlePage({ params }: { params: Params }) {
         <Link className="font-mono text-[11px] text-[#71f6b5]" href="/articles">
           ← All articles
         </Link>
-        <time className="mt-14 block font-mono text-[10px] tracking-[.1em] text-[#a5b7ae]" dateTime={article.date}>
-          {article.date}
+        <time
+          className="mt-14 block font-mono text-[10px] tracking-[.1em] text-[#a5b7ae]"
+          dateTime={article.publishedAt}
+        >
+          {article.publishedAt}
         </time>
         <h1 className="mt-5 text-[clamp(3.2rem,6.5vw,6.5rem)] leading-[.94] font-medium tracking-[-.06em]">
           {article.title}

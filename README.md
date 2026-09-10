@@ -48,7 +48,7 @@ Use one canonical hostname and redirect HTTP and any alternate `www`/non-`www` h
 - `/robots.txt` — crawler policy.
 - `/sitemap.xml` — public route discovery.
 
-The homepage includes ProfilePage + Person JSON-LD. Project case studies use Article JSON-LD and technical articles use BlogPosting JSON-LD.
+The homepage alone includes ProfilePage + Person JSON-LD. Project case studies use Article JSON-LD and technical articles use BlogPosting JSON-LD. All public routes include canonical metadata, page-specific Open Graph/Twitter metadata, and relevant keyword metadata. Production builds intentionally require `NEXT_PUBLIC_SITE_URL` so localhost cannot leak into canonical URLs, structured data, robots, or the sitemap.
 
 ## Servora live samples
 

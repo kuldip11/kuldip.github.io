@@ -1,15 +1,9 @@
 import Link from 'next/link';
 
-import { siteConfig } from '@/data/site';
+import { headerNavigation } from '@/constants/navigation';
+import { siteConfig } from '@/constants/site';
 
 import { ExternalArrow } from './ExternalArrow';
-
-const navigation = [
-  { label: 'Work', href: '/projects' },
-  { label: 'Articles', href: '/articles' },
-  { label: 'About', href: '/about' },
-  { label: 'Résumé', href: '/resume' },
-] as const;
 
 export function Header() {
   return (
@@ -29,7 +23,7 @@ export function Header() {
         className="flex gap-7 text-sm text-[#becac4] max-[1000px]:order-3 max-[1000px]:col-span-2 max-[1000px]:mt-3 max-[1000px]:w-full max-[1000px]:justify-between max-[650px]:gap-3 max-[650px]:text-xs"
         aria-label="Main navigation"
       >
-        {navigation.map((item) => (
+        {headerNavigation.map((item) => (
           <Link className="transition-colors hover:text-[#71f6b5]" href={item.href} key={item.href}>
             {item.label}
           </Link>

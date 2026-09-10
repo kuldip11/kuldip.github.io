@@ -4,7 +4,8 @@ export const articles = [
     title: 'Rendering 100,000+ Mapbox Points Without Making React Do the Wrong Work',
     description:
       'Practical architecture principles for keeping dense Mapbox interfaces responsive in React by separating map rendering from the component tree.',
-    date: '2026-09-10',
+    publishedAt: '2026-09-10',
+    updatedAt: '2026-09-10',
     sections: [
       [
         'The real bottleneck is often the boundary',
@@ -29,7 +30,8 @@ export const articles = [
     title: 'Structuring a React Monorepo Around Shared Contracts, Not Shared Everything',
     description:
       'A practical approach to sharing types, validation, API clients, realtime behavior and UI across multiple React applications without creating a tangled monorepo.',
-    date: '2026-09-10',
+    publishedAt: '2026-09-10',
+    updatedAt: '2026-09-10',
     sections: [
       [
         'Share boundaries that are truly shared',
@@ -54,7 +56,8 @@ export const articles = [
     title: 'Preventing Duplicate API Requests in React by Fixing Ownership',
     description:
       'Why duplicate requests are often an ownership problem rather than a fetch problem, and how to reason about request lifecycles in React applications.',
-    date: '2026-09-10',
+    publishedAt: '2026-09-10',
+    updatedAt: '2026-09-10',
     sections: [
       [
         'Duplicate requests usually have two owners',

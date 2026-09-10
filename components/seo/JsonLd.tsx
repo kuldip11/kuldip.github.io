@@ -1,32 +1,27 @@
-import { siteConfig } from '@/data/site';
+import { landingPageKeywords } from '@/constants/seo';
+import { siteConfig } from '@/constants/site';
+
 export function JsonLd() {
   const data = {
     '@context': 'https://schema.org',
     '@type': 'ProfilePage',
+    '@id': `${siteConfig.url}/#profile-page`,
     url: siteConfig.url,
     name: `${siteConfig.name} — ${siteConfig.role}`,
+    description: siteConfig.description,
     mainEntity: {
       '@type': 'Person',
+      '@id': `${siteConfig.url}/${siteConfig.personId}`,
       name: siteConfig.name,
       jobTitle: siteConfig.role,
       url: siteConfig.url,
       image: `${siteConfig.url}/kuldip.jpg`,
       email: `mailto:${siteConfig.email}`,
       sameAs: [siteConfig.github, siteConfig.linkedin],
-      knowsAbout: [
-        'React',
-        'Next.js',
-        'TypeScript',
-        'JavaScript',
-        'Frontend Architecture',
-        'Web Performance',
-        'Mapbox',
-        'Testing',
-        'Accessibility',
-        'CI/CD',
-      ],
+      knowsAbout: [...landingPageKeywords],
     },
   };
+
   return (
     <script
       type="application/ld+json"

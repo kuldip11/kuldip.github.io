@@ -17,6 +17,8 @@ export const projects = [
     seoTitle: 'Servora Restaurant POS Architecture Case Study',
     summary:
       'A case study in designing a typed, multi-application restaurant operating system with role-aware workflows, shared packages and server-authoritative business logic.',
+    publishedAt: '2026-09-10',
+    updatedAt: '2026-09-10',
   },
   {
     index: '02',
@@ -29,6 +31,8 @@ export const projects = [
     seoTitle: 'Rendering 100,000+ Mapbox Points in React',
     summary:
       'A frontend performance case study focused on dense geospatial interfaces, custom Mapbox layers, clustering and fine-grained visibility control.',
+    publishedAt: '2026-09-10',
+    updatedAt: '2026-09-10',
   },
   {
     index: '03',
@@ -41,6 +45,8 @@ export const projects = [
     seoTitle: 'Enterprise Frontend Architecture Case Study',
     summary:
       'A case study in structuring reusable frontend architecture for dense enterprise workflows across onboarding, projects, vendors, contracts and milestones.',
+    publishedAt: '2026-09-10',
+    updatedAt: '2026-09-10',
   },
 ] as const;
 

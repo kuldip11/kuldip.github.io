@@ -6,7 +6,8 @@ import ProjectsPage, { metadata } from '@/app/projects/page';
 describe('Projects page', () => {
   it('renders all case studies', () => {
     render(<ProjectsPage />);
-    expect(screen.getAllByRole('link', { name: /Read case study/i })).toHaveLength(3);
+    expect(screen.getAllByRole('link', { name: /^Read /i })).toHaveLength(3);
     expect(metadata.alternates).toEqual({ canonical: '/projects' });
+    expect(metadata.keywords).toBeUndefined();
   });
 });

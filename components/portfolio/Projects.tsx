@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
+import { servoraLinks } from '@/constants/site';
 import { projects } from '@/data/portfolio';
-import { servoraLinks } from '@/data/site';
 
 import { ExternalArrow } from './ExternalArrow';
 import { ProjectVisual } from './ProjectVisual';

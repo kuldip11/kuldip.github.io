@@ -20,5 +20,6 @@ describe('Article page', () => {
     const article = articles[0];
     const metadata = await generateMetadata({ params: Promise.resolve({ slug: article.slug }) });
     expect(metadata.alternates).toEqual({ canonical: `/articles/${article.slug}` });
+    expect(metadata.keywords).toBeUndefined();
   });
 });
