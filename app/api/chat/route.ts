@@ -84,7 +84,7 @@ async function askGemini(apiKey: string, message: string, systemInstruction: str
       model: chatbotConfig.model,
       input: message,
       system_instruction: systemInstruction,
-      store: false,
+      store: true,
       generation_config: { max_output_tokens: 420 },
     }),
   });
