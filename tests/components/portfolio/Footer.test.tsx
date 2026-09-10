@@ -4,6 +4,10 @@ import { describe, expect, it } from 'vitest';
 import { Footer } from '@/components/portfolio/Footer';
 
 describe('Footer', () => {
+  it('uses the dark portfolio footer surface', () => {
+    const { container } = render(<Footer />);
+    expect(container.querySelector('footer')).toHaveClass('bg-[#091411]');
+  });
   it('links to all portfolio sections', () => {
     render(<Footer />);
 

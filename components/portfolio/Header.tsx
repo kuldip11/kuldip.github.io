@@ -30,7 +30,7 @@ export function Header() {
         ))}
       </nav>
       <a
-        className="justify-self-end rounded-full border border-[#39524a] px-[15px] py-2.5 text-[13px] transition hover:border-[#71f6b5] hover:bg-[#71f6b5] hover:text-[#07110f]"
+        className="justify-self-end rounded-full border border-[#71f6b570] bg-[#71f6b5] px-[15px] py-2.5 text-[13px] font-semibold text-[#07110f] shadow-[0_6px_24px_rgba(113,246,181,.12)] transition hover:-translate-y-0.5 hover:bg-[#9affcc]"
         href={`mailto:${siteConfig.email}`}
       >
         Let&apos;s talk <ExternalArrow />

@@ -10,5 +10,6 @@ describe('Header', () => {
     expect(screen.getByRole('link', { name: 'Articles' })).toHaveAttribute('href', '/articles');
     expect(screen.getByRole('link', { name: 'About' })).toHaveAttribute('href', '/about');
     expect(screen.getByRole('link', { name: 'Résumé' })).toHaveAttribute('href', '/resume');
+    expect(screen.getByRole('link', { name: /Let's talk/i })).toHaveClass('bg-[#71f6b5]');
   });
 });

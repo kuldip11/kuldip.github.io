@@ -54,3 +54,14 @@ test.describe('Home page', () => {
     ).toBeVisible();
   });
 });
+
+test.describe('Portfolio assistant', () => {
+  test('opens and exposes recruiter-focused prompts', async ({ page }) => {
+    await page.goto('/');
+
+    await page.getByRole('button', { name: 'Open portfolio assistant' }).click();
+    await expect(page.getByRole('region', { name: 'Portfolio assistant' })).toBeVisible();
+    await expect(page.getByText('What makes Kuldip a strong Senior React Engineer?')).toBeVisible();
+    await expect(page.getByRole('textbox', { name: "Message Kuldip's portfolio assistant" })).toBeFocused();
+  });
+});
