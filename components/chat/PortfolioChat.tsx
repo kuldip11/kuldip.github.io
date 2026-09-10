@@ -27,6 +27,7 @@ export function PortfolioChat() {
   const nextId = useRef(1);
   const endRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!open) return;
@@ -37,6 +38,19 @@ export function PortfolioChat() {
     if (!open) return;
     endRef.current?.scrollIntoView?.({ behavior: 'smooth', block: 'nearest' });
   }, [messages, loading, open]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    function handlePointerDown(event: PointerEvent) {
+      if (!rootRef.current?.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    }
+
+    document.addEventListener('pointerdown', handlePointerDown);
+    return () => document.removeEventListener('pointerdown', handlePointerDown);
+  }, [open]);
 
   async function sendMessage(rawMessage: string) {
     const message = rawMessage.trim();
@@ -90,11 +104,14 @@ export function PortfolioChat() {
   }
 
   return (
-    <div className="fixed right-5 bottom-5 z-[80] flex flex-col items-end gap-3 max-[650px]:right-3 max-[650px]:bottom-3">
+    <div
+      ref={rootRef}
+      className="fixed right-5 bottom-5 z-[80] flex flex-col items-end gap-3 max-[650px]:right-3 max-[650px]:bottom-3 max-[650px]:left-3"
+    >
       {open ? (
         <section
           aria-label="Portfolio assistant"
-          className="flex h-[min(690px,calc(100vh-96px))] w-[min(430px,calc(100vw-24px))] flex-col overflow-hidden rounded-[30px] border border-[#71f6b52e] bg-[#091613f2] shadow-[0_32px_90px_rgba(0,0,0,.55)] backdrop-blur-2xl"
+          className="flex h-[min(690px,calc(100vh-96px))] w-[430px] max-w-[calc(100vw-24px)] flex-col overflow-hidden rounded-[30px] border border-[#71f6b52e] bg-[#091613f2] shadow-[0_32px_90px_rgba(0,0,0,.55)] backdrop-blur-2xl max-[650px]:w-full"
         >
           <div className="relative overflow-hidden border-b border-[#71f6b51f] px-5 pt-5 pb-4">
             <div className="pointer-events-none absolute -top-20 -right-14 size-44 rounded-full bg-[#71f6b51f] blur-3xl" />

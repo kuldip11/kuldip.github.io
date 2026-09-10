@@ -26,6 +26,22 @@ describe('PortfolioChat', () => {
     expect(screen.queryByRole('region', { name: 'Portfolio assistant' })).not.toBeInTheDocument();
   });
 
+  it('closes when the user clicks outside the open assistant', () => {
+    render(
+      <div>
+        <button type="button">Outside target</button>
+        <PortfolioChat />
+      </div>,
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: 'Open portfolio assistant' }));
+    expect(screen.getByRole('region', { name: 'Portfolio assistant' })).toBeInTheDocument();
+
+    fireEvent.pointerDown(screen.getByRole('button', { name: 'Outside target' }));
+
+    expect(screen.queryByRole('region', { name: 'Portfolio assistant' })).not.toBeInTheDocument();
+  });
+
   it('sends a question and renders the assistant response', async () => {
     vi.stubGlobal('fetch', fetchMock);
     fetchMock.mockResolvedValue({
