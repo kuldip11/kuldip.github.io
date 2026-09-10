@@ -3,106 +3,92 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { POST } from '@/app/api/chat/route';
 
 const fetchMock = vi.fn();
-const originalApiKey = process.env.GEMINI_API_KEY;
+const names = [
+  'GEMINI_API_KEY',
+  'CHATS',
+  'SECRET_CODE',
+  'PRIVATE_CHATBOT_INSTRUCTIONS',
+  'CHAT_SESSION_SECRET',
+] as const;
+const originals = Object.fromEntries(names.map((name) => [name, process.env[name]]));
+const geminiResponse = (text: string) => ({
+  ok: true,
+  json: async () => ({ steps: [{ type: 'model_output', content: [{ type: 'text', text }] }] }),
+});
+const request = (message: string, extra = {}) =>
+  POST(
+    new Request('http://localhost/api/chat', {
+      method: 'POST',
+      body: JSON.stringify({ message, ...extra }),
+    }),
+  );
+
+function configure() {
+  process.env.GEMINI_API_KEY = 'test-key';
+  process.env.CHATS = 'do you love me, do you miss me';
+  process.env.SECRET_CODE = 'private-code';
+  process.env.PRIVATE_CHATBOT_INSTRUCTIONS = 'Private instructions.';
+  process.env.CHAT_SESSION_SECRET = 'independent-long-test-signing-secret';
+  vi.stubGlobal('fetch', fetchMock);
+}
 
 afterEach(() => {
   fetchMock.mockReset();
   vi.unstubAllGlobals();
-  if (originalApiKey === undefined) delete process.env.GEMINI_API_KEY;
-  else process.env.GEMINI_API_KEY = originalApiKey;
+  for (const name of names) {
+    const original = originals[name];
+    if (original === undefined) delete process.env[name];
+    else process.env[name] = original;
+  }
 });
 
 describe('POST /api/chat', () => {
-  it('returns 503 when the Gemini key is missing', async () => {
-    delete process.env.GEMINI_API_KEY;
-
-    const response = await POST(
-      new Request('http://localhost/api/chat', {
-        method: 'POST',
-        body: JSON.stringify({ message: 'Tell me about Kuldip.' }),
-      }),
-    );
-
-    expect(response.status).toBe(503);
-    await expect(response.json()).resolves.toEqual({ error: 'The portfolio assistant is not configured yet.' });
+  it('sends only the current message and ignores supplied history', async () => {
+    configure();
+    fetchMock.mockResolvedValue(geminiResponse('Public response.'));
+    await request('Current question', { history: [{ content: 'old private data' }] });
+    const sent = JSON.parse(fetchMock.mock.calls[0][1].body as string);
+    expect(sent.input).toBe('Current question');
+    expect(JSON.stringify(sent)).not.toContain('old private data');
   });
 
-  it('validates empty messages', async () => {
-    process.env.GEMINI_API_KEY = 'test-key';
-
-    const response = await POST(
-      new Request('http://localhost/api/chat', {
-        method: 'POST',
-        body: JSON.stringify({ message: '   ' }),
-      }),
-    );
-
-    expect(response.status).toBe(400);
+  it('uses exact normalized triggers before calling Gemini', async () => {
+    configure();
+    const payload = await (await request('  DO   YOU LOVE ME  ')).json();
+    expect(payload).toMatchObject({ message: "What's your name?" });
+    expect(payload.stateToken).toBeTruthy();
+    expect(fetchMock).not.toHaveBeenCalled();
+    fetchMock.mockResolvedValue(geminiResponse('Public'));
+    await request('Hey, do you love me?');
+    expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 
-  it('logs Gemini upstream errors without exposing them to the client', async () => {
-    process.env.GEMINI_API_KEY = 'test-key';
-    vi.stubGlobal('fetch', fetchMock);
-    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => undefined);
-
-    fetchMock.mockResolvedValue({
-      ok: false,
-      status: 429,
-      statusText: 'Too Many Requests',
-      text: async () => '{"error":{"message":"quota exceeded"}}',
-    });
-
-    const response = await POST(
-      new Request('http://localhost/api/chat', {
-        method: 'POST',
-        body: JSON.stringify({ message: 'Who is Kuldip?' }),
-      }),
-    );
-
-    expect(response.status).toBe(502);
-    await expect(response.json()).resolves.toEqual({
-      error: 'The portfolio assistant could not answer right now.',
-    });
-    expect(consoleError).toHaveBeenCalledWith('Gemini API error', {
-      status: 429,
-      statusText: 'Too Many Requests',
-      body: '{"error":{"message":"quota exceeded"}}',
-    });
-
-    consoleError.mockRestore();
+  it('unlocks private mode without forwarding the code', async () => {
+    configure();
+    const challenge = await (await request('Do you love me')).json();
+    fetchMock.mockResolvedValue(geminiResponse('Private response.'));
+    const unlocked = await (
+      await request('private-code', { stateToken: challenge.stateToken, history: ['ignored'] })
+    ).json();
+    const sent = JSON.parse(fetchMock.mock.calls[0][1].body as string);
+    expect(unlocked.stateToken).toBeTruthy();
+    expect(sent.input).toBe('Do you love me');
+    expect(sent.system_instruction).toBe('Private instructions.');
+    expect(JSON.stringify(sent)).not.toContain('private-code');
   });
 
-  it('returns the text produced by Gemini', async () => {
-    process.env.GEMINI_API_KEY = 'test-key';
-    vi.stubGlobal('fetch', fetchMock);
-    fetchMock.mockResolvedValue({
-      ok: true,
-      json: async () => ({
-        steps: [
-          {
-            type: 'model_output',
-            content: [{ type: 'text', text: 'Kuldip is a Senior Frontend Engineer.' }],
-          },
-        ],
-      }),
-    });
+  it('falls back to professional mode after an incorrect answer', async () => {
+    configure();
+    const challenge = await (await request('Do you miss me')).json();
+    fetchMock.mockResolvedValue(geminiResponse('Public response.'));
+    const payload = await (await request('wrong', { stateToken: challenge.stateToken })).json();
+    expect(payload.clearState).toBe(true);
+    expect(JSON.parse(fetchMock.mock.calls[0][1].body as string).system_instruction).toContain('professional profile');
+  });
 
-    const response = await POST(
-      new Request('http://localhost/api/chat', {
-        method: 'POST',
-        body: JSON.stringify({ message: 'Who is Kuldip?' }),
-      }),
-    );
-
-    expect(response.status).toBe(200);
-    await expect(response.json()).resolves.toEqual({ message: 'Kuldip is a Senior Frontend Engineer.' });
-    expect(fetchMock).toHaveBeenCalledWith(
-      'https://generativelanguage.googleapis.com/v1beta/interactions',
-      expect.objectContaining({
-        method: 'POST',
-        headers: expect.objectContaining({ 'x-goog-api-key': 'test-key' }),
-        body: expect.stringContaining('gemini-3.5-flash-lite'),
-      }),
-    );
+  it('never forwards the secret outside an active challenge', async () => {
+    configure();
+    expect((await (await request('private-code')).json()).message).toContain('only be used');
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 });

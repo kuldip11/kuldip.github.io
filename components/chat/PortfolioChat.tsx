@@ -24,6 +24,7 @@ export function PortfolioChat() {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [stateToken, setStateToken] = useState('');
   const nextId = useRef(1);
   const endRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -71,15 +72,26 @@ export function PortfolioChat() {
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message }),
+        body: JSON.stringify({
+          message,
+          stateToken: stateToken || undefined,
+        }),
       });
 
-      const payload = (await response.json()) as { message?: string; error?: string };
+      const payload = (await response.json()) as {
+        message?: string;
+        error?: string;
+        stateToken?: string;
+        clearState?: boolean;
+      };
       if (!response.ok || !payload.message) {
         throw new Error(payload.error ?? 'The portfolio assistant is unavailable right now.');
       }
 
       const responseMessage = payload.message;
+
+      if (payload.stateToken) setStateToken(payload.stateToken);
+      else if (payload.clearState) setStateToken('');
 
       setMessages((current) => [
         ...current,
@@ -106,12 +118,12 @@ export function PortfolioChat() {
   return (
     <div
       ref={rootRef}
-      className="fixed right-5 bottom-5 z-[80] flex flex-col items-end gap-3 max-[650px]:right-3 max-[650px]:bottom-3 max-[650px]:left-3"
+      className="fixed right-5 bottom-5 z-[80] flex flex-col items-end gap-3 max-[650px]:right-3 max-[650px]:bottom-3"
     >
       {open ? (
         <section
           aria-label="Portfolio assistant"
-          className="flex h-[min(690px,calc(100vh-96px))] w-[430px] max-w-[calc(100vw-24px)] flex-col overflow-hidden rounded-[30px] border border-[#71f6b52e] bg-[#091613f2] shadow-[0_32px_90px_rgba(0,0,0,.55)] backdrop-blur-2xl max-[650px]:w-full"
+          className="flex h-[min(690px,calc(100vh-96px))] w-[min(430px,calc(100vw-24px))] flex-col overflow-hidden rounded-[30px] border border-[#71f6b52e] bg-[#091613f2] shadow-[0_32px_90px_rgba(0,0,0,.55)] backdrop-blur-2xl"
         >
           <div className="relative overflow-hidden border-b border-[#71f6b51f] px-5 pt-5 pb-4">
             <div className="pointer-events-none absolute -top-20 -right-14 size-44 rounded-full bg-[#71f6b51f] blur-3xl" />
