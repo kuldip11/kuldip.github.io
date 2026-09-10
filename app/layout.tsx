@@ -1,5 +1,5 @@
 import { PortfolioChat } from '@/components/chat/PortfolioChat';
-import { siteConfig } from '@/constants/site';
+import { siteConfig, socialImage } from '@/constants/site';
 
 import type { Metadata } from 'next';
 
@@ -24,20 +24,13 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: `${siteConfig.name} — ${siteConfig.role}`,
     description: siteConfig.socialDescription,
-    images: [
-      {
-        url: siteConfig.image,
-        width: 1200,
-        height: 630,
-        alt: `${siteConfig.name}, ${siteConfig.role}`,
-      },
-    ],
+    images: [socialImage],
   },
   twitter: {
     card: 'summary_large_image',
     title: `${siteConfig.name} — ${siteConfig.role}`,
     description: siteConfig.socialDescription,
-    images: [siteConfig.image],
+    images: [socialImage],
   },
   robots: { index: true, follow: true },
   verification: {

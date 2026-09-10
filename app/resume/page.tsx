@@ -2,7 +2,7 @@ import { ExternalArrow } from '@/components/portfolio/ExternalArrow';
 import { Footer } from '@/components/portfolio/Footer';
 import { Header } from '@/components/portfolio/Header';
 import { seoCopy } from '@/constants/seo';
-import { servoraLinks, siteConfig } from '@/constants/site';
+import { servoraLinks, siteConfig, socialImage } from '@/constants/site';
 import { experience, stack } from '@/data/portfolio';
 
 import type { Metadata } from 'next';
@@ -17,13 +17,13 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: `${siteConfig.name} — Senior Frontend Engineer Résumé`,
     description: seoCopy.resume.description,
-    images: [siteConfig.image],
+    images: [socialImage],
   },
   twitter: {
     card: 'summary_large_image',
     title: `${siteConfig.name} — Senior Frontend Engineer Résumé`,
     description: seoCopy.resume.description,
-    images: [siteConfig.image],
+    images: [socialImage],
   },
 };
 

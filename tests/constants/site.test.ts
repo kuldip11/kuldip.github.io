@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { servoraLinks, siteConfig } from '@/constants/site';
+import { servoraLinks, siteConfig, socialImage } from '@/constants/site';
 
 describe('siteConfig', () => {
   it('contains the correct personal links and profile information', () => {
@@ -11,6 +11,14 @@ describe('siteConfig', () => {
     expect(siteConfig.role).toBe('Senior Frontend Engineer');
     expect(siteConfig.location).toBe('India');
     expect(siteConfig.url).toBeDefined();
+  });
+
+  it('exposes an absolute social preview image', () => {
+    expect(socialImage.url).toBe(`${siteConfig.url}/og.png`);
+    expect(socialImage.url).toMatch(/^https?:\/\//);
+    expect(socialImage.width).toBe(1200);
+    expect(socialImage.height).toBe(630);
+    expect(socialImage.alt).toContain(siteConfig.name);
   });
 
   it('contains all expected Servora links', () => {

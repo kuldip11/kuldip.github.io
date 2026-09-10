@@ -9,7 +9,7 @@ import { Projects } from '@/components/portfolio/Projects';
 import { TechStack } from '@/components/portfolio/TechStack';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { landingPageKeywords } from '@/constants/seo';
-import { siteConfig } from '@/constants/site';
+import { siteConfig, socialImage } from '@/constants/site';
 
 import type { Metadata } from 'next';
 
@@ -22,13 +22,13 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: `${siteConfig.name} — ${siteConfig.role}`,
     description: siteConfig.socialDescription,
-    images: [siteConfig.image],
+    images: [socialImage],
   },
   twitter: {
     card: 'summary_large_image',
     title: `${siteConfig.name} — ${siteConfig.role}`,
     description: siteConfig.socialDescription,
-    images: [siteConfig.image],
+    images: [socialImage],
   },
 };
 

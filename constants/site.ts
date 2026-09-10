@@ -20,6 +20,13 @@ export const siteConfig = {
   personId: '#person',
 } as const;
 
+export const socialImage = {
+  url: `${siteConfig.url}${siteConfig.image}`,
+  width: 1200,
+  height: 630,
+  alt: `${siteConfig.name} — ${siteConfig.role}`,
+} as const;
+
 export const servoraLinks = [
   { label: 'Website', href: 'https://servora-one.vercel.app/', description: 'Marketing website' },
   {
