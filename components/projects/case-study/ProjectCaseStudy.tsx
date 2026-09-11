@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+import { AppIcon } from '@/components/portfolio/AppIcon';
 import { InnerPageBackdrop } from '@/components/portfolio/InnerPageUi';
 import { PROJECT_DETAIL_CONTENT } from '@/constants/pages/projects.constants';
 import { ROUTES } from '@/constants/routes';
@@ -31,7 +32,11 @@ export const ProjectCaseStudy = ({ project }: { project: ProjectDefinition }) =>
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
       />
       <article className="relative mx-auto max-w-[1500px] px-5 py-8 sm:px-8 sm:py-10 lg:px-12">
-        <Link className="text-[12px] font-semibold text-[#59ecb0]" href={ROUTES.projects}>
+        <Link
+          className="inline-flex items-center gap-2 text-[12px] font-semibold text-[#59ecb0]"
+          href={ROUTES.projects}
+        >
+          <AppIcon name="arrow-left" className="size-4" />
           {PROJECT_DETAIL_CONTENT.backLabel}
         </Link>
         <ProjectHero project={project} />

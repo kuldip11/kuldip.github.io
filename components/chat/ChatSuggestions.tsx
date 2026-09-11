@@ -1,3 +1,4 @@
+import { AppIcon } from '@/components/portfolio/AppIcon';
 import { chatbotSuggestions } from '@/constants/chatbot';
 
 export const ChatSuggestions = ({ onSelect }: { onSelect: (suggestion: string) => void }) => (
@@ -11,7 +12,7 @@ export const ChatSuggestions = ({ onSelect }: { onSelect: (suggestion: string) =
       >
         <span>{suggestion}</span>
         <span aria-hidden="true" className="text-[#71f6b5] transition-transform group-hover:translate-x-0.5">
-          →
+          <AppIcon name="arrow-right" className="size-4" />
         </span>
       </button>
     ))}

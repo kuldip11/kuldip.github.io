@@ -11,10 +11,10 @@ export const HOME_EXPERTISE = [
 export type ExpertiseIconName = (typeof HOME_EXPERTISE)[number]['icon'];
 
 export const HOME_CAPABILITIES = [
-  ['</>', 'Build scalable products', 'From idea to a polished, production-ready frontend application.'],
-  ['▱', 'Design maintainable architecture', 'Reusable UI systems and clean, maintainable codebases.'],
-  ['ϟ', 'Optimize performance', 'Fast, accessible and delightful user experiences.'],
-  ['☁', 'Work end-to-end', 'Integrate with APIs, testing, deployment and iterate based on real user feedback.'],
+  ['code', 'Build scalable products', 'From idea to a polished, production-ready frontend application.'],
+  ['architecture', 'Design maintainable architecture', 'Reusable UI systems and clean, maintainable codebases.'],
+  ['performance', 'Optimize performance', 'Fast, accessible and delightful user experiences.'],
+  ['cloud', 'Work end-to-end', 'Integrate with APIs, testing, deployment and iterate based on real user feedback.'],
 ] as const;
 
 export const HOME_TOOLS = [
@@ -43,10 +43,10 @@ export const HERO_EXPERTISE = [
 ] as const;
 
 export const HOME_CAPABILITY_CARDS = [
-  ['</>', 'Build scalable products', 'From idea to a polished, production-ready frontend application.'],
-  ['▱', 'Design maintainable architecture', 'Reusable UI systems and clean, maintainable codebases.'],
-  ['↯', 'Optimize performance', 'Fast, accessible and delightful user experiences.'],
-  ['☁', 'Work end-to-end', 'Integrate with APIs, testing and deployment, then iterate from real feedback.'],
+  ['code', 'Build scalable products', 'From idea to a polished, production-ready frontend application.'],
+  ['architecture', 'Design maintainable architecture', 'Reusable UI systems and clean, maintainable codebases.'],
+  ['performance', 'Optimize performance', 'Fast, accessible and delightful user experiences.'],
+  ['cloud', 'Work end-to-end', 'Integrate with APIs, testing and deployment, then iterate from real feedback.'],
 ] as const;
 
 export const SYSTEM_CAPABILITIES = [

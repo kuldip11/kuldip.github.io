@@ -4,6 +4,8 @@ import { ROUTES } from '@/constants/routes';
 import { INNER_PAGE_PANEL_CLASS } from '@/constants/styles/component-styles.constants';
 import type { ProjectVisualVariant } from '@/types/project.types';
 
+import { AppIcon } from '../AppIcon';
+
 import { Badge } from './Badge';
 import { ProjectVisual } from './ProjectVisual';
 
@@ -49,7 +51,7 @@ export const ProjectCard = ({
         className="mt-5 inline-flex text-[13px] font-semibold text-[#59ecb0]"
         href={ROUTES.project(slug)}
       >
-        View project&nbsp; →
+        View project&nbsp; <AppIcon name="arrow-right" className="size-4" />
       </Link>
     </div>
   </article>

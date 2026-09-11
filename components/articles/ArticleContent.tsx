@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+import { AppIcon } from '@/components/portfolio/AppIcon';
 import { Footer } from '@/components/portfolio/Footer';
 import { Header } from '@/components/portfolio/Header';
 import { ARTICLE_DETAIL_BACK_LABEL } from '@/constants/pages/article-details.constants';
@@ -40,7 +41,8 @@ export const ArticleContent = ({ article }: { article: ArticleDefinition }) => {
       />
       <Header />
       <article className="mx-auto max-w-[880px] px-12 py-24 max-[650px]:px-5">
-        <Link className="font-mono text-[11px] text-[#71f6b5]" href={ROUTES.articles}>
+        <Link className="inline-flex items-center gap-2 font-mono text-[11px] text-[#71f6b5]" href={ROUTES.articles}>
+          <AppIcon name="arrow-left" className="size-4" />
           {ARTICLE_DETAIL_BACK_LABEL}
         </Link>
         <time

@@ -3,7 +3,9 @@ import Link from 'next/link';
 
 import { HOME_CAPABILITIES, HOME_EXPERTISE, HOME_TOOLS } from '@/constants/pages/home.constants';
 
+import { AppIcon } from '../AppIcon';
 import { ExpertiseIcon } from '../ExpertiseIcon';
+import { GlyphIcon } from '../GlyphIcon';
 
 import { ProjectMock } from './ProjectMock';
 import { SectionLabel } from './SectionLabel';
@@ -140,11 +142,8 @@ export const LandingShowcase = () => {
                 className="min-h-[142px] rounded-[14px] border border-[#1f4e3c] bg-[#0a1b16] p-3 min-[900px]:min-h-[150px] min-[1100px]:min-h-[168px] min-[1100px]:p-4"
                 key={title}
               >
-                <span
-                  className="font-mono text-[28px] font-bold text-[#55eeb0] min-[1100px]:text-[24px]"
-                  aria-hidden="true"
-                >
-                  {icon}
+                <span className="flex size-7 items-center justify-center text-[#55eeb0]" aria-hidden="true">
+                  <GlyphIcon glyph={icon} className="size-6" />
                 </span>
                 <h3 className="mt-3 mb-1.5 text-[13px] leading-[1.18] font-semibold tracking-[-.02em] min-[700px]:text-[15px] min-[1100px]:text-[16px]">
                   {title}
@@ -205,7 +204,7 @@ export const LandingShowcase = () => {
               </h2>
             </div>
             <Link className="hidden text-[13px] font-medium text-[#57eeb0] hover:text-white sm:block" href="/projects">
-              View all projects&nbsp; →
+              View all projects&nbsp; <AppIcon name="arrow-right" className="size-4" />
             </Link>
           </div>
           <div className="grid grid-cols-2 gap-3">
@@ -228,7 +227,9 @@ export const LandingShowcase = () => {
                   Multi-app restaurant platform with POS, kitchen, waiter, customer and admin workflows.
                 </p>
 
-                <span className="mt-auto text-[11px] font-medium text-[#57eeb0]">View project&nbsp; →</span>
+                <span className="mt-auto inline-flex items-center gap-1 text-[11px] font-medium text-[#57eeb0]">
+                  View project&nbsp; <AppIcon name="arrow-right" className="size-3.5" />
+                </span>
               </div>
             </Link>
 
@@ -260,7 +261,7 @@ export const LandingShowcase = () => {
           <SectionLabel>Experience</SectionLabel>
           <div className="mt-3 flex flex-col items-start gap-3 sm:flex-row">
             <span className="grid size-9 shrink-0 place-items-center rounded-full border border-[#2a7659] text-[18px] text-[#55eeb0]">
-              ▣
+              <AppIcon name="briefcase" className="size-[18px]" />
             </span>
             <h2 className="m-0 text-[20px] leading-[1.12] font-semibold tracking-[-.03em]">
               A journey of growth and impact.
@@ -270,7 +271,7 @@ export const LandingShowcase = () => {
             From building features to owning products, I&apos;ve worked across diverse teams and challenging problems.
           </p>
           <a className="mt-4 inline-flex text-[12px] font-medium text-[#55eeb0]" href="#experience-detail">
-            View timeline&nbsp; →
+            View timeline&nbsp; <AppIcon name="arrow-right" className="size-3.5" />
           </a>
         </article>
 
@@ -281,7 +282,7 @@ export const LandingShowcase = () => {
           <SectionLabel>My Approach</SectionLabel>
           <div className="mt-3 flex flex-col items-start gap-3 sm:flex-row">
             <span className="grid size-9 shrink-0 place-items-center rounded-full border border-[#2a7659] text-[18px] text-[#55eeb0]">
-              ◎
+              <AppIcon name="architecture" className="size-[18px]" />
             </span>
             <h2 className="m-0 text-[20px] leading-[1.12] font-semibold tracking-[-.03em]">
               Thoughtful solutions, lasting results.
@@ -291,7 +292,7 @@ export const LandingShowcase = () => {
             I care about user needs, clean architecture, accessibility and measurable impact.
           </p>
           <a className="mt-4 inline-flex text-[12px] font-medium text-[#55eeb0]" href="/about">
-            Learn more&nbsp; →
+            Learn more&nbsp; <AppIcon name="arrow-right" className="size-3.5" />
           </a>
         </article>
       </section>

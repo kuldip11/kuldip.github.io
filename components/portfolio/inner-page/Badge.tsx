@@ -1,3 +1,5 @@
+import { AppIcon } from '../AppIcon';
+
 type BadgeVariant = 'featured' | 'category' | 'tag';
 
 const badgeClasses: Record<BadgeVariant, string> = {
@@ -7,5 +9,8 @@ const badgeClasses: Record<BadgeVariant, string> = {
 };
 
 export const Badge = ({ children, variant }: { children: React.ReactNode; variant: BadgeVariant }) => (
-  <span className={badgeClasses[variant]}>{children}</span>
+  <span className={`inline-flex items-center gap-1.5 ${badgeClasses[variant]}`}>
+    {variant === 'featured' ? <AppIcon name="featured" className="size-3" /> : null}
+    {children}
+  </span>
 );

@@ -59,7 +59,7 @@ const ICON_PATHS: Record<ExpertiseIconName, ReactNode> = {
   ),
 };
 
-export const ExpertiseIcon = ({ icon, className = 'size-[28px]' }: ExpertiseIconProps) => (
+export const ExpertiseIcon = ({ icon, className = 'size-[15px]' }: ExpertiseIconProps) => (
   <svg
     aria-hidden="true"
     className={className}

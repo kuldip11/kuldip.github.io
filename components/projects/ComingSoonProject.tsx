@@ -1,3 +1,4 @@
+import { AppIcon } from '@/components/portfolio/AppIcon';
 import { PROJECTS_PAGE_CONTENT } from '@/constants/pages/projects.constants';
 import { INNER_PAGE_PANEL_CLASS } from '@/constants/styles/component-styles.constants';
 
@@ -20,8 +21,8 @@ export const ComingSoonProject = () => (
             {PROJECTS_PAGE_CONTENT.comingSoon.copy}
           </p>
         </div>
-        <div className="grid size-14 shrink-0 place-items-center rounded-[16px] border border-[#27775a] bg-[#092018] text-[26px] text-[#59ecb0] shadow-[0_0_28px_rgba(89,236,176,.1)]">
-          +
+        <div className="grid size-14 shrink-0 place-items-center rounded-[16px] border border-[#27775a] bg-[#092018] text-[#59ecb0] shadow-[0_0_28px_rgba(89,236,176,.1)]">
+          <AppIcon name="plus" className="size-6" />
         </div>
       </div>
     </div>

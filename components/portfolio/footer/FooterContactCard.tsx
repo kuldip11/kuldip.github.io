@@ -1,5 +1,7 @@
 import { siteConfig } from '@/constants/site';
 
+import { AppIcon } from '../AppIcon';
+
 import { FooterIcon } from './FooterIcon';
 
 export const FooterContactCard = () => (
@@ -26,7 +28,7 @@ export const FooterContactCard = () => (
       className="relative mt-7 flex min-h-[50px] w-full items-center justify-center gap-4 rounded-full bg-[#59ecb0] px-6 text-[15px] font-bold text-[#03100b] transition hover:-translate-y-0.5 hover:bg-[#85f6c7]"
       href={siteConfig.contactHref}
     >
-      Say Hello <span aria-hidden="true">→</span>
+      Say Hello <AppIcon name="arrow-right" className="size-4" />
     </a>
   </section>
 );

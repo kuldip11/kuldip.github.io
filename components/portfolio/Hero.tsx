@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 import { HERO_EXPERTISE } from '@/constants/pages/home.constants';
 
+import { AppIcon } from './AppIcon';
 import { ExpertiseIcon } from './ExpertiseIcon';
 import { ExternalArrow } from './ExternalArrow';
 
@@ -46,7 +47,7 @@ export const Hero = () => {
             className="inline-flex items-center gap-8 rounded-full bg-[#71f6b5] px-6 py-4 text-[15px] font-bold text-[#07110f] transition hover:-translate-y-0.5 hover:shadow-[0_12px_30px_#71f6b524]"
             href="#work"
           >
-            View my work <span aria-hidden="true">↓</span>
+            View my work <AppIcon name="arrow-down" className="size-4" />
           </a>
           <a
             className="inline-flex items-center gap-2 text-[15px] font-medium transition-colors hover:text-[#71f6b5]"

@@ -2,6 +2,8 @@ import Link from 'next/link';
 
 import type { FooterLink } from '@/types/navigation.types';
 
+import { AppIcon } from '../AppIcon';
+
 export const FooterLinkList = ({ links }: { links: readonly FooterLink[] }) => (
   <ul className="mt-7 space-y-4 text-[15px] text-[#bec9c4] max-[1099px]:mt-5 max-[1099px]:space-y-3">
     {links.map((item) => (
@@ -21,7 +23,7 @@ export const FooterLinkList = ({ links }: { links: readonly FooterLink[] }) => (
               className="text-[#59ecb0] opacity-0 transition-opacity group-hover:opacity-100 max-[1099px]:opacity-100"
               aria-hidden="true"
             >
-              →
+              <AppIcon name="arrow-right" className="size-4" />
             </span>
           </Link>
         ) : (

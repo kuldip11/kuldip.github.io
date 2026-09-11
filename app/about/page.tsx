@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { AppIcon } from '@/components/portfolio/AppIcon';
 import { Footer } from '@/components/portfolio/Footer';
 import { Header } from '@/components/portfolio/Header';
 import { seoCopy } from '@/constants/seo';
@@ -69,8 +70,8 @@ const AboutPage = () => {
                 make quality repeatable.
               </p>
             </div>
-            <Link className="mt-8 inline-block border-b border-[#71f6b5] pb-1" href="/resume">
-              View résumé →
+            <Link className="mt-8 inline-flex items-center gap-2 border-b border-[#71f6b5] pb-1" href="/resume">
+              View résumé <AppIcon name="arrow-right" className="size-4" />
             </Link>
           </div>
         </section>

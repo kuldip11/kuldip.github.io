@@ -1,3 +1,5 @@
+import { AppIcon } from '../AppIcon';
+
 export const ActionLink = ({
   href,
   children,
@@ -14,6 +16,6 @@ export const ActionLink = ({
     href={href}
     {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
   >
-    {children} <span aria-hidden="true">→</span>
+    {children} <AppIcon name={external ? 'arrow-up-right' : 'arrow-right'} className="size-4" />
   </a>
 );

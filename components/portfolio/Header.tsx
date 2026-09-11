@@ -1,12 +1,18 @@
 'use client';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
+import { AppIcon } from '@/components/portfolio/AppIcon';
 import { mainNavigation } from '@/constants/data/navigation.constants';
 import { siteConfig } from '@/constants/site';
 
-export const Header = ({ inner = false }: { inner?: boolean }) => {
+export const Header = () => {
+  const pathname = usePathname() ?? '/';
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const isNavigationItemActive = (href: string) =>
+    href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
   useEffect(() => {
     if (!menuOpen) return;
     const fn = (e: KeyboardEvent) => {
@@ -27,9 +33,10 @@ export const Header = ({ inner = false }: { inner?: boolean }) => {
           {siteConfig.name} <span className="ml-1 text-[#59ecb0]">•</span>
         </Link>
         <nav className="flex gap-8 text-[14px] text-[#d2ddd7] max-[760px]:hidden" aria-label="Main navigation">
-          {mainNavigation.map((item, index) => (
+          {mainNavigation.map((item) => (
             <Link
-              className={`relative py-1.5 transition-colors hover:text-[#59ecb0] ${!inner && index === 0 ? 'text-[#59ecb0] after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-[#59ecb0]' : ''}`}
+              aria-current={isNavigationItemActive(item.href) ? 'page' : undefined}
+              className={`relative py-1.5 transition-colors hover:text-[#59ecb0] ${isNavigationItemActive(item.href) ? 'text-[#59ecb0] after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-[#59ecb0]' : ''}`}
               href={item.href}
               key={item.href}
             >
@@ -38,10 +45,37 @@ export const Header = ({ inner = false }: { inner?: boolean }) => {
           ))}
         </nav>
         <a
-          className="justify-self-end rounded-full border border-[#209b68] bg-[#071b15] px-5 py-2 text-[13px] font-semibold text-[#e5f5ed] transition hover:bg-[#59ecb0] hover:text-[#04100c] max-[760px]:hidden"
-          href={siteConfig.contactHref}
+          className="inline-flex items-center justify-center gap-2 justify-self-end rounded-full border border-[#209b68] bg-[#071b15] px-5 py-2 text-[13px] font-semibold whitespace-nowrap text-[#e5f5ed] transition hover:bg-[#59ecb0] hover:text-[#04100c] max-[760px]:hidden"
+          href="mailto:kuldipkumarsah112@gmail.com?subject=Portfolio%20enquiry&body=Hi%20Kuldip%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20wanted%20to%20get%20in%20touch.%0A%0A"
         >
-          ✉ &nbsp; Let&apos;s Connect&nbsp; →
+          <svg
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            viewBox="0 0 24 24"
+            className="size-4 shrink-0"
+            strokeWidth={1.8}
+            aria-hidden="true"
+          >
+            <rect x="3" y="5" width="18" height="14" rx="2" />
+            <path d="m4 7 8 6 8-6" />
+          </svg>
+
+          <span>Let&apos;s Connect</span>
+
+          <svg
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            viewBox="0 0 24 24"
+            className="size-4 shrink-0"
+            strokeWidth={1.8}
+            aria-hidden="true"
+          >
+            <path d="M5 12h14m0 0-5-5m5 5-5 5" />
+          </svg>
         </a>
         <button
           aria-controls="mobile-navigation-drawer"
@@ -80,7 +114,8 @@ export const Header = ({ inner = false }: { inner?: boolean }) => {
             <nav className="mt-6 grid" aria-label="Mobile main navigation">
               {mainNavigation.map((item, index) => (
                 <Link
-                  className="flex items-center justify-between border-b border-[#234638] py-4 text-lg font-semibold"
+                  aria-current={isNavigationItemActive(item.href) ? 'page' : undefined}
+                  className={`flex items-center justify-between border-b border-[#234638] py-4 text-lg font-semibold transition-colors ${isNavigationItemActive(item.href) ? 'text-[#59ecb0]' : ''}`}
                   href={item.href}
                   key={item.href}
                   onClick={() => setMenuOpen(false)}
@@ -94,7 +129,9 @@ export const Header = ({ inner = false }: { inner?: boolean }) => {
               className="mt-auto rounded-full bg-[#59ecb0] px-5 py-3.5 text-center text-[15px] font-bold text-[#04100c]"
               href={siteConfig.contactHref}
             >
-              Let&apos;s Connect →
+              <span className="inline-flex items-center justify-center gap-2">
+                Let&apos;s Connect <AppIcon name="arrow-right" className="size-4" />
+              </span>
             </a>
           </aside>
         </div>

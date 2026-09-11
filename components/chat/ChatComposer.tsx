@@ -1,3 +1,4 @@
+import { AppIcon } from '@/components/portfolio/AppIcon';
 import { chatbotConfig } from '@/constants/chatbot';
 import { CHAT_UI_COPY } from '@/constants/pages/chat.constants';
 
@@ -36,7 +37,7 @@ export const ChatComposer = ({
         disabled={!input.trim() || loading}
         type="submit"
       >
-        ↑
+        <AppIcon name="arrow-up" className="size-[18px]" strokeWidth={2.2} />
       </button>
     </form>
     <p className="mt-2 text-center font-mono text-[8px] tracking-[.08em] text-[#64766e] uppercase">

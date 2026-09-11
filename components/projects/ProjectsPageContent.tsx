@@ -1,3 +1,4 @@
+import { AppIcon } from '@/components/portfolio/AppIcon';
 import { Eyebrow, InnerPageBackdrop, Pills, ProjectCard } from '@/components/portfolio/InnerPageUi';
 import { PROJECTS_PAGE_CONTENT } from '@/constants/pages/projects.constants';
 import { ROUTES } from '@/constants/routes';
@@ -32,7 +33,10 @@ export const ProjectsPageContent = () => (
           </div>
           <ul className="space-y-5 text-[14px] font-semibold text-[#dbe6e0]">
             {PROJECTS_PAGE_CONTENT.heroPoints.map((point) => (
-              <li key={point}>◉ &nbsp;{point}</li>
+              <li className="flex items-center gap-2" key={point}>
+                <AppIcon name="apps" className="size-4 text-[#59ecb0]" />
+                {point}
+              </li>
             ))}
           </ul>
         </div>
@@ -46,14 +50,17 @@ export const ProjectsPageContent = () => (
       </div>
       <div className="mt-5 flex flex-col gap-4 rounded-[18px] border border-[#176746] bg-[#071713]/90 p-5 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h3 className="text-[17px] font-bold">{PROJECTS_PAGE_CONTENT.footerCta.title}</h3>
+          <h3 className="flex items-center gap-2 text-[17px] font-bold">
+            <AppIcon name="performance" className="size-[18px] text-[#59ecb0]" />
+            {PROJECTS_PAGE_CONTENT.footerCta.title}
+          </h3>
           <p className="mt-1 text-[13px] text-[#aebdb6]">{PROJECTS_PAGE_CONTENT.footerCta.copy}</p>
         </div>
         <a
           className="rounded-full border border-[#45dba4] px-5 py-3 text-[12px] font-semibold text-[#59ecb0]"
           href={ROUTES.articles}
         >
-          {PROJECTS_PAGE_CONTENT.footerCta.linkLabel}
+          {PROJECTS_PAGE_CONTENT.footerCta.linkLabel} <AppIcon name="arrow-right" className="size-4" />
         </a>
       </div>
     </section>

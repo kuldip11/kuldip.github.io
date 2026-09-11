@@ -1,7 +1,17 @@
 import { fireEvent, render, screen, within } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+
+const navigation = vi.hoisted(() => ({ pathname: '/' }));
+
+vi.mock('next/navigation', () => ({
+  usePathname: () => navigation.pathname,
+}));
 
 import { Header } from '@/components/portfolio/Header';
+
+afterEach(() => {
+  navigation.pathname = '/';
+});
 
 describe('Header', () => {
   it('provides navigation to the main landing sections', () => {
@@ -11,6 +21,14 @@ describe('Header', () => {
     expect(screen.getByRole('link', { name: 'Articles' })).toHaveAttribute('href', '/articles');
     expect(screen.getByRole('link', { name: 'Resume' })).toHaveAttribute('href', '/resume');
     expect(screen.getByRole('link', { name: /Let's Connect/i })).toBeInTheDocument();
+  });
+
+  it('highlights the navigation item for the current route', () => {
+    navigation.pathname = '/projects/servora';
+    render(<Header />);
+
+    expect(screen.getByRole('link', { name: 'Projects' })).toHaveAttribute('aria-current', 'page');
+    expect(screen.getByRole('link', { name: 'Home' })).not.toHaveAttribute('aria-current');
   });
 
   it('opens and closes the mobile navigation drawer', () => {

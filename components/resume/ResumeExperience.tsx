@@ -1,9 +1,13 @@
+import { AppIcon } from '@/components/portfolio/AppIcon';
 import { experience } from '@/constants/data/experience.constants';
 import { INNER_PAGE_PANEL_CLASS } from '@/constants/styles/component-styles.constants';
 
 export const ResumeExperience = () => (
   <section className={`${INNER_PAGE_PANEL_CLASS} p-5`} id="experience">
-    <h2 className="text-[20px] font-bold">▣ &nbsp;Experience Timeline</h2>
+    <h2 className="flex items-center gap-2 text-[20px] font-bold">
+      <AppIcon name="briefcase" className="size-5 text-[#59ecb0]" />
+      Experience Timeline
+    </h2>
     <div className="mt-5 space-y-5">
       {experience.map(([date, role, company, copy]) => (
         <article className="border-l border-[#46eeb0] pl-5" key={role}>
