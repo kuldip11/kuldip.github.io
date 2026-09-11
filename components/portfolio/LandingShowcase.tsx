@@ -1,8 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { siteConfig } from '@/constants/site';
-
 const expertise = [
   ['5+ Years', '▣'],
   ['React / Next.js', '⚛'],
@@ -321,24 +319,6 @@ export function LandingShowcase() {
             Learn more&nbsp; →
           </a>
         </article>
-      </section>
-
-      <section className="relative w-full px-5 pb-6 sm:px-8 lg:px-12">
-        <div className="flex flex-col gap-3 border-t border-[#164d38] px-3 pt-4 sm:flex-row sm:items-center sm:justify-between">
-          <p className="m-0 text-[15px] font-semibold text-white">
-            Let&apos;s build something great together.{' '}
-            <span className="ml-2 text-[12px] font-normal text-[#a9b9b1]">
-              I&apos;m always open to discussing new opportunities, interesting projects, or just a chat about
-              technology.
-            </span>
-          </p>
-          <a
-            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-[#2ab878] bg-[#0a241b] px-5 py-2.5 text-[12px] font-semibold text-[#e9f7f0] transition hover:bg-[#55eeb0] hover:text-[#04100c]"
-            href={siteConfig.contactHref}
-          >
-            ✉&nbsp; Let&apos;s Connect&nbsp; →
-          </a>
-        </div>
       </section>
 
       <div id="experience-detail" className="sr-only">

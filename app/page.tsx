@@ -1,3 +1,4 @@
+import { Footer } from '@/components/portfolio/Footer';
 import { Header } from '@/components/portfolio/Header';
 import { LandingShowcase } from '@/components/portfolio/LandingShowcase';
 import { JsonLd } from '@/components/seo/JsonLd';
@@ -37,6 +38,7 @@ export default function Home() {
       <JsonLd />
       <Header />
       <LandingShowcase />
+      <Footer />
     </>
   );
 }
