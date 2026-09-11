@@ -1,19 +1,6 @@
-const tools = [
-  ['React', 'react', '#61DAFB'],
-  ['Next.js', 'nextdotjs', '#FFFFFF'],
-  ['TypeScript', 'typescript', '#3178C6'],
-  ['JavaScript', 'javascript', '#F7DF1E'],
-  ['Node.js', 'nodedotjs', '#5FA04E'],
-  ['PostgreSQL', 'postgresql', '#4169E1'],
-  ['Tailwind CSS', 'tailwindcss', '#06B6D4'],
-  ['Docker', 'docker', '#2496ED'],
-  ['GitHub', 'github', '#FFFFFF'],
-  ['Git', 'git', '#F05032'],
-  ['Vercel', 'vercel', '#FFFFFF'],
-  ['Figma', 'figma', '#F24E1E'],
-] as const;
+import { techStackTools } from '@/constants/data/skills.constants';
 
-export function TechStack() {
+export const TechStack = () => {
   return (
     <section
       className="mx-auto max-w-[1344px] pb-[120px] max-[1380px]:mx-12 max-[650px]:mx-5 max-[650px]:pb-[90px]"
@@ -34,7 +21,7 @@ export function TechStack() {
           </span>
         </div>
         <div className="grid grid-cols-6 gap-3 max-[1000px]:grid-cols-4 max-[700px]:grid-cols-3 max-[480px]:grid-cols-2">
-          {tools.map(([name, slug, color]) => (
+          {techStackTools.map(([name, slug, color]) => (
             <div
               className="group grid min-h-[116px] place-items-center rounded-[16px] border border-[#23483b] bg-[#0d1d18] p-3 text-center transition hover:-translate-y-1 hover:border-[#71f6b56b]"
               key={name}
@@ -57,4 +44,4 @@ export function TechStack() {
       </div>
     </section>
   );
-}
+};

@@ -1,9 +1,11 @@
 'use client';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+
+import { mainNavigation } from '@/constants/data/navigation.constants';
 import { siteConfig } from '@/constants/site';
 
-export function Header({ inner = false }: { inner?: boolean }) {
+export const Header = ({ inner = false }: { inner?: boolean }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   useEffect(() => {
     if (!menuOpen) return;
@@ -13,13 +15,6 @@ export function Header({ inner = false }: { inner?: boolean }) {
     document.addEventListener('keydown', fn);
     return () => document.removeEventListener('keydown', fn);
   }, [menuOpen]);
-
-  const nav = [
-    { label: 'Home', href: '/' },
-    { label: 'Projects', href: '/projects' },
-    { label: 'Articles', href: '/articles' },
-    { label: 'Resume', href: '/resume' },
-  ];
 
   return (
     <header className="sticky top-0 z-50 border-b border-[#164833b8] bg-[#030d0ae8] backdrop-blur-[14px]">
@@ -32,7 +27,7 @@ export function Header({ inner = false }: { inner?: boolean }) {
           {siteConfig.name} <span className="ml-1 text-[#59ecb0]">•</span>
         </Link>
         <nav className="flex gap-8 text-[14px] text-[#d2ddd7] max-[760px]:hidden" aria-label="Main navigation">
-          {nav.map((item, index) => (
+          {mainNavigation.map((item, index) => (
             <Link
               className={`relative py-1.5 transition-colors hover:text-[#59ecb0] ${!inner && index === 0 ? 'text-[#59ecb0] after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-[#59ecb0]' : ''}`}
               href={item.href}
@@ -83,7 +78,7 @@ export function Header({ inner = false }: { inner?: boolean }) {
           >
             <p className="font-mono text-[12px] tracking-[.16em] text-[#59ecb0] uppercase">Navigation</p>
             <nav className="mt-6 grid" aria-label="Mobile main navigation">
-              {nav.map((item, index) => (
+              {mainNavigation.map((item, index) => (
                 <Link
                   className="flex items-center justify-between border-b border-[#234638] py-4 text-lg font-semibold"
                   href={item.href}
@@ -106,4 +101,4 @@ export function Header({ inner = false }: { inner?: boolean }) {
       ) : null}
     </header>
   );
-}
+};

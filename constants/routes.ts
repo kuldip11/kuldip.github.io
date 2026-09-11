@@ -1,1 +1,1 @@
-export const staticSitemapRoutes = ['', '/about', '/resume', '/projects', '/articles'] as const;
+export { ROUTES, staticSitemapRoutes } from './routes/routes.constants';

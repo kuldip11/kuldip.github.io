@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { ExternalArrow } from './ExternalArrow';
-export function About() {
+export const About = () => {
   return (
     <section
       className="mx-auto grid max-w-[1344px] grid-cols-[1fr_1.45fr] gap-[110px] px-0 pt-10 pb-[150px] max-[1380px]:mx-12 max-[800px]:grid-cols-1 max-[800px]:gap-[30px] max-[650px]:mx-5 max-[650px]:pt-0 max-[650px]:pb-[100px]"
@@ -44,4 +44,4 @@ export function About() {
       </div>
     </section>
   );
-}
+};

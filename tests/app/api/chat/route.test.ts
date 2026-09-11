@@ -43,7 +43,7 @@ afterEach(() => {
 });
 
 describe('POST /api/chat', () => {
-  it('uses exact normalized triggers before calling Gemini', async () => {
+  it('uses normalized substring triggers without calling Gemini', async () => {
     configure();
 
     const payload = await (await request('  PRIVATE   TRIGGER ONE  ')).json();
@@ -54,9 +54,11 @@ describe('POST /api/chat', () => {
 
     fetchMock.mockResolvedValue(geminiResponse('Public'));
 
-    await request('Hey, private trigger one?');
+    const embeddedTrigger = await (await request('Hey, private trigger one?')).json();
 
-    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(embeddedTrigger).toMatchObject({ message: "What's your name?" });
+    expect(embeddedTrigger.stateToken).toBeTruthy();
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 
   it('unlocks private mode without forwarding the code', async () => {

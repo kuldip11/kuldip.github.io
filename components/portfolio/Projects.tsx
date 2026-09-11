@@ -1,31 +1,25 @@
 import Link from 'next/link';
 
-import { servoraLinks } from '@/constants/site';
-import { projects } from '@/data/portfolio';
+import { projects } from '@/constants/data/projects';
+import { HOME_SECTION_HEADERS } from '@/constants/pages/home.constants';
+import { ROUTES } from '@/constants/routes';
 
 import { ExternalArrow } from './ExternalArrow';
 import { ProjectVisual } from './ProjectVisual';
+import { SectionHeader } from './SectionHeader';
 
-export function Projects() {
+export const Projects = () => {
   return (
     <section
       className="mx-auto max-w-[1344px] pb-[150px] max-[1380px]:mx-12 max-[650px]:mx-5 max-[650px]:pb-[100px]"
       id="work"
     >
-      <div className="mb-16 grid grid-cols-[1fr_1.7fr_1fr] items-end gap-10 max-[1000px]:grid-cols-[1fr_2fr] max-[650px]:grid-cols-1 max-[650px]:gap-[22px]">
-        <div>
-          <span className="mb-2.5 block font-mono text-[12px] text-[#71f6b5]">01</span>
-          <p className="m-0 font-mono text-[12px] leading-[1.4] font-semibold tracking-[.12em] text-[#a5b7ae] uppercase">
-            Selected systems
-          </p>
-        </div>
-        <h2 className="m-0 max-w-[660px] text-[clamp(2.6rem,5vw,5.6rem)] leading-[.96] font-medium tracking-[-.055em]">
-          Proof lives in the work.
-        </h2>
-        <p className="text-[15px] leading-[1.65] text-[#8fa29a] max-[1000px]:col-start-2 max-[650px]:col-auto">
-          Three stories about scale, architecture and turning operational complexity into clear product experiences.
-        </p>
-      </div>
+      <SectionHeader
+        index={HOME_SECTION_HEADERS.projects.index}
+        eyebrow={HOME_SECTION_HEADERS.projects.eyebrow}
+        title={HOME_SECTION_HEADERS.projects.title}
+        copy={HOME_SECTION_HEADERS.projects.copy}
+      />
       <div className="grid gap-7">
         {projects.map((project) => (
           <article
@@ -51,31 +45,29 @@ export function Projects() {
                   </li>
                 ))}
               </ul>
-              {project.slug === 'servora' && (
+              {project.showcaseLinks && project.showcaseLinksLabel && (
                 <div className="mb-8">
                   <p className="mb-3 font-mono text-[12px] tracking-[.1em] text-[#71f6b5] uppercase">
-                    Live Servora demos
+                    {project.showcaseLinksLabel}
                   </p>
                   <div className="flex flex-wrap gap-x-4 gap-y-2">
-                    {servoraLinks
-                      .filter((link) => link.label !== 'API')
-                      .map((link) => (
-                        <a
-                          className="inline-flex items-center gap-1.5 text-xs text-[#c3d0ca] transition-colors hover:text-[#71f6b5]"
-                          href={link.href}
-                          key={link.label}
-                          rel="noopener noreferrer"
-                          target="_blank"
-                        >
-                          {link.label} <ExternalArrow />
-                        </a>
-                      ))}
+                    {project.showcaseLinks.map((link) => (
+                      <a
+                        className="inline-flex items-center gap-1.5 text-xs text-[#c3d0ca] transition-colors hover:text-[#71f6b5]"
+                        href={link.href}
+                        key={link.label}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        {link.label} <ExternalArrow />
+                      </a>
+                    ))}
                   </div>
                 </div>
               )}
               <Link
                 className="mt-auto flex w-max items-center gap-[7px] border-b border-[#577268] pb-[5px] text-[14px] transition-colors hover:text-[#71f6b5]"
-                href={`/projects/${project.slug}`}
+                href={ROUTES.project(project.slug)}
               >
                 Read case study <ExternalArrow />
               </Link>
@@ -86,4 +78,4 @@ export function Projects() {
       </div>
     </section>
   );
-}
+};

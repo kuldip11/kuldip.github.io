@@ -6,10 +6,10 @@ import { Header } from '@/components/portfolio/Header';
 describe('Header', () => {
   it('provides navigation to the main landing sections', () => {
     render(<Header />);
-    expect(screen.getByRole('link', { name: 'Home' })).toHaveAttribute('href', '/#top');
-    expect(screen.getByRole('link', { name: 'Projects' })).toHaveAttribute('href', '/#work');
-    expect(screen.getByRole('link', { name: 'Experience' })).toHaveAttribute('href', '/#experience');
-    expect(screen.getByRole('link', { name: 'Approach' })).toHaveAttribute('href', '/#approach');
+    expect(screen.getByRole('link', { name: 'Home' })).toHaveAttribute('href', '/');
+    expect(screen.getByRole('link', { name: 'Projects' })).toHaveAttribute('href', '/projects');
+    expect(screen.getByRole('link', { name: 'Articles' })).toHaveAttribute('href', '/articles');
+    expect(screen.getByRole('link', { name: 'Resume' })).toHaveAttribute('href', '/resume');
     expect(screen.getByRole('link', { name: /Let's Connect/i })).toBeInTheDocument();
   });
 
@@ -26,7 +26,7 @@ describe('Header', () => {
     render(<Header />);
     fireEvent.click(screen.getByRole('button', { name: 'Open navigation menu' }));
     const mobileNavigation = screen.getByRole('navigation', { name: 'Mobile main navigation' });
-    fireEvent.click(within(mobileNavigation).getByRole('link', { name: 'Home' }));
+    fireEvent.click(within(mobileNavigation).getByRole('link', { name: /Home01/ }));
     expect(mobileNavigation).not.toBeInTheDocument();
   });
 });

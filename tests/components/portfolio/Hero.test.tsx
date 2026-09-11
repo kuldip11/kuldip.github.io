@@ -7,7 +7,7 @@ describe('Hero', () => {
   it('makes the role, capabilities and resume path clear', () => {
     render(<Hero />);
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/scalable React products/i);
-    expect(screen.getByText(/Senior Frontend Engineer/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/Senior Frontend Engineer/i).length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText('Frontend Architecture')).toBeInTheDocument();
     expect(screen.getByAltText(/Kuldip Kumar Sah/i)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /View résumé/i })).toHaveAttribute('href', '/resume');

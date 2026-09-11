@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AboutPage() {
+const AboutPage = () => {
   return (
     <>
       <Header />
@@ -78,4 +78,6 @@ export default function AboutPage() {
       <Footer />
     </>
   );
-}
+};
+
+export default AboutPage;

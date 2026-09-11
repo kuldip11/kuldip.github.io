@@ -1,31 +1,6 @@
-const capabilities = [
-  {
-    number: '01',
-    title: 'PRODUCT FRONTEND',
-    copy: 'Complex React & Next.js applications, responsive UI and reusable component systems.',
-    stack: 'React · Next.js · TypeScript',
-  },
-  {
-    number: '02',
-    title: 'ARCHITECTURE & SCALE',
-    copy: 'Maintainable frontend architecture for multi-role products, monorepos and enterprise workflows.',
-    stack: 'Architecture · RBAC · Monorepos',
-  },
-  {
-    number: '03',
-    title: 'PERFORMANCE & DATA UI',
-    copy: 'Fast experiences for dense data, maps and interaction-heavy interfaces at production scale.',
-    stack: 'Mapbox · Core Web Vitals · SSR',
-  },
-  {
-    number: '04',
-    title: 'FULL-STACK DELIVERY',
-    copy: 'Enough backend depth to own typed APIs, data flows, testing and production delivery end to end.',
-    stack: 'Bun · PostgreSQL · Redis · CI/CD',
-  },
-] as const;
+import { SYSTEM_CAPABILITIES } from '@/constants/pages/home.constants';
 
-export function SystemCanvas() {
+export const SystemCanvas = () => {
   return (
     <aside
       className="overflow-hidden rounded-[22px] border border-[#223b33] bg-[#0c1916] shadow-[0_24px_80px_#0003]"
@@ -42,12 +17,12 @@ export function SystemCanvas() {
       </div>
 
       <div className="grid grid-cols-2 max-[520px]:grid-cols-1">
-        {capabilities.map((capability, index) => (
+        {SYSTEM_CAPABILITIES.map((capability, index) => (
           <article
             className={`group min-h-[205px] p-6 transition-colors hover:bg-[#10201c] ${
               index % 2 === 0 ? 'border-r border-[#223b33] max-[520px]:border-r-0' : ''
             } ${index < 2 ? 'border-b border-[#223b33]' : 'max-[520px]:border-b max-[520px]:border-[#223b33]'} ${
-              index === capabilities.length - 1 ? 'max-[520px]:border-b-0' : ''
+              index === SYSTEM_CAPABILITIES.length - 1 ? 'max-[520px]:border-b-0' : ''
             }`}
             key={capability.title}
           >
@@ -70,4 +45,4 @@ export function SystemCanvas() {
       </div>
     </aside>
   );
-}
+};

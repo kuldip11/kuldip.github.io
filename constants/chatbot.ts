@@ -1,5 +1,7 @@
-import { articles } from '@/data/articles';
-import { experience, projects, stack } from '@/data/portfolio';
+import { articles } from '@/constants/data/articles.constants';
+import { experience } from '@/constants/data/experience.constants';
+import { projects } from '@/constants/data/projects';
+import { stack } from '@/constants/data/skills.constants';
 
 import { servoraLinks, siteConfig } from './site';
 

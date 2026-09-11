@@ -39,4 +39,36 @@ export default tseslint.config(
       ],
     },
   },
+  {
+    files: ['components/**/*.{ts,tsx}'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['@/app/**', '@/server/**'],
+              message: 'Presentation components must not depend on route or server implementation modules.',
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    files: ['hooks/**/*.{ts,tsx}', 'lib/**/*.{ts,tsx}'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['@/app/**', '@/components/**'],
+              message: 'Hooks and library modules must remain independent of routes and presentation components.',
+            },
+          ],
+        },
+      ],
+    },
+  },
 );

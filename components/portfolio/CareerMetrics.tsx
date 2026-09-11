@@ -1,5 +1,5 @@
-import { metrics } from '@/data/portfolio';
-export function CareerMetrics() {
+import { metrics } from '@/constants/data/portfolio.constants';
+export const CareerMetrics = () => {
   return (
     <section
       className="mx-auto mb-[150px] grid max-w-[1344px] grid-cols-4 border-y border-[#20362f] max-[1380px]:mx-12 max-[1000px]:grid-cols-2 max-[650px]:mx-5 max-[650px]:mb-[100px]"
@@ -18,4 +18,4 @@ export function CareerMetrics() {
       ))}
     </section>
   );
-}
+};

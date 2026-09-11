@@ -1,12 +1,10 @@
-export function ProjectVisual({ index }: { index: string }) {
+import { homeEnterpriseVisualNodes, homeServoraVisualCards } from '@/constants/data/project-visuals.constants';
+
+export const ProjectVisual = ({ index }: { index: string }) => {
   if (index === '01')
     return (
       <div className="relative min-h-[520px] overflow-hidden bg-[radial-gradient(circle_at_55%_48%,#7cb8ff21,transparent_40%),linear-gradient(135deg,#0a1714,#112820)] max-[650px]:min-h-[430px]">
-        {[
-          ['SERVORA / POS', '₹ 18,240', '12 active tables', 'top-[24%] left-[13%] -rotate-3 max-[650px]:left-[6%]'],
-          ['KITCHEN', '08', 'orders cooking', 'top-[13%] right-[8%] rotate-4 max-[650px]:right-[3%]'],
-          ['WAITER', 'Table 14', 'ready to serve', 'right-[13%] bottom-[10%] -rotate-1 max-[650px]:right-[7%]'],
-        ].map(([label, value, copy, pos]) => (
+        {homeServoraVisualCards.map(([label, value, copy, pos]) => (
           <div
             key={label}
             className={`absolute flex w-[230px] flex-col rounded-[15px] border border-[#7cb8ff3b] bg-[#0d1e19ed] p-[18px] shadow-[0_30px_60px_#0005] max-[650px]:w-[170px] ${pos}`}
@@ -44,13 +42,7 @@ export function ProjectVisual({ index }: { index: string }) {
       >
         <path d="M64 91H188V170H318V92H440M318 170V270H440" />
       </svg>
-      {[
-        ['USER', 'left-[5%] top-[22%]'],
-        ['PROJECT', 'left-[31%] top-[45%]'],
-        ['CONTRACT', 'right-[24%] top-[22%]'],
-        ['MILESTONE', 'right-[5%] top-[45%]'],
-        ['SHIP', 'right-[5%] bottom-[14%] border-[#ffb86b]'],
-      ].map(([label, position]) => (
+      {homeEnterpriseVisualNodes.map(([label, position]) => (
         <div
           key={label}
           className={`absolute z-10 rounded-lg border border-[#61513a] bg-[#211d15] px-[18px] py-[13px] font-mono text-[10px] text-[#ffb86b] shadow-[0_14px_30px_#0006] ${position}`}
@@ -60,4 +52,4 @@ export function ProjectVisual({ index }: { index: string }) {
       ))}
     </div>
   );
-}
+};

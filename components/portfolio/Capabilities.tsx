@@ -1,11 +1,6 @@
-const capabilities = [
-  ['</>', 'Build scalable products', 'From idea to a polished, production-ready frontend application.'],
-  ['▱', 'Design maintainable architecture', 'Reusable UI systems and clean, maintainable codebases.'],
-  ['↯', 'Optimize performance', 'Fast, accessible and delightful user experiences.'],
-  ['☁', 'Work end-to-end', 'Integrate with APIs, testing and deployment, then iterate from real feedback.'],
-] as const;
+import { HOME_CAPABILITY_CARDS } from '@/constants/pages/home.constants';
 
-export function Capabilities() {
+export const Capabilities = () => {
   return (
     <section
       className="mx-auto max-w-[1344px] px-0 pb-8 max-[1380px]:mx-12 max-[650px]:mx-5"
@@ -21,7 +16,7 @@ export function Capabilities() {
           </span>
         </div>
         <div className="grid grid-cols-4 gap-3 max-[950px]:grid-cols-2 max-[650px]:grid-cols-1">
-          {capabilities.map(([icon, title, copy]) => (
+          {HOME_CAPABILITY_CARDS.map(([icon, title, copy]) => (
             <article className="min-h-[190px] rounded-[18px] border border-[#25483c] bg-[#0d1d18] p-5" key={title}>
               <span className="font-mono text-2xl font-bold text-[#71f6b5]" aria-hidden="true">
                 {icon}
@@ -34,4 +29,4 @@ export function Capabilities() {
       </div>
     </section>
   );
-}
+};

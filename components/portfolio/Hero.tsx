@@ -1,18 +1,11 @@
 import Image from 'next/image';
 
+import { HERO_EXPERTISE } from '@/constants/pages/home.constants';
+
+import { ExpertiseIcon } from './ExpertiseIcon';
 import { ExternalArrow } from './ExternalArrow';
 
-const expertise = [
-  ['5+ Years', '◫'],
-  ['React / Next.js', '⚛'],
-  ['TypeScript', 'TS'],
-  ['Frontend Architecture', '◇'],
-  ['Performance', '↗'],
-  ['Testing & CI/CD', '⚙'],
-  ['Full-stack Collaboration', '◎'],
-] as const;
-
-export function Hero() {
+export const Hero = () => {
   return (
     <section
       className="relative mx-auto grid max-w-[1440px] grid-cols-[minmax(0,1.05fr)_minmax(420px,.95fr)] items-center gap-10 overflow-hidden px-12 pt-16 pb-12 max-[1050px]:grid-cols-1 max-[650px]:px-5 max-[650px]:pt-10"
@@ -35,18 +28,15 @@ export function Hero() {
         </p>
 
         <ul className="mt-7 flex max-w-[780px] list-none flex-wrap gap-2.5 p-0" aria-label="Core expertise">
-          {expertise.map(([item, icon]) => (
+          {HERO_EXPERTISE.map(({ label, icon }) => (
             <li
               className="inline-flex items-center gap-2 rounded-full border border-[#2b5b4a] bg-[#0b1915cc] px-4 py-2.5 text-[13px] font-medium text-[#d8e4de] shadow-[inset_0_0_18px_rgba(113,246,181,.025)]"
-              key={item}
+              key={label}
             >
-              <span
-                className="grid min-w-5 place-items-center font-mono text-[12px] font-bold text-[#71f6b5]"
-                aria-hidden="true"
-              >
-                {icon}
+              <span className="flex size-5 shrink-0 items-center justify-center text-[#71f6b5]" aria-hidden="true">
+                <ExpertiseIcon icon={icon} />
               </span>
-              {item}
+              <span>{label}</span>
             </li>
           ))}
         </ul>
@@ -89,4 +79,4 @@ export function Hero() {
       </div>
     </section>
   );
-}
+};

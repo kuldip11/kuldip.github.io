@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
+const Home = () => {
   return (
     <>
       <a
@@ -41,4 +41,6 @@ export default function Home() {
       <Footer />
     </>
   );
-}
+};
+
+export default Home;
