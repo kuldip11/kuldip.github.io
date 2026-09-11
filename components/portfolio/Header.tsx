@@ -20,14 +20,28 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-[#164833b8] bg-[#030d0ac2] backdrop-blur-[14px]">
-      <div className="grid h-[62px] w-full grid-cols-[1fr_auto_1fr] items-center px-5 max-[760px]:grid-cols-[1fr_auto] sm:px-8 lg:px-12">
+      <div className="grid h-[62px] w-full grid-cols-[1fr_auto_1fr] items-center px-5 max-[760px]:grid-cols-[1fr_auto_auto_auto] max-[760px]:gap-4 sm:px-8 lg:px-12">
         <Link
-          className="w-max text-[18px] font-bold tracking-[-.035em] sm:text-[20px]"
+          className="w-max text-[18px] font-bold tracking-[-.035em] max-[430px]:text-[15px] sm:text-[20px]"
           href="/#top"
           aria-label={`${siteConfig.name}, home`}
         >
           {siteConfig.name} <span className="ml-1 text-[#59ecb0]">•</span>
         </Link>
+
+        <Link
+          className="relative hidden py-1.5 text-[14px] text-[#59ecb0] after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-[#59ecb0] max-[760px]:block max-[430px]:hidden"
+          href="/#top"
+        >
+          Home
+        </Link>
+
+        <a
+          className="hidden justify-self-end rounded-full border border-[#209b68] bg-[#071b15] px-5 py-2 text-[13px] font-semibold text-[#e5f5ed] max-[760px]:block max-[500px]:px-3 max-[430px]:hidden"
+          href={siteConfig.contactHref}
+        >
+          ✉ &nbsp; Let&apos;s Connect
+        </a>
 
         <nav className="flex gap-9 text-[14px] text-[#d2ddd7] max-[760px]:hidden" aria-label="Main navigation">
           {headerNavigation.map((item, index) => (

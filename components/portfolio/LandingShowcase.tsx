@@ -94,21 +94,24 @@ export function LandingShowcase() {
       <div className="pointer-events-none absolute inset-0 [background-image:radial-gradient(circle_at_12%_9%,rgba(36,255,177,.13),transparent_22%),radial-gradient(circle_at_83%_32%,rgba(52,244,177,.12),transparent_30%),radial-gradient(circle_at_95%_86%,rgba(52,244,177,.1),transparent_22%)] opacity-35" />
       <div className="pointer-events-none absolute inset-0 [background-image:linear-gradient(rgba(78,241,181,.12)_1px,transparent_1px),linear-gradient(90deg,rgba(78,241,181,.10)_1px,transparent_1px)] [background-size:72px_72px] opacity-[.12]" />
 
-      <section className="relative w-full px-5 pt-6 pb-4 sm:px-8 lg:px-12" id="top">
-        <div className="grid items-center gap-6 lg:grid-cols-[minmax(0,1.04fr)_minmax(540px,.96fr)] lg:gap-4">
-          <div className="relative z-10 pt-5 lg:pt-8">
+      <section className="relative w-full px-5 pt-6 pb-4 min-[1100px]:px-12 sm:px-8" id="top">
+        <div className="grid grid-cols-[minmax(0,.58fr)_minmax(0,.42fr)] items-start gap-0 min-[700px]:grid-cols-[minmax(0,1.02fr)_minmax(340px,.98fr)] min-[700px]:items-center min-[700px]:gap-3 min-[1100px]:grid-cols-[minmax(0,1.04fr)_minmax(540px,.96fr)] min-[1100px]:gap-4">
+          <div className="relative z-10 pt-3 min-[700px]:pt-5 min-[1100px]:pt-8">
             <SectionLabel>Senior Frontend Engineer</SectionLabel>
-            <h1 className="mt-4 mb-4 max-w-[800px] text-[clamp(3.35rem,5.15vw,5.25rem)] leading-[.94] font-bold tracking-[-.06em]">
+            <h1 className="mt-4 mb-4 max-w-[800px] text-[clamp(2.05rem,7.3vw,3.05rem)] leading-[.96] font-bold tracking-[-.055em] min-[700px]:text-[clamp(2.65rem,5.2vw,4rem)] min-[1100px]:text-[clamp(3.35rem,5.15vw,5.25rem)]">
               I build scalable <span className="text-[#59ecb0]">React</span> products from interface to production.
             </h1>
-            <p className="max-w-[780px] text-[clamp(1.05rem,1.26vw,1.24rem)] leading-[1.55] text-[#d6ded9]">
+            <p className="max-w-[780px] text-[13px] leading-[1.48] text-[#d6ded9] min-[700px]:text-[15px] min-[1100px]:text-[clamp(1.05rem,1.26vw,1.24rem)] min-[1100px]:leading-[1.55]">
               Hi, I&apos;m <strong className="font-semibold text-white">Kuldip Kumar Sah</strong> — a Senior Frontend
               Engineer focused on React, Next.js, TypeScript, frontend architecture, performance, and product-quality
               user experiences. I also work comfortably across APIs, backend integration, testing, and deployment when
               needed.
             </p>
 
-            <ul className="mt-5 flex max-w-[790px] list-none flex-wrap gap-2.5 p-0" aria-label="Core expertise">
+            <ul
+              className="mt-5 flex max-w-[790px] list-none flex-wrap gap-2.5 p-0 max-[699px]:hidden"
+              aria-label="Core expertise"
+            >
               {expertise.map(([label, icon]) => (
                 <li
                   className="inline-flex min-h-[42px] items-center gap-2 rounded-full border border-[#176f50] bg-[#071814d9] px-4 text-[13px] font-medium text-[#e3ebe7] shadow-[inset_0_0_18px_rgba(85,239,175,.02)]"
@@ -126,7 +129,7 @@ export function LandingShowcase() {
             </ul>
           </div>
 
-          <div className="relative top-[-62px] isolate -mb-[62px] hidden h-[clamp(510px,36vw,610px)] w-full lg:block">
+          <div className="relative top-[-62px] isolate -mb-[62px] hidden h-[clamp(510px,36vw,610px)] w-full min-[1100px]:block">
             <figure className="absolute inset-[-3%_-4%_-2%_-9%] -z-10 m-0">
               <Image
                 src="/kuldip-hero-composite-v4.png"
@@ -158,23 +161,56 @@ export function LandingShowcase() {
             </div>
           </div>
 
-          <div className="relative mx-auto block w-full max-w-[680px] lg:hidden">
-            <div className="relative aspect-[4/3]">
+          <div className="relative top-1 mx-auto block h-[430px] w-full min-[700px]:h-[500px] min-[1100px]:hidden">
+            <div className="relative h-full">
               <Image
                 src="/kuldip-hero-composite-v4.png"
                 alt="Kuldip Kumar Sah, Senior Frontend Engineer"
                 fill
                 priority
-                sizes="92vw"
-                className="[mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,.15)_6%,rgba(0,0,0,.55)_13%,black_22%,black_78%,rgba(0,0,0,.55)_87%,rgba(0,0,0,.15)_94%,transparent_100%),linear-gradient(to_bottom,transparent_0%,rgba(0,0,0,.28)_2%,black_6%,black_50%,rgba(0,0,0,.92)_58%,rgba(0,0,0,.62)_66%,rgba(0,0,0,.28)_73%,transparent_82%)] [mask-composite:intersect] object-cover object-center [-webkit-mask-composite:source-in] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,.15)_6%,rgba(0,0,0,.55)_13%,black_22%,black_78%,rgba(0,0,0,.55)_87%,rgba(0,0,0,.15)_94%,transparent_100%),linear-gradient(to_bottom,transparent_0%,rgba(0,0,0,.28)_2%,black_6%,black_50%,rgba(0,0,0,.92)_58%,rgba(0,0,0,.62)_66%,rgba(0,0,0,.28)_73%,transparent_82%)]"
+                sizes="(max-width: 699px) 46vw, 48vw"
+                className="origin-top scale-[1.04] [mask-image:linear-gradient(to_right,transparent_0%,black_15%,black_94%,transparent_100%),linear-gradient(to_bottom,black_0%,black_72%,rgba(0,0,0,.72)_84%,transparent_98%)] [mask-composite:intersect] object-cover object-[62%_top] [-webkit-mask-composite:source-in] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_15%,black_94%,transparent_100%),linear-gradient(to_bottom,black_0%,black_72%,rgba(0,0,0,.72)_84%,transparent_98%)] min-[700px]:scale-100 min-[700px]:object-[59%_top]"
               />
+              <div className="absolute top-[16%] right-[3%] rotate-[-5deg] font-serif text-[14px] leading-[1.25] text-[#9bf4cb] italic min-[700px]:right-[15%] min-[700px]:text-[17px]">
+                Build
+                <br />
+                Ship
+                <br />
+                Improve
+                <br />
+                Repeat
+              </div>
+              <div className="absolute top-[40%] right-[-5%] w-[92px] rounded-[12px] border border-[#35b77f82] bg-[#061611e6] p-3 text-[12px] leading-[1.4] text-[#dbe5e0] min-[700px]:right-0 min-[700px]:w-[112px] min-[700px]:p-4 min-[700px]:text-[14px]">
+                <span className="text-[24px] text-[#4ee9a7]">“</span>
+                <p>Better interfaces create a brighter tomorrow.</p>
+              </div>
             </div>
           </div>
+
+          <ul
+            className="col-span-2 mt-1 flex list-none flex-wrap gap-2 p-0 min-[700px]:hidden"
+            aria-label="Core expertise"
+          >
+            {expertise.map(([label, icon]) => (
+              <li
+                className="inline-flex min-h-[38px] items-center gap-2 rounded-full border border-[#176f50] bg-[#071814d9] px-3 text-[11px] font-medium text-[#e3ebe7]"
+                key={label}
+              >
+                <span
+                  className="grid min-w-5 place-items-center font-mono text-[15px] font-bold text-[#52ecac]"
+                  aria-hidden="true"
+                >
+                  {icon}
+                </span>
+                {label}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
       <section
-        className="relative grid w-full gap-4 px-5 pb-4 sm:px-8 lg:grid-cols-[1.46fr_1fr] lg:px-12"
+        className="relative grid w-full grid-cols-1 gap-3 px-5 pb-4 min-[900px]:grid-cols-[1.08fr_.92fr] min-[900px]:gap-4 min-[1100px]:grid-cols-[1.46fr_1fr] min-[1100px]:px-12 sm:px-8"
         aria-label="Capabilities and tech stack"
       >
         <article className="rounded-[18px] border border-[#176746] bg-[#061612e8] p-4 shadow-[0_18px_60px_rgba(0,0,0,.22)] backdrop-blur-sm">
@@ -184,14 +220,24 @@ export function LandingShowcase() {
               Turn ideas into impact
             </span>
           </div>
-          <div className="grid gap-2.5 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="grid grid-cols-2 gap-2.5 min-[1100px]:grid-cols-4">
             {capabilities.map(([icon, title, copy]) => (
-              <div className="min-h-[168px] rounded-[14px] border border-[#1f4e3c] bg-[#0a1b16] p-4" key={title}>
-                <span className="font-mono text-[24px] font-bold text-[#55eeb0]" aria-hidden="true">
+              <div
+                className="min-h-[142px] rounded-[14px] border border-[#1f4e3c] bg-[#0a1b16] p-3 min-[900px]:min-h-[150px] min-[1100px]:min-h-[168px] min-[1100px]:p-4"
+                key={title}
+              >
+                <span
+                  className="font-mono text-[28px] font-bold text-[#55eeb0] min-[1100px]:text-[24px]"
+                  aria-hidden="true"
+                >
                   {icon}
                 </span>
-                <h3 className="mt-3 mb-1.5 text-[16px] leading-[1.18] font-semibold tracking-[-.02em]">{title}</h3>
-                <p className="m-0 text-[13px] leading-[1.48] text-[#aebdb6]">{copy}</p>
+                <h3 className="mt-3 mb-1.5 text-[13px] leading-[1.18] font-semibold tracking-[-.02em] min-[700px]:text-[15px] min-[1100px]:text-[16px]">
+                  {title}
+                </h3>
+                <p className="m-0 text-[11px] leading-[1.45] text-[#aebdb6] min-[700px]:text-[12px] min-[1100px]:text-[13px] min-[1100px]:leading-[1.48]">
+                  {copy}
+                </p>
               </div>
             ))}
           </div>
@@ -204,39 +250,43 @@ export function LandingShowcase() {
               Tools I love
             </span>
           </div>
-          <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 xl:grid-cols-6">
+          <div className="grid grid-cols-6 gap-1.5 min-[900px]:grid-cols-5 min-[1100px]:grid-cols-6 min-[1100px]:gap-2">
             {tools.map(([name, slug, color]) => (
               <div
-                className="group grid min-h-[78px] place-items-center rounded-[12px] border border-[#1f4e3c] bg-[#0a1b16] px-2 py-2 text-center transition hover:-translate-y-0.5 hover:border-[#4eeaaa78]"
+                className="group grid min-h-[72px] place-items-center rounded-[10px] border border-[#1f4e3c] bg-[#0a1b16] px-1 py-2 text-center transition hover:-translate-y-0.5 hover:border-[#4eeaaa78] min-[1100px]:min-h-[78px] min-[1100px]:rounded-[12px] min-[1100px]:px-2"
                 key={name}
               >
                 <img
-                  className="h-7 w-7 object-contain transition-transform group-hover:scale-110"
+                  className="h-8 w-8 object-contain transition-transform group-hover:scale-110 min-[1100px]:h-7 min-[1100px]:w-7"
                   src={`https://cdn.simpleicons.org/${slug}/${color}`}
                   alt=""
                   width="28"
                   height="28"
                   loading="lazy"
                 />
-                <span className="mt-1 text-[11px] font-medium text-[#e7ece9]">{name}</span>
+                <span className="mt-1 text-[9px] font-medium text-[#e7ece9] min-[1100px]:text-[11px]">{name}</span>
               </div>
             ))}
+            <p className="col-span-3 hidden min-h-[72px] items-center justify-center gap-3 rounded-[10px] border border-[#1f4e3c] text-[12px] text-[#cbd6d1] min-[900px]:flex min-[1100px]:hidden">
+              <span className="text-[28px] text-[#52ecac]">＋</span>And more tools
+              <br />I use
+            </p>
           </div>
-          <p className="mt-2.5 mb-0 text-center text-[11px] text-[#9caea6]">
+          <p className="mt-2.5 mb-0 text-center text-[11px] text-[#9caea6] max-[1099px]:hidden">
             <span className="text-[#52ecac]">＋</span> And more tools I use
           </p>
         </article>
       </section>
 
       <section
-        className="relative grid w-full gap-4 px-5 pb-5 sm:px-8 lg:grid-cols-[1.54fr_.48fr_.48fr] lg:px-12"
+        className="relative grid w-full grid-cols-2 gap-3 px-5 pb-5 min-[900px]:grid-cols-[1.54fr_.74fr_.74fr] min-[900px]:gap-4 min-[1100px]:grid-cols-[1.54fr_.48fr_.48fr] min-[1100px]:px-12 sm:px-8"
         id="work"
       >
-        <article className="rounded-[18px] border border-[#176746] bg-[#061612e8] p-4 shadow-[0_18px_60px_rgba(0,0,0,.2)]">
+        <article className="col-span-2 rounded-[18px] border border-[#176746] bg-[#061612e8] p-4 shadow-[0_18px_60px_rgba(0,0,0,.2)] min-[900px]:col-span-1">
           <div className="mb-3 flex items-end justify-between gap-4">
             <div>
               <SectionLabel>Featured Projects</SectionLabel>
-              <h2 className="mt-1 mb-0 text-[clamp(2rem,2.8vw,3rem)] leading-none font-semibold tracking-[-.05em]">
+              <h2 className="mt-1 mb-0 text-[clamp(2rem,2.8vw,3rem)] leading-none font-semibold tracking-[-.05em] max-[699px]:hidden">
                 Real projects. Real impact.
               </h2>
             </div>
@@ -244,7 +294,7 @@ export function LandingShowcase() {
               View all projects&nbsp; →
             </Link>
           </div>
-          <div className="grid gap-3 md:grid-cols-2">
+          <div className="grid grid-cols-2 gap-3">
             <Link
               href="/projects/servora"
               className="group grid min-h-[132px] grid-cols-[.42fr_1fr] gap-3 rounded-[14px] border border-[#1f4e3c] bg-[#0a1b16] p-3 transition hover:border-[#4ae7a36b]"
