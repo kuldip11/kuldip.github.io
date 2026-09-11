@@ -14,14 +14,14 @@ export function Footer() {
       <div className="relative mx-auto max-w-[1344px] py-[110px] max-[1380px]:mx-12 max-[650px]:mx-5 max-[650px]:py-20">
         <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
-            <p className="font-mono text-[11px] tracking-[.13em] text-[#71f6b5] uppercase">Have a complex product?</p>
+            <p className="font-mono text-[12px] tracking-[.13em] text-[#71f6b5] uppercase">Have a complex product?</p>
             <h2 className="my-6 mb-0 max-w-[900px] text-[clamp(3.3rem,7vw,7.5rem)] leading-[.9] font-medium tracking-[-.07em] max-[650px]:text-[52px]">
               Let&apos;s make it feel simple.
             </h2>
           </div>
 
           <a
-            className="group flex min-w-[250px] items-center justify-between gap-8 rounded-full border border-[#71f6b566] bg-[#71f6b510] px-6 py-4 text-sm font-semibold text-[#dff9ec] transition hover:border-[#71f6b5] hover:bg-[#71f6b5] hover:text-[#07110f]"
+            className="group flex min-w-[250px] items-center justify-between gap-8 rounded-full border border-[#71f6b566] bg-[#71f6b510] px-6 py-4 text-[15px] font-semibold text-[#dff9ec] transition hover:border-[#71f6b5] hover:bg-[#71f6b5] hover:text-[#07110f]"
             href={`mailto:${siteConfig.email}`}
           >
             Start a conversation
@@ -33,7 +33,7 @@ export function Footer() {
       </div>
 
       <div className="relative border-t border-[#71f6b51f] bg-[#07100e]">
-        <div className="mx-auto max-w-[1344px] py-6 font-mono text-[10px] tracking-[.04em] text-[#8fa29a] uppercase max-[1380px]:mx-12 max-[650px]:mx-5">
+        <div className="mx-auto max-w-[1344px] py-6 font-mono text-[12px] tracking-[.04em] text-[#8fa29a] uppercase max-[1380px]:mx-12 max-[650px]:mx-5">
           <nav className="mb-6 flex flex-wrap gap-x-6 gap-y-3" aria-label="Footer navigation">
             {footerNavigation.map((item) => (
               <Link className="transition-colors hover:text-[#71f6b5]" href={item.href} key={item.href}>
@@ -45,7 +45,7 @@ export function Footer() {
             <span>© 2026 {siteConfig.name}</span>
             <div className="flex gap-6 max-[650px]:order-3 max-[650px]:w-full max-[650px]:justify-between max-[650px]:gap-2">
               <a
-                className="flex items-center gap-1.5 transition-colors hover:text-[#71f6b5] max-[650px]:text-[9px]"
+                className="flex items-center gap-1.5 transition-colors hover:text-[#71f6b5] max-[650px]:text-[12px]"
                 href={siteConfig.github}
                 rel="me noopener noreferrer"
                 target="_blank"
@@ -53,7 +53,7 @@ export function Footer() {
                 GitHub <ExternalArrow />
               </a>
               <a
-                className="flex items-center gap-1.5 transition-colors hover:text-[#71f6b5] max-[650px]:text-[9px]"
+                className="flex items-center gap-1.5 transition-colors hover:text-[#71f6b5] max-[650px]:text-[12px]"
                 href={siteConfig.linkedin}
                 rel="me noopener noreferrer"
                 target="_blank"
@@ -61,7 +61,7 @@ export function Footer() {
                 LinkedIn <ExternalArrow />
               </a>
               <a
-                className="flex items-center gap-1.5 transition-colors hover:text-[#71f6b5] max-[650px]:text-[9px]"
+                className="flex items-center gap-1.5 transition-colors hover:text-[#71f6b5] max-[650px]:text-[12px]"
                 href={`mailto:${siteConfig.email}`}
               >
                 Email <ExternalArrow />

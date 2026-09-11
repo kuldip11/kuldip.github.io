@@ -1,8 +1,8 @@
 export const headerNavigation = [
-  { label: 'Work', href: '/projects' },
-  { label: 'Articles', href: '/articles' },
-  { label: 'About', href: '/about' },
-  { label: 'Résumé', href: '/resume' },
+  { label: 'Home', href: '/#top' },
+  { label: 'Projects', href: '/#work' },
+  { label: 'Experience', href: '/#experience' },
+  { label: 'Approach', href: '/#approach' },
 ] as const;
 
 export const footerNavigation = [
