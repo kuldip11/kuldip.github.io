@@ -1,31 +1,5 @@
 export const articles = [
   {
-    slug: 'rendering-100k-mapbox-points-react',
-    title: 'Rendering 100,000+ Mapbox Points Without Making React Do the Wrong Work',
-    description:
-      'Practical architecture principles for keeping dense Mapbox interfaces responsive in React by separating map rendering from the component tree.',
-    publishedAt: '2026-09-10',
-    updatedAt: '2026-09-10',
-    sections: [
-      [
-        'The real bottleneck is often the boundary',
-        'When a map contains tens of thousands of interactive features, representing every feature as a React element creates unnecessary reconciliation and event overhead. The more scalable approach is to let Mapbox own map-native rendering while React owns product state and surrounding interface behavior.',
-      ],
-      [
-        'Use map-native sources and layers',
-        'GeoJSON sources, layers and clustering keep dense geometry inside the rendering system designed for it. React can still control filters, visibility and selected state, but it should not become the renderer for every point.',
-      ],
-      [
-        'Treat layer lifecycle as architecture',
-        'Adding, updating and removing sources and layers should be deliberate. Stable identifiers, predictable cleanup and a clear mapping between application state and map state make performance work easier to reason about and prevent duplicated layers or stale handlers.',
-      ],
-      [
-        'Optimize interaction, not a vanity benchmark',
-        'The useful measurement is whether pan, zoom, filtering and hover behavior remain responsive under realistic data. A high point count is only meaningful when the interface still feels immediate to the person using it.',
-      ],
-    ],
-  },
-  {
     slug: 'react-monorepo-architecture-shared-contracts',
     title: 'Structuring a React Monorepo Around Shared Contracts, Not Shared Everything',
     description:

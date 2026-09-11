@@ -312,22 +312,23 @@ export function LandingShowcase() {
               </div>
             </Link>
 
-            <Link
-              href="/projects/mapbox-performance"
-              className="group grid min-h-[132px] grid-cols-[.42fr_1fr] gap-3 rounded-[14px] border border-[#1f4e3c] bg-[#0a1b16] p-3 transition hover:border-[#4ae7a36b]"
-            >
-              <ProjectMock variant="fintech" />
+            <div className="relative grid min-h-[132px] grid-cols-[.42fr_1fr] gap-3 overflow-hidden rounded-[14px] border border-[#1f4e3c] bg-[#0a1b16] p-3">
+              <div className="grid min-h-[108px] place-items-center rounded-[11px] border border-[#235641] bg-[#092018]">
+                <div className="grid size-12 place-items-center rounded-[14px] border border-[#2b7559] text-[26px] text-[#57eeb0] shadow-[0_0_24px_rgba(87,238,176,.12)]">
+                  +
+                </div>
+              </div>
               <div className="flex min-w-0 flex-col justify-center">
                 <span className="mb-1 w-max rounded-full border border-[#27775a] px-2 py-0.5 text-[10px] text-[#70eeb7]">
-                  Performance
+                  Next Build
                 </span>
-                <h3 className="m-0 text-[16px] font-semibold">Mapbox at 100K+ points</h3>
+                <h3 className="m-0 text-[16px] font-semibold">Project coming soon</h3>
                 <p className="my-1 text-[12px] leading-[1.4] text-[#aab9b2]">
-                  Dense geospatial UI engineered for fluid interaction across 15+ layers.
+                  The next case study will appear here when it is ready to be shown properly.
                 </p>
-                <span className="mt-auto text-[11px] font-medium text-[#57eeb0]">View project&nbsp; →</span>
+                <span className="mt-auto text-[11px] font-medium text-[#73877e]">In progress</span>
               </div>
-            </Link>
+            </div>
           </div>
         </article>
 
