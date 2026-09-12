@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import ArticlePage, { generateMetadata, generateStaticParams } from '@/app/articles/[slug]/page';
-import { articles } from '@/data/articles';
+import ArticlePage, { generateMetadata, generateStaticParams } from '@/app/(portfolio)/articles/[slug]/page';
+import { articles } from '@/constants/data/articles.constants';
 
 describe('Article page', () => {
   it('generates routes for every article', () => {
@@ -21,5 +21,9 @@ describe('Article page', () => {
     const metadata = await generateMetadata({ params: Promise.resolve({ slug: article.slug }) });
     expect(metadata.alternates).toEqual({ canonical: `/articles/${article.slug}` });
     expect(metadata.keywords).toBeUndefined();
+  });
+  it('returns empty metadata for an unknown article slug', async () => {
+    const metadata = await generateMetadata({ params: Promise.resolve({ slug: 'does-not-exist' }) });
+    expect(metadata).toEqual({});
   });
 });

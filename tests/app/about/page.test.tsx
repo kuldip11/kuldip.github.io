@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import AboutPage, { metadata } from '@/app/about/page';
+import AboutPage, { metadata } from '@/app/(portfolio)/about/page';
 
 describe('About page', () => {
   it('renders and exposes canonical metadata', () => {

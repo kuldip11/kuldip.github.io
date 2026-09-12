@@ -1,55 +1,104 @@
-# Kuldip Portfolio
+# Kuldip Kumar Sah — Portfolio
 
-Minimal Next.js 16 + React 19 + Tailwind CSS portfolio prepared for self-hosting.
+Personal portfolio of **Kuldip Kumar Sah**, Senior Frontend Engineer focused on React, Next.js, TypeScript, frontend architecture, performance, testing, accessibility, and product-quality user experiences.
 
-## Run
+The portfolio showcases real projects, engineering case studies, technical articles, and selected experience across frontend and full-stack product development.
+
+## Live Portfolio
+
+[Visit Portfolio](YOUR_PORTFOLIO_URL)
+
+## About Me
+
+I’m a Senior Frontend Engineer with 5+ years of experience building scalable web applications and product interfaces.
+
+My core areas of work include:
+
+- React and Next.js
+- TypeScript
+- Frontend architecture
+- Performance optimization
+- Accessibility
+- Testing and CI/CD
+- API and backend integration
+- Product-focused engineering
+
+## Featured Projects
+
+### Servora
+
+Servora is my flagship project — a multi-application restaurant platform covering:
+
+- Admin / POS
+- Kitchen display
+- Waiter workflows
+- Customer ordering
+- Multi-tenant business management
+- Role-based access control
+- Server-authoritative pricing
+- Realtime operational updates
+- Shared contracts across applications
+
+The portfolio includes a detailed architecture and engineering case study.
+
+### TallyLite
+
+TallyLite is a lightweight business application designed around Google Sheets as a user-owned datastore.
+
+It includes:
+
+- Inventory
+- Invoicing
+- Payments
+- GST handling
+- Imports / exports
+- Backup and recovery
+- Repository-driven persistence architecture
+
+Live app: https://tallylite.netlify.app/
+
+## Engineering Articles
+
+The portfolio includes engineering articles based on real problems solved while building Servora and TallyLite, including:
+
+- React monorepo boundaries
+- Server-authoritative business rules
+- Google Sheets as a datastore
+- Money and GST modeling in TypeScript
+- Testing architectural seams
+
+## Tech Stack
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- Bun
+- Vitest
+- Playwright
+- Node.js
+- PostgreSQL
+- Git / GitHub
+- Vercel
+- Netlify
+
+## Portfolio Features
+
+- Responsive desktop, tablet and mobile UI
+- Data-driven project and article routes
+- Accessible keyboard navigation
+- SEO metadata, sitemap and structured data
+- Interactive résumé skill sections
+- Portfolio assistant
+- Animated technical article diagrams
+- Project architecture case studies
+- Server-side chat security and validation
+
+## Run Locally
 
 ```bash
-npm install
-npm run dev
-```
+bun install
 
-Production:
+cp .env.example .env.local
 
-```bash
-npm run build
-npm start
-```
-
-## Quality commands
-
-```bash
-npm run format
-npm run format:check
-npm run test
-npm run test:coverage
-```
-
-Prettier is configured with `prettier-plugin-tailwindcss`, so inline Tailwind utility classes are formatted and sorted consistently.
-
-The Vitest suite mirrors the TypeScript/TSX source tree under `app/`, `components/`, and `data/`. It covers route metadata, SEO files, structured data, page/component rendering, navigation, portfolio data, and deployed Servora links.
-
-## Required production configuration
-
-Copy `.env.example` to `.env.production` or configure these values in your hosting environment:
-
-- `NEXT_PUBLIC_SITE_URL` — canonical HTTPS production origin, with no trailing slash.
-- `GOOGLE_SITE_VERIFICATION` — optional Google Search Console verification token.
-- `BING_SITE_VERIFICATION` — optional Bing Webmaster Tools verification token.
-
-Use one canonical hostname and redirect HTTP and any alternate `www`/non-`www` hostname to it at your reverse proxy or hosting layer.
-
-## Portfolio routes
-
-- `/projects` — selected engineering case studies and live Servora samples.
-- `/articles` — technical frontend engineering articles.
-- `/about` — profile and engineering background.
-- `/resume` — HTML résumé, PDF download, and live Servora links.
-- `/robots.txt` — crawler policy.
-- `/sitemap.xml` — public route discovery.
-
-The homepage alone includes ProfilePage + Person JSON-LD. Project case studies use Article JSON-LD and technical articles use BlogPosting JSON-LD. All public routes include canonical metadata, page-specific Open Graph/Twitter metadata, and relevant keyword metadata. Production builds intentionally require `NEXT_PUBLIC_SITE_URL` so localhost cannot leak into canonical URLs, structured data, robots, or the sitemap.
-
-## Servora live samples
-
-The portfolio exposes the same Servora applications linked from the PDF résumé: Website, Admin/POS, Kitchen, Waiter, Customer, and GitHub. The deployed API endpoint is also included on the Servora case-study and HTML résumé pages as a technical reference.
+bun run dev

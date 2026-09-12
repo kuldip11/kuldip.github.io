@@ -6,7 +6,7 @@ import { ExternalArrow } from '@/components/portfolio/ExternalArrow';
 describe('ExternalArrow', () => {
   it('renders a decorative rotated arrow', () => {
     const { container } = render(<ExternalArrow />);
-    expect(container.textContent).toContain('→');
+    expect(container.querySelector('svg')).toBeTruthy();
     expect(container.firstElementChild).toHaveAttribute('aria-hidden', 'true');
   });
 });

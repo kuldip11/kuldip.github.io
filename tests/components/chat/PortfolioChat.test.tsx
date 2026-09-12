@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { PortfolioChat } from '@/components/chat/PortfolioChat';
@@ -21,7 +21,7 @@ describe('PortfolioChat', () => {
       .mockResolvedValueOnce({ ok: true, json: async () => ({ message: 'Next reply' }) });
     render(<PortfolioChat />);
     fireEvent.click(screen.getByRole('button', { name: 'Open portfolio assistant' }));
-    const input = screen.getByRole('textbox', { name: "Message Kuldip's portfolio assistant" });
+    const input = await screen.findByRole('textbox', { name: "Message Kuldip's portfolio assistant" });
     const send = async (value: string, reply: string) => {
       fireEvent.change(input, { target: { value } });
       fireEvent.click(screen.getByRole('button', { name: 'Send message' }));
@@ -36,5 +36,16 @@ describe('PortfolioChat', () => {
       stateToken: 'challenge',
     });
     expect(JSON.parse(fetchMock.mock.calls[2][1].body as string)).toEqual({ message: 'Next' });
+  });
+
+  it('closes with Escape and restores focus to the launcher', async () => {
+    render(<PortfolioChat />);
+    const launcher = screen.getByRole('button', { name: 'Open portfolio assistant' });
+    fireEvent.click(launcher);
+    await screen.findByRole('dialog', { name: 'Portfolio assistant' });
+
+    fireEvent.keyDown(document, { key: 'Escape' });
+    expect(screen.queryByRole('dialog', { name: 'Portfolio assistant' })).not.toBeInTheDocument();
+    await waitFor(() => expect(launcher).toHaveFocus());
   });
 });

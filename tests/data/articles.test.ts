@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { articles } from '@/data/articles';
+import { articles } from '@/constants/data/articles.constants';
 
 describe('articles data', () => {
   it('uses unique slugs and contains article sections', () => {

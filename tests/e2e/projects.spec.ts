@@ -1,53 +1,27 @@
 import { expect, test } from '@playwright/test';
 
 test.describe('Projects', () => {
-  test('lists project case studies', async ({ page }) => {
+  test('lists Servora and TallyLite', async ({ page }) => {
     await page.goto('/projects');
-
-    await expect(
-      page.getByRole('heading', {
-        name: /Servora/i,
-      }),
-    ).toBeVisible();
-
-    await expect(
-      page.getByRole('heading', {
-        name: 'Rendering 100,000+ Mapbox Points in React',
-      }),
-    ).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Servora' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'TallyLite' })).toBeVisible();
   });
 
   test('opens Servora case study', async ({ page }) => {
     await page.goto('/projects/servora');
-
     await expect(page).toHaveURL(/\/projects\/servora$/);
-
     await expect(
-      page.getByRole('heading', {
-        level: 1,
-        name: 'Servora Restaurant POS Architecture Case Study',
-      }),
+      page.getByRole('heading', { level: 1, name: /Servora.+Multi-App Restaurant POS Architecture Case Study/i }),
     ).toBeVisible();
   });
 
-  test('opens Mapbox case study', async ({ page }) => {
-    await page.goto('/projects/mapbox-performance');
-
+  test('opens TallyLite case study', async ({ page }) => {
+    await page.goto('/projects/tallylite');
+    await expect(page).toHaveURL(/\/projects\/tallylite$/);
     await expect(
       page.getByRole('heading', {
         level: 1,
-        name: 'Rendering 100,000+ Mapbox Points in React',
-      }),
-    ).toBeVisible();
-  });
-
-  test('opens enterprise architecture case study', async ({ page }) => {
-    await page.goto('/projects/enterprise-frontend-architecture');
-
-    await expect(
-      page.getByRole('heading', {
-        level: 1,
-        name: 'Enterprise Frontend Architecture Case Study',
+        name: /TallyLite.+Google Sheets Business Management Architecture Case Study/i,
       }),
     ).toBeVisible();
   });

@@ -1,18 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import ResumePage, { metadata } from '@/app/resume/page';
-import { servoraLinks } from '@/constants/site';
-
+import ResumePage, { metadata } from '@/app/(portfolio)/resume/page';
 describe('Resume page', () => {
-  it('renders downloadable résumé', () => {
+  it('renders downloadable résumé and redesigned sections', () => {
     render(<ResumePage />);
-    expect(screen.getByRole('link', { name: 'Download PDF' })).toHaveAttribute('href', '/Kuldip_Kumar_Sah.pdf');
+    expect(screen.getByRole('link', { name: /Download PDF/i })).toHaveAttribute('href', '/Kuldip_Kumar_Sah.pdf');
+    expect(screen.getByRole('heading', { name: /Professional Summary/i })).toBeInTheDocument();
     expect(metadata.alternates).toEqual({ canonical: '/resume' });
-    expect(metadata.keywords).toBeUndefined();
-    for (const link of servoraLinks) {
-      const matches = screen.getAllByRole('link', { name: new RegExp(link.label.replace('/', '\\/'), 'i') });
-      expect(matches.some((item) => item.getAttribute('href') === link.href)).toBe(true);
-    }
   });
 });

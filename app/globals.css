@@ -1,1 +1,98 @@
 @import 'tailwindcss';
+
+@theme {
+  --color-accent: #59ecb0;
+  --color-accent-bright: #71f6b5;
+  --color-page: #07110f;
+  --color-page-deep: #030d0a;
+  --color-text-primary: #f2f4ee;
+  --color-panel-border: #176746;
+  --color-muted-border: #20362f;
+  --breakpoint-phone: 40.625rem;
+  --breakpoint-hero: 43.75rem;
+  --breakpoint-nav: 47.5rem;
+  --breakpoint-content: 50rem;
+  --breakpoint-wide: 56.25rem;
+  --breakpoint-desktop: 68.75rem;
+}
+
+:root {
+  color-scheme: dark;
+  background: #030d0a;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #030d0a;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #030d0a;
+  color: #f5f7f3;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #59ecb0;
+  color: #04100c;
+}
+
+@keyframes article-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes article-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(4px);
+  }
+}
+
+@keyframes article-scan {
+  0% {
+    top: 24%;
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    top: 82%;
+    opacity: 0;
+  }
+}
+
+.article-float {
+  animation: article-float 4.8s ease-in-out infinite;
+}
+.article-pulse {
+  animation: article-pulse 1.8s ease-in-out infinite;
+}
+.article-scan {
+  animation: article-scan 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .article-float,
+  .article-pulse,
+  .article-scan {
+    animation: none;
+  }
+}

@@ -1,7 +1,7 @@
-export function ExternalArrow() {
-  return (
-    <span className="inline-block -rotate-45 text-[1.05em] leading-none" aria-hidden="true">
-      →
-    </span>
-  );
-}
+import { AppIcon } from './AppIcon';
+
+export const ExternalArrow = () => (
+  <span className="inline-flex" aria-hidden="true">
+    <AppIcon name="arrow-up-right" className="size-[1.05em]" />
+  </span>
+);

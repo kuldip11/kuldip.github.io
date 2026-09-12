@@ -10,12 +10,7 @@ test.describe('Home page', () => {
       }),
     ).toBeVisible();
 
-    await expect(
-      page.getByRole('heading', {
-        name: 'Senior Frontend Engineer',
-        exact: true,
-      }),
-    ).toBeVisible();
+    await expect(page.getByText('Senior Frontend Engineer', { exact: true })).toBeVisible();
 
     await expect(page.getByRole('main')).toBeVisible();
   });
@@ -24,7 +19,7 @@ test.describe('Home page', () => {
     await page.goto('/');
 
     await expect(
-      page.getByText('Selected systems', {
+      page.getByText('Featured Projects', {
         exact: true,
       }),
     ).toBeVisible();
@@ -35,13 +30,8 @@ test.describe('Home page', () => {
       }),
     ).toBeVisible();
 
-    await expect(
-      page
-        .getByText('About', {
-          exact: true,
-        })
-        .first(),
-    ).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'What I can do' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'My Tech Stack' })).toBeVisible();
   });
 
   test('shows profile image', async ({ page }) => {
@@ -90,7 +80,10 @@ test.describe('Mobile navigation', () => {
     await expect(drawer).toBeVisible();
     await expect(page.getByRole('navigation', { name: 'Mobile main navigation' })).toBeVisible();
 
-    await page.getByRole('navigation', { name: 'Mobile main navigation' }).getByRole('link', { name: 'About' }).click();
-    await expect(page).toHaveURL(/\/about$/);
+    await page
+      .getByRole('navigation', { name: 'Mobile main navigation' })
+      .getByRole('link', { name: 'Projects' })
+      .click();
+    await expect(page).toHaveURL(/#work$/);
   });
 });

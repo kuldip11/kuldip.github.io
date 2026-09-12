@@ -1,130 +1,146 @@
 'use client';
-
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
 
-import { headerNavigation } from '@/constants/navigation';
+import { AppIcon } from '@/components/portfolio/AppIcon';
+import { mainNavigation } from '@/constants/data/navigation.constants';
 import { siteConfig } from '@/constants/site';
 
-import { ExternalArrow } from './ExternalArrow';
-
-export function Header() {
+export const Header = () => {
+  const pathname = usePathname() ?? '/';
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const drawerRef = useRef<HTMLElement>(null);
 
+  const isNavigationItemActive = (href: string) =>
+    href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
   useEffect(() => {
     if (!menuOpen) return;
 
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') setMenuOpen(false);
-    }
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    const drawer = drawerRef.current;
+    const firstFocusable = drawer?.querySelector<HTMLElement>(focusableSelector);
+    firstFocusable?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false);
+        return;
+      }
+      if (event.key !== 'Tab' || !drawer) return;
+
+      const focusable = [...drawer.querySelectorAll<HTMLElement>(focusableSelector)];
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
 
     document.addEventListener('keydown', handleKeyDown);
-
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener('keydown', handleKeyDown);
+      menuButtonRef.current?.focus();
+    };
   }, [menuOpen]);
 
   return (
-    <header className="sticky top-0 z-50 mx-auto grid h-[82px] max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center border-b border-[#71f6b522] bg-[#07110fd6] px-12 backdrop-blur-[18px] max-[1000px]:h-auto max-[1000px]:grid-cols-[1fr_auto] max-[1000px]:py-3 max-[650px]:h-[70px] max-[650px]:grid-cols-[1fr_auto] max-[650px]:px-5 max-[650px]:py-0">
-      <Link className="flex w-max items-center gap-3" href="/" aria-label={`${siteConfig.name}, home`}>
-        <span className="grid size-[38px] place-items-center rounded-full border border-[#71f6b5] font-mono text-xs font-bold text-[#71f6b5]">
-          KS
-        </span>
-
-        <p className="m-0 font-bold tracking-[-.02em] max-[650px]:hidden">
-          {siteConfig.shortName}
-
-          <small className="block font-mono text-[9px] leading-[1.4] font-medium tracking-[.12em] text-[#8fa29a] uppercase">
-            Frontend systems
-          </small>
-        </p>
-      </Link>
-
-      <nav
-        className="flex gap-7 text-sm text-[#becac4] max-[1000px]:order-3 max-[1000px]:col-span-2 max-[1000px]:mt-3 max-[1000px]:w-full max-[1000px]:justify-between max-[650px]:hidden"
-        aria-label="Main navigation"
-      >
-        {headerNavigation.map((item) => (
-          <Link className="transition-colors hover:text-[#71f6b5]" href={item.href} key={item.href}>
-            {item.label}
-          </Link>
-        ))}
-      </nav>
-
-      <a
-        className="justify-self-end rounded-full border border-[#71f6b570] bg-[#71f6b5] px-[15px] py-2.5 text-[13px] font-semibold text-[#07110f] shadow-[0_6px_24px_rgba(113,246,181,.12)] transition hover:-translate-y-0.5 hover:bg-[#9affcc] max-[650px]:hidden"
-        href={siteConfig.contactHref}
-      >
-        Let&apos;s talk <ExternalArrow />
-      </a>
-
-      <button
-        aria-controls="mobile-navigation-drawer"
-        aria-expanded={menuOpen}
-        aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-        className="hidden size-11 place-items-center rounded-full border border-[#31453f] bg-[#0d1b18] text-[#f2f4ee] transition hover:border-[#71f6b5] max-[650px]:grid"
-        onClick={() => setMenuOpen((current) => !current)}
-        type="button"
-      >
-        <span className="sr-only">Menu</span>
-
-        <span className="grid gap-1.5" aria-hidden="true">
-          <span className={`block h-px w-5 bg-current transition ${menuOpen ? 'translate-y-[7px] rotate-45' : ''}`} />
-          <span className={`block h-px w-5 bg-current transition ${menuOpen ? 'opacity-0' : ''}`} />
-          <span className={`block h-px w-5 bg-current transition ${menuOpen ? '-translate-y-[7px] -rotate-45' : ''}`} />
-        </span>
-      </button>
-
-      {menuOpen ? (
-        <div
-          className="fixed inset-0 top-[70px] z-[70] hidden max-[650px]:block"
-          data-testid="mobile-navigation-overlay"
+    <header className="sticky top-0 z-50 border-b border-[#164833b8] bg-[#030d0ae8] backdrop-blur-[14px]">
+      <div className="grid h-[64px] w-full grid-cols-[1fr_auto_1fr] items-center px-5 max-nav:grid-cols-[1fr_auto] sm:px-8 lg:px-12">
+        <Link
+          className="w-max text-[18px] font-bold tracking-[-.035em] sm:text-[20px]"
+          href="/"
+          aria-label={`${siteConfig.name}, home`}
         >
+          {siteConfig.name} <span className="ml-1 text-accent">•</span>
+        </Link>
+        <nav className="flex gap-8 text-[14px] text-[#d2ddd7] max-nav:hidden" aria-label="Main navigation">
+          {mainNavigation.map((item) => (
+            <Link
+              aria-current={isNavigationItemActive(item.href) ? 'page' : undefined}
+              className={`relative py-1.5 transition-colors hover:text-accent ${isNavigationItemActive(item.href) ? 'text-accent after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-accent' : ''}`}
+              href={item.href}
+              key={item.href}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+        <a
+          className="inline-flex items-center justify-center gap-2 justify-self-end rounded-full border border-[#209b68] bg-[#071b15] px-5 py-2 text-[13px] font-semibold whitespace-nowrap text-[#e5f5ed] transition hover:bg-accent hover:text-[#04100c] max-nav:hidden"
+          href={siteConfig.contactHref}
+        >
+          <AppIcon name="mail" className="size-4 shrink-0" />
+          <span>Let&apos;s Connect</span>
+          <AppIcon name="arrow-right" className="size-4 shrink-0" />
+        </a>
+        <button
+          ref={menuButtonRef}
+          aria-controls="mobile-navigation-drawer"
+          aria-expanded={menuOpen}
+          aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          className="hidden size-10 place-items-center justify-self-end rounded-full border border-[#285443] bg-[#081713] text-text-primary max-nav:grid"
+          onClick={() => setMenuOpen((x) => !x)}
+          type="button"
+        >
+          <span className="grid gap-1.5" aria-hidden="true">
+            <span className={`block h-px w-5 bg-current transition ${menuOpen ? 'translate-y-[7px] rotate-45' : ''}`} />
+            <span className={`block h-px w-5 bg-current transition ${menuOpen ? 'opacity-0' : ''}`} />
+            <span
+              className={`block h-px w-5 bg-current transition ${menuOpen ? '-translate-y-[7px] -rotate-45' : ''}`}
+            />
+          </span>
+        </button>
+      </div>
+      {menuOpen ? (
+        <div className="fixed inset-0 top-[64px] z-[70] hidden max-nav:block" data-testid="mobile-navigation-overlay">
           <button
             aria-label="Close navigation menu"
-            className="absolute inset-0 bg-[#02070699] backdrop-blur-sm"
+            className="absolute inset-0 bg-[#010504a8] backdrop-blur-sm"
             onClick={() => setMenuOpen(false)}
             type="button"
           />
-
           <aside
+            ref={drawerRef}
             id="mobile-navigation-drawer"
             aria-label="Mobile navigation"
-            className="absolute top-0 right-0 flex h-[calc(100vh-70px)] w-[min(86vw,360px)] flex-col border-l border-[#71f6b526] bg-[#091613f7] px-6 py-7 shadow-[-24px_0_70px_rgba(0,0,0,.45)]"
+            className="absolute top-0 right-0 flex h-[calc(100vh-64px)] w-[min(86vw,360px)] flex-col border-l border-[#2e6f54] bg-[#06140ff7] px-6 py-7"
           >
-            <p className="font-mono text-[9px] tracking-[.16em] text-[#71f6b5] uppercase">Navigation</p>
-
+            <p className="font-mono text-[12px] tracking-[.16em] text-accent uppercase">Navigation</p>
             <nav className="mt-6 grid" aria-label="Mobile main navigation">
-              {headerNavigation.map((item, index) => (
+              {mainNavigation.map((item, index) => (
                 <Link
-                  className="flex items-center justify-between border-b border-[#263b34] py-4 text-lg font-semibold tracking-[-.02em] text-[#e7ede9] transition hover:text-[#71f6b5]"
+                  aria-current={isNavigationItemActive(item.href) ? 'page' : undefined}
+                  className={`flex items-center justify-between border-b border-[#234638] py-4 text-lg font-semibold transition-colors ${isNavigationItemActive(item.href) ? 'text-accent' : ''}`}
                   href={item.href}
                   key={item.href}
                   onClick={() => setMenuOpen(false)}
                 >
                   <span>{item.label}</span>
-
-                  <span className="font-mono text-xs text-[#668077]" aria-hidden="true">
-                    0{index + 1}
-                  </span>
+                  <span className="font-mono text-xs text-[#668077]">0{index + 1}</span>
                 </Link>
               ))}
             </nav>
-
-            <div className="mt-auto rounded-2xl border border-[#71f6b52e] bg-[#10201c] p-5">
-              <p className="text-sm leading-6 text-[#aebdb6]">
-                Have a role, product challenge, or frontend problem worth discussing?
-              </p>
-
-              <a
-                className="mt-4 inline-flex items-center gap-2 rounded-full bg-[#71f6b5] px-4 py-2.5 text-sm font-semibold text-[#07110f]"
-                href={siteConfig.contactHref}
-              >
-                Let&apos;s talk <ExternalArrow />
-              </a>
-            </div>
+            <a
+              className="mt-auto rounded-full bg-accent px-5 py-3.5 text-center text-[15px] font-bold text-[#04100c]"
+              href={siteConfig.contactHref}
+            >
+              <span className="inline-flex items-center justify-center gap-2">
+                Let&apos;s Connect <AppIcon name="arrow-right" className="size-4" />
+              </span>
+            </a>
           </aside>
         </div>
       ) : null}
     </header>
   );
-}
+};

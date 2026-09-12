@@ -1,7 +1,7 @@
 import { landingPageKeywords } from '@/constants/seo';
 import { siteConfig } from '@/constants/site';
 
-export function JsonLd() {
+export const JsonLd = () => {
   const data = {
     '@context': 'https://schema.org',
     '@type': 'ProfilePage',
@@ -28,4 +28,4 @@ export function JsonLd() {
       dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, '\\u003c') }}
     />
   );
-}
+};

@@ -5,59 +5,23 @@ test.describe('Navigation', () => {
     await page.goto('/');
   });
 
-  test('navigates to projects', async ({ page }) => {
-    await page
-      .getByRole('navigation', {
-        name: 'Main navigation',
-      })
-      .getByRole('link', {
-        name: 'Work',
-        exact: true,
-      })
-      .click();
-
-    await expect(page).toHaveURL('/projects');
+  test('navigates to projects section', async ({ page }) => {
+    await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Projects' }).click();
+    await expect(page).toHaveURL(/#work$/);
   });
 
-  test('navigates to articles', async ({ page }) => {
-    await page
-      .getByRole('navigation', {
-        name: 'Main navigation',
-      })
-      .getByRole('link', {
-        name: 'Articles',
-        exact: true,
-      })
-      .click();
-
-    await expect(page).toHaveURL('/articles');
+  test('navigates to experience section', async ({ page }) => {
+    await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Experience' }).click();
+    await expect(page).toHaveURL(/#experience$/);
   });
 
-  test('navigates to about', async ({ page }) => {
-    await page
-      .getByRole('navigation', {
-        name: 'Main navigation',
-      })
-      .getByRole('link', {
-        name: 'About',
-        exact: true,
-      })
-      .click();
-
-    await expect(page).toHaveURL('/about');
+  test('navigates to approach section', async ({ page }) => {
+    await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Approach' }).click();
+    await expect(page).toHaveURL(/#approach$/);
   });
 
-  test('navigates to resume', async ({ page }) => {
-    await page
-      .getByRole('navigation', {
-        name: 'Main navigation',
-      })
-      .getByRole('link', {
-        name: 'Résumé',
-        exact: true,
-      })
-      .click();
-
-    await expect(page).toHaveURL('/resume');
+  test('returns to the top section', async ({ page }) => {
+    await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Home' }).click();
+    await expect(page).toHaveURL(/#top$/);
   });
 });
