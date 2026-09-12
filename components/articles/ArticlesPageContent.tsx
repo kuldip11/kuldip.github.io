@@ -5,12 +5,10 @@ import type { ArticleCardDefinition } from '@/types/article.types';
 
 import { ArticleCard } from './ArticleCard';
 import { ArticleHero } from './ArticleHero';
-import { ArticlesComingSoonCard } from './ArticlesComingSoonCard';
 
 const articleCards = articles.map((article, index) => ({
   ...article,
-  kind: ARTICLES_PAGE_CONTENT.kinds[index] ?? 'Frontend',
-  glyph: ARTICLES_PAGE_CONTENT.glyphs[index] ?? '◇',
+  glyph: ARTICLES_PAGE_CONTENT.glyphs[index] ?? 'article',
 })) satisfies readonly ArticleCardDefinition[];
 
 export const ArticlesPageContent = () => (
@@ -19,12 +17,14 @@ export const ArticlesPageContent = () => (
       <ArticleHero />
       <div className="mt-7 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <Pills items={ARTICLES_PAGE_CONTENT.filter} />
+        <span className="font-mono text-[10px] tracking-[.12em] text-[#78988a] uppercase">
+          {articles.length} field notes
+        </span>
       </div>
       <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        {articleCards.slice(0, 5).map((article, index) => (
-          <ArticleCard article={article} index={index} key={`${article.slug}-${index}`} />
+        {articleCards.map((article) => (
+          <ArticleCard article={article} key={article.slug} />
         ))}
-        <ArticlesComingSoonCard />
       </div>
     </section>
   </InnerPageBackdrop>

@@ -1,101 +1,361 @@
-import { siteConfig } from '@/constants/site';
 import type { ProjectDefinition } from '@/types/project.types';
 
 import { servoraLinks } from './servora.constants';
+import { tallyLiteLinks } from './tallylite.constants';
 
-const sharedMetrics = [
-  ['5+', 'Apps / Monorepo', '⌘'],
-  ['40+', 'Database Tables', '◉'],
-  ['Real-time', 'WebSocket', 'ϟ'],
-  ['Multi-tenant', 'Franchise/Branch', '♙'],
-  ['Production Ready', 'Deployed & Tested', '◎'],
+const projectNavigation = [
+  { label: 'Overview', href: '#overview' },
+  { label: 'Architecture', href: '#architecture' },
+  { label: 'Decisions', href: '#decisions' },
+  { label: 'Engineering', href: '#engineering' },
+  { label: 'Quality', href: '#quality' },
+  { label: 'Live', href: '#live' },
 ] as const;
 
-const sharedOverviewItems = [
-  ['Point of Sale', 'Fast, intuitive ordering'],
-  ['Kitchen Display', 'Real-time order routing'],
-  ['Customer App', 'Online ordering & tracking'],
-  ['Waiter App', 'Table management'],
-  ['Admin Dashboard', 'Business insights & control'],
-  ['Multi-tenant', 'Organization → Franchise → Branch'],
-] as const;
-
-const sharedHighlights = [
-  ['Real-time order synchronization', 'WebSocket-based live updates across all apps', '♙'],
-  ['Scalable multi-tenant architecture', 'Organization, franchise and branch hierarchy', '⌘'],
-  ['Complete restaurant operations', 'POS, kitchen, waiter, customer and admin apps', '⌖'],
-  ['Production ready', 'Deployed, tested and real restaurant workflows', '▣'],
-  ['Modern tech stack', 'React, Next.js, TypeScript, Node.js and more', '◈'],
-] as const;
-
-const navigation = [
-  'Overview',
-  'Tech Stack',
-  'Key Features',
-  'Architecture',
-  'Gallery',
-  'Impact',
-  'Learnings',
-] as const;
-const servoraHeroLines = ['Servora — Modern', 'Restaurant POS', 'Ecosystem'] as const;
-const servoraGithub = servoraLinks.find((link) => link.label === 'GitHub')?.href ?? siteConfig.github;
-
-export const projects: readonly ProjectDefinition[] = [
+export const projects = [
   {
     index: '01',
     slug: 'servora',
+    name: 'Servora',
     label: 'Full-stack product · Solo project',
-    title: 'One restaurant system. Six focused applications.',
+    category: 'SaaS / Restaurant POS',
+    featured: true,
+    mockVariant: 'saas',
+    title: 'Servora — a multi-app restaurant operating system.',
     description:
-      'Servora is a multi-tenant restaurant operating system connecting POS, kitchen, waiter, customer ordering, marketing and backend workflows in one typed monorepo.',
-    stats: ['12 workspaces', '9 system roles', '6 shared packages'],
-    seoTitle: 'Servora Restaurant POS Architecture Case Study',
+      'A production-minded restaurant platform spanning administration, POS, kitchen, waiter, customer ordering, marketing and a shared backend in one typed monorepo.',
+    stats: ['12 workspaces', '9 system roles', '78 migrations'],
+    tags: ['React 19', 'TypeScript', 'PostgreSQL', 'Realtime', 'Multi-tenant', 'Bun'],
+    seoTitle: 'Servora — Multi-App Restaurant POS Architecture Case Study',
     summary:
-      'A case study in designing a typed, multi-application restaurant operating system with role-aware workflows, shared packages and server-authoritative business logic.',
+      'Servora is a multi-tenant restaurant operating system designed around separate role-focused applications, shared TypeScript contracts, server-authoritative business rules and real-time order workflows.',
     publishedAt: '2026-09-10',
-    updatedAt: '2026-09-10',
-    showcaseLinksLabel: 'Live Servora demos',
+    updatedAt: '2026-09-12',
+    showcaseLinksLabel: 'Live Servora applications',
     showcaseLinks: servoraLinks.filter((link) => link.label !== 'API'),
     caseStudy: {
-      eyebrow: 'Multi-tenant restaurant product',
+      eyebrow: 'Flagship project · Restaurant technology',
       intro:
-        'Servora brings several restaurant roles and interfaces into one typed system while keeping pricing, permissions and operational state authoritative and consistent.',
-      heroLines: servoraHeroLines,
+        'Servora started as a POS idea and grew into a complete restaurant operating model. The hard part was not building another screen—it was keeping orders, pricing, availability, permissions and tenant context consistent while six applications evolved around the same domain.',
+      heroLines: ['Servora — one', 'restaurant system,', 'many focused surfaces.'],
       heroAccent: 'Servora',
       visualVariant: 'servora',
-      liveDemoHref: servoraLinks[1].href,
+      liveDemoHref: 'https://servora-web-lyart.vercel.app',
       liveDemoExternal: true,
-      sourceHref: servoraGithub,
-      metrics: sharedMetrics,
-      navigation,
-      overviewItems: sharedOverviewItems,
-      highlights: sharedHighlights,
-      sections: [
+      sourceHref: 'https://github.com/kuldip11/servora',
+      metrics: [
+        ['12', 'Monorepo workspaces', '⌘'],
+        ['6', 'Applications', '▦'],
+        ['9', 'System roles', '♙'],
+        ['78', 'SQL migrations', '◉'],
+        ['Realtime', 'Order workflows', 'ϟ'],
+      ],
+      navigation: projectNavigation,
+      overviewItems: [
+        ['Admin / POS', 'Menus, orders, business context, staff, analytics and restaurant operations.'],
+        ['Kitchen Display', 'Station-aware ticket flow for preparation and ready-state operations.'],
+        ['Waiter App', 'Fast table-side ordering and service workflows for floor staff.'],
+        ['Customer App', 'Customer ordering experience connected to the same menu and availability rules.'],
+        ['Marketing Website', 'Public-facing product surface separated from operational applications.'],
+        ['Backend API', 'Authorization, pricing, orders, tenancy, inventory, realtime and persistence authority.'],
+      ],
+      highlights: [
+        [
+          'Role-focused applications',
+          'Each restaurant role gets a purpose-built surface without duplicating the domain model.',
+          'apps',
+        ],
+        [
+          'Server-authoritative decisions',
+          'Pricing, permissions and operational rules are validated at the backend boundary.',
+          'architecture',
+        ],
+        [
+          'Multi-tenant by design',
+          'Organization → tenant/franchise → branch context flows through data and authorization.',
+          'layers',
+        ],
+        [
+          'Realtime operations',
+          'Kitchen, waiter and order experiences react to shared operational events.',
+          'realtime',
+        ],
+        [
+          'Shared contracts',
+          'Types, validation, API client, UI and realtime primitives live in dedicated packages.',
+          'code',
+        ],
+      ],
+      architectureTitle: 'Different applications. One domain contract.',
+      architectureCopy:
+        'The monorepo keeps product surfaces independent while shared packages define the contracts that should not drift. The API remains the authority for business-critical decisions, and realtime events distribute operational change to the clients that need it.',
+      architecture: [
+        { label: 'Customer / Waiter / Kitchen / Admin', detail: 'Role-specific React applications' },
+        { label: 'Shared packages', detail: 'Types · validation · UI · API client · realtime · config' },
+        { label: 'API boundary', detail: 'Auth · tenancy · orders · pricing · inventory · analytics' },
+        { label: 'PostgreSQL + Redis', detail: 'Persistent relational state and realtime/supporting infrastructure' },
+      ],
+      decisions: [
         {
-          title: 'The problem',
-          copy: 'Restaurant operations span owners, managers, waiters, kitchen staff and customers. Each role needs a focused interface, but all of those interfaces still depend on the same ordering, menu, availability, pricing and authorization rules.',
+          title: 'Keep pricing authoritative on the server',
+          problem:
+            'The same menu can be rendered by admin, waiter and customer applications, but money cannot depend on whichever client happened to calculate it.',
+          decision:
+            'Clients present estimates and selections while the API owns final pricing, availability and validation.',
+          outcome: 'One source of truth for financial and ordering rules across every application.',
         },
         {
-          title: 'Architecture',
-          copy: 'The system is organized as a monorepo with separate applications and shared packages so each surface can evolve independently without duplicating core contracts.',
+          title: 'Model tenancy explicitly',
+          problem:
+            'Restaurant data needs to be isolated while still supporting organization, franchise/tenant and branch-level operations.',
+          decision:
+            'Tenant and branch context is part of the core model, permissions and API access path rather than a UI-only filter.',
+          outcome: 'The same product can support multiple businesses and branches without mixing operational data.',
+        },
+        {
+          title: 'Share contracts, not entire features',
+          problem:
+            'A kitchen display and an admin dashboard share order semantics but have radically different interaction models.',
+          decision:
+            'Share stable primitives—types, validation, API client, realtime and UI—while keeping application workflows local.',
+          outcome: 'Less duplication without turning the monorepo into one tightly coupled frontend.',
+        },
+        {
+          title: 'Treat authorization as product behavior',
+          problem:
+            'Nine system roles need different capabilities and interfaces, and hiding a button is not sufficient protection.',
+          decision: 'Permission-aware UI is paired with backend authorization and tenant-aware checks.',
+          outcome: 'Roles stay understandable in the interface while security remains enforced at the server boundary.',
+        },
+      ],
+      stack: [
+        {
+          label: 'Product surfaces',
+          items: ['React 19', 'Vite', 'Next.js website', 'TanStack Router', 'TanStack Query', 'Zustand'],
+        },
+        { label: 'Backend', items: ['Bun', 'Elysia', 'PostgreSQL', 'Redis', 'Drizzle', 'WebSocket'] },
+        {
+          label: 'Contracts',
+          items: ['TypeScript', 'Zod', 'Shared API client', 'Shared realtime package', 'Shared UI'],
+        },
+        { label: 'Quality', items: ['Vitest', 'Playwright', 'Accessibility checks', 'ESLint', 'Prettier', 'Turbo'] },
+      ],
+      quality: [
+        {
+          value: '78',
+          label: 'Migration files',
+          detail: 'Schema evolution is explicit and ordered rather than hidden behind runtime magic.',
+        },
+        {
+          value: '9',
+          label: 'Reserved roles',
+          detail: 'Owner, franchise admin, manager, chef, waiter, cashier, inventory, reception and accounting roles.',
+        },
+        {
+          value: '6',
+          label: 'Shared packages',
+          detail: 'Config, realtime, validation, UI, API client and types form the reusable foundation.',
+        },
+        {
+          value: 'CI',
+          label: 'Verification mindset',
+          detail: 'Type checking, linting, builds, unit tests and browser checks are first-class project scripts.',
+        },
+      ],
+      sections: [
+        {
+          id: 'engineering',
+          eyebrow: 'Product engineering',
+          title: 'The complexity is in the seams.',
+          copy: 'A restaurant order touches menus, availability, pricing, staff permissions, kitchen routing, payments and realtime state. I focused on making those seams explicit so a change in one application does not silently change the business rules in another.',
           items: [
-            'Separate web, customer, kitchen and waiter experiences',
-            'Shared types, validation, API client, realtime and UI packages',
-            'Server-authoritative pricing and availability rules',
-            'Role-aware access across tenant and branch context',
+            'Menu, modifier, combo and availability rules are represented as domain behavior rather than view-only state.',
+            'Order transitions are permission-aware and shared across the operational surfaces.',
+            'The kitchen and waiter applications remain focused clients instead of alternative implementations of backend logic.',
+            'Business context and branch selection are modeled as application state backed by tenant-aware APIs.',
           ],
         },
         {
-          title: 'Engineering priorities',
-          copy: 'The focus is maintainable boundaries: business logic lives in the appropriate shared or server layer, application shells stay focused on their role, and test coverage protects cross-application behavior.',
-        },
-        {
-          title: 'What this demonstrates',
-          copy: 'End-to-end product architecture, multi-tenant modeling, permission-aware UX, shared TypeScript contracts, realtime workflows, testing strategy and CI/CD thinking.',
+          id: 'engineering-learning',
+          eyebrow: 'What I learned',
+          title: 'Architecture earns its value when the product changes.',
+          copy: 'Servora pushed me beyond component-level frontend work. The biggest lessons came from maintaining contracts across applications, diagnosing permission and session edge cases, keeping business logic authoritative, and resisting abstractions that did not reduce real product complexity.',
+          items: [
+            'Make ownership obvious: one layer should be responsible for each critical decision.',
+            'Treat loading, errors and degraded infrastructure as product states, not afterthoughts.',
+            'Test boundaries and role behavior, not only isolated components.',
+            'Keep shared packages small enough that application-specific decisions remain visible.',
+          ],
         },
       ],
-      applicationHeading: 'Try each Servora application.',
+      applicationHeading: 'Explore the Servora ecosystem',
       applications: servoraLinks,
     },
   },
-] as const;
+  {
+    index: '02',
+    slug: 'tallylite',
+    name: 'TallyLite',
+    label: 'Product engineering · Spreadsheet-first business app',
+    category: 'Business / FinTech tooling',
+    featured: false,
+    mockVariant: 'fintech',
+    title: 'TallyLite — business operations on top of a user-owned Google Sheet.',
+    description:
+      'A browser-first business management application for customers, products, inventory, GST/non-GST invoices, payments, returns, ledgers, reports, imports, exports and backups.',
+    stats: ['12 app areas', '58 test files', 'Google Sheets datastore'],
+    tags: ['Next.js 16', 'React 19', 'TypeScript', 'Google Sheets', 'Decimal.js', 'Zod'],
+    seoTitle: 'TallyLite — Google Sheets Business Management Architecture Case Study',
+    summary:
+      'TallyLite makes a user-owned Google Sheet behave like a structured business datastore while keeping GST, money, invoice, inventory, payment and reconciliation rules in testable application/domain layers.',
+    publishedAt: '2026-09-12',
+    updatedAt: '2026-09-12',
+    showcaseLinksLabel: 'TallyLite links',
+    showcaseLinks: tallyLiteLinks,
+    caseStudy: {
+      eyebrow: 'Spreadsheet-first business management',
+      intro:
+        'TallyLite explores a different constraint from a traditional SaaS backend: the customer owns the datastore. The application has to provide reliable business workflows while reading and writing structured records through the Google Sheets API.',
+      heroLines: ['TallyLite — your', 'business data stays', 'in your spreadsheet.'],
+      heroAccent: 'TallyLite',
+      visualVariant: 'tallylite',
+      liveDemoHref: 'https://tallylite.netlify.app/',
+      liveDemoExternal: true,
+      sourceHref: 'https://github.com/kuldip11/TallyLite',
+      metrics: [
+        ['12', 'Primary app areas', '▦'],
+        ['58', 'Test files', '✓'],
+        ['Google', 'Sheets datastore', '◫'],
+        ['GST', 'Invoice rules', '%'],
+        ['Browser', 'Backup & export', '⇩'],
+      ],
+      navigation: projectNavigation,
+      overviewItems: [
+        ['Customers', 'Profiles, transaction context, outstanding balances and customer ledger workflows.'],
+        ['Products & Inventory', 'Stock movements, adjustments, receiving, returns and serialized inventory support.'],
+        ['Sales & Invoices', 'GST and non-GST invoicing with draft/finalized workflows and invoice numbering.'],
+        ['Payments', 'Cash, UPI, card, bank transfer, cheque and other payment tracking.'],
+        ['Reports & Ledger', 'Persisted transaction views, outstanding balances and business reporting.'],
+        ['Data portability', 'CSV/XLSX import/export plus browser-generated backup and restore workflows.'],
+      ],
+      highlights: [
+        [
+          'User-owned data',
+          'Google Sheets is the persistent V1 datastore instead of a hidden vendor database.',
+          'spreadsheet',
+        ],
+        ['Layered domain design', 'Business rules remain independent from the Google Sheets adapter.', 'architecture'],
+        [
+          'Money-safe calculations',
+          'Decimal.js and dedicated invoice/GST rules avoid casual floating-point arithmetic.',
+          'money',
+        ],
+        [
+          'Persistence recovery',
+          'Mutation lifecycle, reconciliation and recovery code make remote spreadsheet writes observable.',
+          'refresh',
+        ],
+        ['Portable by default', 'Imports, exports, PDFs and backups are first-class product workflows.', 'download'],
+      ],
+      architectureTitle: 'Treat the spreadsheet as an adapter, not the domain.',
+      architectureCopy:
+        'TallyLite separates React UI, application use cases, domain rules and repository contracts from the Google Sheets implementation. That keeps calculations testable and means persistence can evolve without rewriting invoice or inventory behavior.',
+      architecture: [
+        { label: 'Next.js / React UI', detail: 'Dashboard and business workflows' },
+        { label: 'Application services', detail: 'Sales · payments · returns · reporting · reconciliation' },
+        { label: 'Domain rules', detail: 'Money · GST · invoices · inventory · ledger · sequences' },
+        { label: 'Repository contracts', detail: 'Persistence boundary independent from the UI' },
+        { label: 'Google Sheets adapter', detail: 'User-authorized spreadsheet reads and mutations' },
+      ],
+      decisions: [
+        {
+          title: 'Reject silent in-memory persistence in production',
+          problem: 'A business app cannot pretend a save succeeded when the user-owned spreadsheet is not connected.',
+          decision:
+            'Runtime repositories require Google persistence outside tests and throw a persistence-required error rather than silently mutating temporary memory.',
+          outcome: 'The UI has an explicit connection state and business mutations do not disappear on refresh.',
+        },
+        {
+          title: 'Queue and observe remote mutations',
+          problem: 'Google API writes are remote, rate-limited and can outlive a quick UI interaction.',
+          decision:
+            'Persistence mutations are tracked through a queue/lifecycle layer with waiting, retrying and reconciliation states.',
+          outcome: 'Users receive honest saving feedback and mutation behavior becomes testable instead of invisible.',
+        },
+        {
+          title: 'Keep financial rules out of components',
+          problem:
+            'GST, invoice totals, payments and returns contain rules that become fragile when mixed into forms and tables.',
+          decision: 'Dedicated domain modules own money, GST, invoice, payment, inventory and ledger behavior.',
+          outcome: 'The calculations can be unit-tested without rendering the UI or calling Google APIs.',
+        },
+        {
+          title: 'Make data portability a product capability',
+          problem: 'A spreadsheet-first product should not trap the user in one UI or one browser session.',
+          decision:
+            'CSV/XLSX exchange, PDF generation and local backup/restore are part of the application architecture.',
+          outcome: 'The product complements user-owned data rather than replacing ownership with another silo.',
+        },
+      ],
+      stack: [
+        { label: 'Frontend', items: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS', 'Radix UI', 'Lucide'] },
+        { label: 'State & forms', items: ['TanStack Query', 'TanStack Table', 'React Hook Form', 'Zod'] },
+        {
+          label: 'Business data',
+          items: ['Google Sheets API', 'Google Identity Services', 'Decimal.js', 'Repository pattern'],
+        },
+        { label: 'Documents & quality', items: ['React PDF', 'XLSX', 'PapaParse', 'JSZip', 'Vitest', 'Playwright'] },
+      ],
+      quality: [
+        {
+          value: '58',
+          label: 'Test files',
+          detail: 'Domain, persistence, Google integration, UI and end-to-end behavior are represented in the suite.',
+        },
+        {
+          value: '0',
+          label: 'Hidden production memory writes',
+          detail: 'Production paths require the persistent Google-backed repository mode.',
+        },
+        {
+          value: 'Layered',
+          label: 'Business rules',
+          detail: 'Application and domain modules sit above repository implementations.',
+        },
+        {
+          value: 'Portable',
+          label: 'Data model',
+          detail: 'The product is designed around user-owned spreadsheets and exportable business records.',
+        },
+      ],
+      sections: [
+        {
+          id: 'engineering',
+          eyebrow: 'Persistence engineering',
+          title: 'Remote spreadsheets change the UX contract.',
+          copy: 'A normal local state update can feel instant. A Google Sheets mutation can be queued, rate-limited, retried or reconciled. TallyLite makes that lifecycle visible with persistence operation state instead of pretending the write is synchronous.',
+          items: [
+            'Concurrent reads are deduplicated at the store layer.',
+            'Mutation operations are tracked so saving, waiting and retrying states can be surfaced.',
+            'Production code requires persistent repositories rather than falling back to memory.',
+            'Backup and restore include validation and defensive handling for malformed archives.',
+          ],
+        },
+        {
+          id: 'engineering-learning',
+          eyebrow: 'What I learned',
+          title: 'Data ownership is an architectural constraint, not a marketing line.',
+          copy: 'Once the user owns the spreadsheet, the product has to respect connection state, API quotas, reconciliation, portability and failure recovery. That constraint made the separation between domain behavior and persistence much more important.',
+          items: [
+            'Design domain rules so they can run without a network adapter.',
+            'Show persistence truthfully when remote writes are not immediate.',
+            'Use decimal-safe arithmetic for business money flows.',
+            'Protect import, backup and restore paths as carefully as normal CRUD flows.',
+          ],
+        },
+      ],
+      applicationHeading: 'Try TallyLite or inspect the source',
+      applications: tallyLiteLinks,
+    },
+  },
+] as const satisfies readonly ProjectDefinition[];

@@ -2,13 +2,9 @@ import { NextResponse } from 'next/server';
 
 import { chatbotInstructions } from '@/constants/chatbot';
 
+import { enforceChatRateLimit } from './chat-rate-limit';
 import { aiResponse } from './chat-response';
-import {
-  enforceChatRateLimit,
-  readChatRequestBody,
-  rejectCrossOriginChatRequest,
-  rejectOversizedChatRequest,
-} from './chat-security';
+import { readChatRequestBody, rejectCrossOriginChatRequest, rejectOversizedChatRequest } from './chat-security';
 import { CHALLENGE_TTL_MS, createStateToken, PRIVATE_TTL_MS, readStateToken } from './chat-state';
 import { getChatTriggers, normalizeChatValue, validateChatRequestBody } from './chat-validation';
 
@@ -19,7 +15,7 @@ export const handleChatRequest = async (request: Request) => {
   const oversizedResponse = rejectOversizedChatRequest(request);
   if (oversizedResponse) return oversizedResponse;
 
-  const rateLimitResponse = enforceChatRateLimit(request);
+  const rateLimitResponse = await enforceChatRateLimit(request);
   if (rateLimitResponse) return rateLimitResponse;
 
   const apiKey = process.env.GEMINI_API_KEY;

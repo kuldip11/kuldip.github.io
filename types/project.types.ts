@@ -1,9 +1,12 @@
-export type ProjectVisualVariant = 'servora' | 'mapbox' | 'other';
+export type ProjectVisualVariant = 'servora' | 'tallylite' | 'other';
+export type ProjectMockVariant = 'saas' | 'fintech';
 
 export type ProjectMetric = readonly [value: string, label: string, icon: string];
 export type ProjectFeature = readonly [title: string, description: string];
 export type ProjectHighlight = readonly [title: string, description: string, icon: string];
 export type ProjectSection = {
+  readonly id: string;
+  readonly eyebrow?: string;
   readonly title: string;
   readonly copy: string;
   readonly items?: readonly string[];
@@ -12,6 +15,25 @@ export type ProjectLink = {
   readonly label: string;
   readonly href: string;
   readonly description: string;
+};
+export type ProjectArchitectureNode = {
+  readonly label: string;
+  readonly detail: string;
+};
+export type ProjectDecision = {
+  readonly title: string;
+  readonly problem: string;
+  readonly decision: string;
+  readonly outcome: string;
+};
+export type ProjectStackGroup = {
+  readonly label: string;
+  readonly items: readonly string[];
+};
+export type ProjectQualityItem = {
+  readonly value: string;
+  readonly label: string;
+  readonly detail: string;
 };
 export type ProjectCaseStudyDefinition = {
   readonly eyebrow: string;
@@ -23,9 +45,15 @@ export type ProjectCaseStudyDefinition = {
   readonly liveDemoExternal: boolean;
   readonly sourceHref: string;
   readonly metrics: readonly ProjectMetric[];
-  readonly navigation: readonly string[];
+  readonly navigation: readonly { readonly label: string; readonly href: string }[];
   readonly overviewItems: readonly ProjectFeature[];
   readonly highlights: readonly ProjectHighlight[];
+  readonly architectureTitle: string;
+  readonly architectureCopy: string;
+  readonly architecture: readonly ProjectArchitectureNode[];
+  readonly decisions: readonly ProjectDecision[];
+  readonly stack: readonly ProjectStackGroup[];
+  readonly quality: readonly ProjectQualityItem[];
   readonly sections: readonly ProjectSection[];
   readonly applicationHeading: string;
   readonly applications: readonly ProjectLink[];
@@ -33,10 +61,15 @@ export type ProjectCaseStudyDefinition = {
 export type ProjectDefinition = {
   readonly index: string;
   readonly slug: string;
+  readonly name: string;
   readonly label: string;
   readonly title: string;
   readonly description: string;
   readonly stats: readonly string[];
+  readonly tags: readonly string[];
+  readonly category: string;
+  readonly featured?: boolean;
+  readonly mockVariant: ProjectMockVariant;
   readonly seoTitle: string;
   readonly summary: string;
   readonly publishedAt: string;

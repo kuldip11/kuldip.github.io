@@ -1,27 +1,54 @@
-import { mapboxVisualPoints, servoraVisualMetricValues } from '@/constants/data/project-visuals.constants';
+import { servoraVisualMetricValues } from '@/constants/data/project-visuals.constants';
 import type { ProjectVisualVariant } from '@/types/project.types';
 
 import { Bars } from './Bars';
 
 export const ProjectVisual = ({ variant, compact = false }: { variant: ProjectVisualVariant; compact?: boolean }) => {
-  if (variant === 'mapbox') {
+  if (variant === 'tallylite') {
     return (
       <div
-        className={`relative overflow-hidden rounded-[12px] border border-[#207653] bg-[radial-gradient(circle_at_22%_30%,#19eaa9_0_2px,transparent_3px),radial-gradient(circle_at_70%_48%,#23d7ff_0_2px,transparent_3px),radial-gradient(circle_at_48%_68%,#67efb6_0_2px,transparent_3px),linear-gradient(145deg,#071b18,#07111b)] [background-size:33px_33px,41px_41px,27px_27px,auto] ${compact ? 'min-h-[112px]' : 'min-h-[260px] sm:min-h-[320px]'}`}
+        className={`relative overflow-hidden rounded-[14px] border border-[#207653] bg-[radial-gradient(circle_at_15%_0%,rgba(89,236,176,.12),transparent_36%),#071713] p-4 ${compact ? 'min-h-[142px]' : 'min-h-[290px] sm:min-h-[340px]'}`}
       >
-        <div className="absolute inset-x-[8%] bottom-[12%] flex h-[55%] items-end justify-around opacity-85">
-          {mapboxVisualPoints.map((_, index) => (
-            <span
-              className="absolute grid size-8 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-[#55edb1] bg-[#0b3f30] text-[9px] font-bold text-[#79f3c1] shadow-[0_0_18px_rgba(70,240,177,.35)]"
-              key={index}
-            >
-              {index % 2 ? '892' : '1.2K'}
-            </span>
-          ))}
-        </div>
-        <div className="absolute top-4 right-4 rounded-xl border border-[#2c7e60] bg-[#09221a]/95 px-3 py-2">
-          <span className="block text-[11px] text-[#b6c9c0]">Performance</span>
-          <strong className="text-[18px] text-accent">60 FPS</strong>
+        <div className="absolute inset-x-[6%] top-[9%] bottom-[9%] grid grid-cols-[.34fr_1fr] overflow-hidden rounded-[14px] border border-[#245b45] bg-[#081b16] shadow-2xl">
+          <aside className="border-r border-[#1f4e3c] bg-[#0a211a] p-3">
+            <div className="mb-4 h-2 w-14 rounded-full bg-[#59ecb0]" />
+            <div className="space-y-2">
+              {Array.from({ length: 6 }).map((_, index) => (
+                <div className="flex items-center gap-2" key={index}>
+                  <span className="size-2 rounded-sm border border-[#3f725f] bg-[#153d30]" />
+                  <span className={`h-1.5 rounded bg-[#234b3c] ${index % 2 ? 'w-10' : 'w-14'}`} />
+                </div>
+              ))}
+            </div>
+          </aside>
+          <section className="p-3">
+            <div className="grid grid-cols-3 gap-2">
+              {['Sales', 'Due', 'Stock'].map((label, index) => (
+                <div className="rounded-lg border border-[#245b45] bg-[#0b251d] p-2" key={label}>
+                  <span className="block text-[5px] text-[#84a99a]">{label}</span>
+                  <strong className="mt-1 block text-[9px] text-[#70eeb7]">
+                    {index === 0 ? '₹ 84K' : index === 1 ? '₹ 12K' : '326'}
+                  </strong>
+                </div>
+              ))}
+            </div>
+            <div className="mt-3 grid grid-cols-[1fr_.72fr] gap-2">
+              <div className="rounded-lg border border-[#245b45] bg-[#091f19] p-2">
+                <div className="flex h-[72px] items-end gap-1.5">
+                  {[35, 52, 44, 68, 57, 82, 74].map((height, index) => (
+                    <span className="flex-1 rounded-t bg-[#42dca2]/70" style={{ height: `${height}%` }} key={index} />
+                  ))}
+                </div>
+              </div>
+              <div className="rounded-lg border border-[#245b45] bg-[#091f19] p-2">
+                <div className="grid h-full place-items-center">
+                  <div className="grid size-16 place-items-center rounded-full border-[8px] border-[#153e31] border-t-[#59ecb0] text-[6px] text-[#9fc6b7]">
+                    GST
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     );

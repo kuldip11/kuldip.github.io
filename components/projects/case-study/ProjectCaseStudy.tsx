@@ -8,10 +8,15 @@ import { siteConfig } from '@/constants/site';
 import type { ProjectDefinition } from '@/types/project.types';
 
 import { ProjectApplications } from './ProjectApplications';
+import { ProjectArchitecture } from './ProjectArchitecture';
+import { ProjectDecisions } from './ProjectDecisions';
+import { ProjectEngineering } from './ProjectEngineering';
 import { ProjectHero } from './ProjectHero';
 import { ProjectMetrics } from './ProjectMetrics';
 import { ProjectNavigation } from './ProjectNavigation';
 import { ProjectOverview } from './ProjectOverview';
+import { ProjectQuality } from './ProjectQuality';
+import { ProjectStack } from './ProjectStack';
 
 export const ProjectCaseStudy = ({ project }: { project: ProjectDefinition }) => {
   const jsonLd = {
@@ -40,6 +45,11 @@ export const ProjectCaseStudy = ({ project }: { project: ProjectDefinition }) =>
         <ProjectMetrics metrics={project.caseStudy.metrics} />
         <ProjectNavigation items={project.caseStudy.navigation} />
         <ProjectOverview project={project} />
+        <ProjectArchitecture caseStudy={project.caseStudy} />
+        <ProjectDecisions decisions={project.caseStudy.decisions} />
+        <ProjectEngineering sections={project.caseStudy.sections} />
+        <ProjectStack groups={project.caseStudy.stack} />
+        <ProjectQuality items={project.caseStudy.quality} />
         <ProjectApplications
           heading={project.caseStudy.applicationHeading}
           applications={project.caseStudy.applications}

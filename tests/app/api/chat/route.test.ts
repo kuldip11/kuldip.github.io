@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { POST } from '@/app/api/chat/route';
+import { resetChatRateLimitForTests } from '@/server/chat/chat-rate-limit';
 
 const fetchMock = vi.fn();
 const names = [
@@ -9,6 +10,9 @@ const names = [
   'SECRET_CODE',
   'PRIVATE_CHATBOT_INSTRUCTIONS',
   'CHAT_SESSION_SECRET',
+  'TRUST_PROXY_HEADERS',
+  'UPSTASH_REDIS_REST_URL',
+  'UPSTASH_REDIS_REST_TOKEN',
 ] as const;
 const originals = Object.fromEntries(names.map((name) => [name, process.env[name]]));
 const geminiResponse = (text: string) => ({
@@ -29,10 +33,12 @@ const configure = () => {
   process.env.SECRET_CODE = 'private-code';
   process.env.PRIVATE_CHATBOT_INSTRUCTIONS = 'Private instructions.';
   process.env.CHAT_SESSION_SECRET = 'independent-long-test-signing-secret';
+  process.env.TRUST_PROXY_HEADERS = 'true';
   vi.stubGlobal('fetch', fetchMock);
 };
 
 afterEach(() => {
+  resetChatRateLimitForTests();
   fetchMock.mockReset();
   vi.unstubAllGlobals();
   for (const name of names) {
@@ -173,6 +179,51 @@ describe('POST /api/chat', () => {
 
     expect(response.status).toBe(502);
     expect(await response.json()).toEqual({ error: 'The portfolio assistant could not answer right now.' });
+  });
+
+  it('does not trust spoofed forwarded IP headers outside a trusted proxy', async () => {
+    configure();
+    process.env.TRUST_PROXY_HEADERS = 'false';
+    resetChatRateLimitForTests();
+    fetchMock.mockResolvedValue(geminiResponse('Public response.'));
+
+    let response: Response | undefined;
+    for (let index = 0; index < 21; index += 1) {
+      response = await POST(
+        new Request('http://localhost/api/chat', {
+          method: 'POST',
+          headers: { 'x-forwarded-for': `spoofed-${index}` },
+          body: JSON.stringify({ message: `Question ${index}` }),
+        }),
+      );
+    }
+
+    expect(response?.status).toBe(429);
+  });
+
+  it('uses the shared Redis limiter when production credentials are configured', async () => {
+    configure();
+    process.env.UPSTASH_REDIS_REST_URL = 'https://example.upstash.io';
+    process.env.UPSTASH_REDIS_REST_TOKEN = 'test-token';
+    resetChatRateLimitForTests();
+    fetchMock.mockImplementation(async (input) => {
+      if (String(input) === 'https://example.upstash.io') {
+        return { ok: true, json: async () => ({ result: [21, 300_000] }) };
+      }
+      return geminiResponse('Public response.');
+    });
+
+    const response = await POST(
+      new Request('http://localhost/api/chat', {
+        method: 'POST',
+        headers: { 'x-forwarded-for': 'shared-limit-test' },
+        body: JSON.stringify({ message: 'Question' }),
+      }),
+    );
+
+    expect(response.status).toBe(429);
+    expect(response.headers.get('X-RateLimit-Limit')).toBe('20');
+    expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 
   it('rate limits repeated requests from the same client', async () => {

@@ -1,9 +1,8 @@
 import { AppIcon } from '@/components/portfolio/AppIcon';
 import { Eyebrow, InnerPageBackdrop, Pills, ProjectCard } from '@/components/portfolio/InnerPageUi';
+import { projects } from '@/constants/data/projects';
 import { PROJECTS_PAGE_CONTENT } from '@/constants/pages/projects.constants';
 import { ROUTES } from '@/constants/routes';
-
-import { ComingSoonProject } from './ComingSoonProject';
 
 export const ProjectsPageContent = () => (
   <InnerPageBackdrop>
@@ -23,13 +22,11 @@ export const ProjectsPageContent = () => (
         </div>
         <div className="grid grid-cols-[1fr_.8fr] items-center gap-5 rounded-[20px] border border-panel-border bg-[#071713]/80 p-5">
           <div className="grid min-h-[180px] place-items-center rounded-[16px] border border-[#245b45] bg-[#081d17] text-center font-mono text-[24px] leading-tight text-accent">
-            {PROJECTS_PAGE_CONTENT.heroWords[0]}
-            <br />
-            {PROJECTS_PAGE_CONTENT.heroWords[1]}
-            <br />
-            {PROJECTS_PAGE_CONTENT.heroWords[2]}
-            <br />
-            {PROJECTS_PAGE_CONTENT.heroWords[3]}
+            {PROJECTS_PAGE_CONTENT.heroWords.map((word) => (
+              <span className="block" key={word}>
+                {word}
+              </span>
+            ))}
           </div>
           <ul className="space-y-5 text-[14px] font-semibold text-[#dbe6e0]">
             {PROJECTS_PAGE_CONTENT.heroPoints.map((point) => (
@@ -45,8 +42,19 @@ export const ProjectsPageContent = () => (
         <Pills items={PROJECTS_PAGE_CONTENT.filters} />
       </div>
       <div className="mt-6 grid gap-4 lg:grid-cols-2">
-        <ProjectCard {...PROJECTS_PAGE_CONTENT.featuredCard} />
-        <ComingSoonProject />
+        {projects.map((project) => (
+          <ProjectCard
+            key={project.slug}
+            slug={project.slug}
+            title={project.name}
+            copy={project.description}
+            variant={project.caseStudy.visualVariant}
+            tags={project.tags.slice(0, 4)}
+            badge={project.featured ? 'Featured' : undefined}
+            category={project.category}
+            ariaLabel={project.seoTitle}
+          />
+        ))}
       </div>
       <div className="mt-5 flex flex-col gap-4 rounded-[18px] border border-panel-border bg-[#071713]/90 p-5 sm:flex-row sm:items-center sm:justify-between">
         <div>
@@ -57,7 +65,7 @@ export const ProjectsPageContent = () => (
           <p className="mt-1 text-[13px] text-[#aebdb6]">{PROJECTS_PAGE_CONTENT.footerCta.copy}</p>
         </div>
         <a
-          className="rounded-full border border-[#45dba4] px-5 py-3 text-[12px] font-semibold text-accent"
+          className="inline-flex items-center gap-1 rounded-full border border-[#45dba4] px-5 py-3 text-[12px] font-semibold text-accent"
           href={ROUTES.articles}
         >
           {PROJECTS_PAGE_CONTENT.footerCta.linkLabel} <AppIcon name="arrow-right" className="size-4" />

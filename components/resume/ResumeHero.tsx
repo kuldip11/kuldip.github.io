@@ -1,8 +1,9 @@
+import Image from 'next/image';
+
 import { AppIcon } from '@/components/portfolio/AppIcon';
 import { ActionLink, Eyebrow } from '@/components/portfolio/InnerPageUi';
 import { siteConfig } from '@/constants/site';
 import { INNER_PAGE_PANEL_CLASS } from '@/constants/styles/component-styles.constants';
-import Image from 'next/image';
 
 export const ResumeHero = () => (
   <section className="grid gap-7 lg:grid-cols-[.9fr_1.1fr] lg:items-center">

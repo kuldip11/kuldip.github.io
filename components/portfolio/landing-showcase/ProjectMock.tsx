@@ -1,4 +1,6 @@
-export const ProjectMock = ({ variant }: { variant: 'saas' | 'fintech' }) => {
+import type { ProjectMockVariant } from '@/types/project.types';
+
+export const ProjectMock = ({ variant }: { variant: ProjectMockVariant }) => {
   if (variant === 'saas') {
     return (
       <div className="relative h-full min-h-[96px] overflow-hidden rounded-[12px] border border-[#1f4d3c] bg-[#0a1613] p-2">

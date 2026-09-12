@@ -29,7 +29,7 @@ export const PortfolioChat = () => {
   return (
     <div
       ref={rootRef}
-      className="fixed right-5 bottom-5 z-[80] flex flex-col items-end gap-3 max-phone:right-3 max-phone:bottom-3"
+      className="fixed right-5 bottom-20 z-[80] flex flex-col items-end gap-3 max-phone:right-3 max-phone:bottom-6"
     >
       {open ? (
         <ChatPanel

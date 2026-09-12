@@ -37,7 +37,7 @@ The subsequent application-wide review was also implemented. These items extend 
 | ID      | Task                                                                                                    | Status      | Verification / Notes                                                                                                                                                                                 |
 | ------- | ------------------------------------------------------------------------------------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | APP-001 | Move shared portfolio Header/Footer/skip-link chrome into an App Router route-group layout              | `COMPLETED` | `(portfolio)/layout.tsx` owns the shared shell; public URLs are unchanged; focused layout test passes                                                                                                |
-| APP-002 | Remove stale non-Servora project definitions while retaining generic data-driven `[slug]` routing       | `COMPLETED` | Production build generates only `/projects/servora`; project domain/route/sitemap tests pass                                                                                                         |
+| APP-002 | Remove stale placeholder project definitions while retaining generic data-driven `[slug]` routing       | `COMPLETED` | Historical cleanup completed; later source-backed content expansion adds TallyLite through the same generic data model                                                                               |
 | APP-003 | Remove superseded legacy homepage components/tests/constants                                            | `COMPLETED` | Dead presentation branch removed; live-code test suite re-measured                                                                                                                                   |
 | APP-004 | Decompose the remaining large landing showcase into meaningful section components                       | `COMPLETED` | `LandingShowcase` is orchestration-only; existing classes/content retained                                                                                                                           |
 | APP-005 | Complete keyboard/focus accessibility for mobile navigation, résumé tabs, assistant and skip navigation | `COMPLETED` | Header, résumé and assistant focused tests pass; browser E2E remains environment-blocked                                                                                                             |
@@ -46,10 +46,24 @@ The subsequent application-wide review was also implemented. These items extend 
 | APP-008 | Vendor existing My Tech Stack Simple Icons locally                                                      | `COMPLETED` | Runtime `cdn.simpleicons.org` dependency removed; visual icon artwork remains the same                                                                                                               |
 | APP-009 | Harden `/api/chat` for production abuse/failure scenarios                                               | `COMPLETED` | 8 KiB streaming body cap, same-origin enforcement, process-local rate limit, strict validation, 10 s timeout, signed state and sanitized failures; chat route tests pass                             |
 | APP-010 | Remove populated environment secrets from deliverables and provide `.env.example`                       | `COMPLETED` | Only empty `.env.example` is present; README documents credential rotation requirement                                                                                                               |
-| APP-011 | Improve tests/coverage around live route, chat, layout, navigation and accessibility behavior           | `COMPLETED` | 31 test files / 62 tests pass; current coverage: 93.03% statements, 80.93% branches, 94.81% functions, 95.14% lines                                                                                  |
+| APP-011 | Improve tests/coverage around live route, chat, layout, navigation and accessibility behavior           | `COMPLETED` | 31 test files / 63 tests pass after project/article expansion; current coverage: 92.27% statements, 81.97% branches, 93.27% functions, 94.17% lines                                                  |
 | APP-012 | Evaluate raster asset optimization without visual degradation                                           | `COMPLETED` | Lossless recompression of hero/OG PNGs produced no size reduction with available encoders, so original pixel-identical sources were retained; Next Image continues to optimize runtime hero delivery |
 
 > Security follow-up outside source control: credentials that appeared in an earlier distributed archive must be rotated in their provider dashboards. Source cleanup cannot revoke already-exposed credentials.
+
+## Source-backed Projects & Articles Expansion
+
+The later portfolio-content pass intentionally extends the public content beyond the original no-behavior-change refactor. Both attached project repositories were independently inspected before writing portfolio copy; project claims below are constrained to source-supported architecture and features.
+
+| ID          | Task                                                                                | Status      | Verification / Notes                                                                                                                                       |
+| ----------- | ----------------------------------------------------------------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CONTENT-001 | Add TallyLite as a real project and remove placeholder project presentation         | `COMPLETED` | `/projects/tallylite` is generated from typed project data; live Netlify and GitHub links are included                                                     |
+| CONTENT-002 | Expand Servora into the flagship detailed case study                                | `COMPLETED` | Case study covers monorepo/workspaces, product surfaces, tenancy/permissions, server-authoritative decisions, stack, quality and all deployed applications |
+| CONTENT-003 | Build a detailed TallyLite case study from the attached source                      | `COMPLETED` | Covers Google Sheets repository boundary, domain/use-case layering, GST/money/inventory concerns, persistence recovery, tests and portability              |
+| CONTENT-004 | Remove old article content and replace it with experience-based engineering writing | `COMPLETED` | Five new articles derive topics from Servora/TallyLite engineering constraints and use typed structured content                                            |
+| CONTENT-005 | Upgrade article detail presentation beyond plain text                               | `COMPLETED` | Rich hero, takeaway cards, alternating sections, explanatory visual diagrams, callouts and reduced-motion-safe animations added                            |
+| CONTENT-006 | Keep project/article routing generic and SEO/data generated                         | `COMPLETED` | No project-slug equality rendering branch remains; build generates 2 project slugs and 5 article slugs from data                                           |
+| CONTENT-007 | Update homepage/footer/chat knowledge and regression tests for new content          | `COMPLETED` | Homepage features both projects, footer/chat knowledge are current, 31 files / 63 tests pass                                                               |
 
 ---
 
@@ -163,9 +177,9 @@ The stale tests were corrected to assert the already-existing application behavi
 - `npm run typecheck`: **PASS**.
 - `npm run lint`: **PASS**.
 - `npm run format:check`: **PASS**.
-- `npm run test`: **PASS — 31 files, 62 tests**.
-- `npm run test:coverage`: **PASS — 93.03% statements, 80.93% branches, 94.81% functions, 95.14% lines**.
-- `NEXT_PUBLIC_SITE_URL=https://example.com npm run build`: **PASS**; all expected routes are generated, including 2 article slugs and exactly 1 public project slug (`servora`).
+- `npm run test`: **PASS — 31 files, 63 tests**.
+- `npm run test:coverage`: **PASS — 92.27% statements, 81.97% branches, 93.27% functions, 94.17% lines**.
+- `NEXT_PUBLIC_SITE_URL=https://kuldip11.github.io npm run build`: **PASS**; all expected routes are generated, including 5 article slugs and 2 project slugs (`servora`, `tallylite`).
 - `npm run test:e2e`: **BLOCKED BY EXECUTION ENVIRONMENT**. A temporary Bun-compatible verification shim was used only because Bun is absent; Playwright successfully launches system Chromium and the Next.js server, but Chromium refuses `http://localhost:3000/` with `net::ERR_BLOCKED_BY_ADMINISTRATOR` (the browser displays “Your organization doesn’t allow you to view this site”). This is a sandbox browser policy, not an application assertion failure.
 - Desktop/tablet/mobile screenshot comparison: **BLOCKED BY THE SAME CHROMIUM LOCALHOST POLICY**. Source-to-source regression checks, unit/component tests, route/build output and preserved Tailwind class/markup checks were used as the available non-browser safeguards.
 

@@ -39,3 +39,60 @@ body {
   background: #59ecb0;
   color: #04100c;
 }
+
+@keyframes article-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes article-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(4px);
+  }
+}
+
+@keyframes article-scan {
+  0% {
+    top: 24%;
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    top: 82%;
+    opacity: 0;
+  }
+}
+
+.article-float {
+  animation: article-float 4.8s ease-in-out infinite;
+}
+.article-pulse {
+  animation: article-pulse 1.8s ease-in-out infinite;
+}
+.article-scan {
+  animation: article-scan 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .article-float,
+  .article-pulse,
+  .article-scan {
+    animation: none;
+  }
+}

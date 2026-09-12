@@ -19,6 +19,14 @@ const ICON_NAME_MAP: Record<string, AppIconName> = {
   architecture: 'architecture',
   performance: 'performance',
   cloud: 'cloud',
+  apps: 'apps',
+  layers: 'architecture',
+  realtime: 'refresh',
+  spreadsheet: 'summary',
+  money: 'summary',
+  refresh: 'refresh',
+  download: 'arrow-down',
+  testing: 'testing',
 };
 
 export const GlyphIcon = ({ glyph, className = 'size-5' }: { glyph: string; className?: string }) => (

@@ -10,7 +10,7 @@ export const chatbotConfig = {
   eyebrow: 'Portfolio assistant',
   greeting:
     'Hi — I can help you explore Kuldip’s experience, projects, technical strengths, résumé, and availability for senior frontend roles.',
-  placeholder: 'Ask about experience, Servora, React, Mapbox…',
+  placeholder: 'Ask about experience, Servora, TallyLite, React…',
   maxMessageLength: 600,
   model: 'gemini-3.5-flash-lite',
 } as const;
@@ -18,6 +18,7 @@ export const chatbotConfig = {
 export const chatbotSuggestions = [
   'What makes Kuldip a strong Senior React Engineer?',
   'Tell me about Servora.',
+  'How is TallyLite architected?',
   'What performance work has Kuldip done?',
   'Which technologies does Kuldip use most?',
 ] as const;

@@ -16,17 +16,24 @@ describe('article domain data', () => {
     }
   });
 
-  it('keeps every article complete enough for generic rendering and SEO', () => {
+  it('keeps every article complete enough for rich generic rendering and SEO', () => {
     for (const article of articles) {
       expect(article.title.trim()).not.toBe('');
       expect(article.description.trim()).not.toBe('');
+      expect(article.category.trim()).not.toBe('');
+      expect(article.readingTime).toMatch(/min read$/);
       expect(article.publishedAt).toMatch(/^\d{4}-\d{2}-\d{2}$/);
       expect(article.updatedAt).toMatch(/^\d{4}-\d{2}-\d{2}$/);
-      expect(article.sections.length).toBeGreaterThan(0);
+      expect(article.tags.length).toBeGreaterThan(2);
+      expect(article.takeaways.length).toBeGreaterThan(1);
+      expect(article.sections.length).toBeGreaterThan(2);
 
-      for (const [title, copy] of article.sections) {
-        expect(title.trim()).not.toBe('');
-        expect(copy.trim()).not.toBe('');
+      for (const section of article.sections) {
+        expect(section.id.trim()).not.toBe('');
+        expect(section.eyebrow.trim()).not.toBe('');
+        expect(section.title.trim()).not.toBe('');
+        expect(section.paragraphs.length).toBeGreaterThan(0);
+        section.paragraphs.forEach((paragraph) => expect(paragraph.trim()).not.toBe(''));
       }
     }
   });
