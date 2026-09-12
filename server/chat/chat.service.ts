@@ -10,7 +10,7 @@ export const askGemini = async (apiKey: string, message: string, systemInstructi
       model: chatbotConfig.model,
       input: message,
       system_instruction: systemInstruction,
-      store: false,
+      store: true,
       generation_config: { max_output_tokens: 420 },
     }),
   });
