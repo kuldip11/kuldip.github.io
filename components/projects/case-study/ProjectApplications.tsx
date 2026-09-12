@@ -13,7 +13,7 @@ export const ProjectApplications = ({
   <section className={`${INNER_PAGE_PANEL_CLASS} mt-4 p-5 sm:p-6`} id="details">
     <h2 className="sr-only">{heading}</h2>
     <h3 className="flex items-center gap-2 text-[20px] font-bold">
-      <AppIcon name="apps" className="size-5 text-[#59ecb0]" />
+      <AppIcon name="apps" className="size-5 text-accent" />
       {PROJECT_DETAIL_CONTENT.applicationsTitle}
     </h3>
     <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -25,12 +25,12 @@ export const ProjectApplications = ({
           rel="noreferrer"
           key={application.label}
         >
-          <span className="text-[#59ecb0]">
+          <span className="text-accent">
             <AppIcon name="apps" className="size-5" />
           </span>
           <strong className="mt-3 block text-[12px]">{application.label}</strong>
           <span className="mt-1 block text-[10px] text-[#9fb2a9]">{application.description}</span>
-          <span className="mt-3 block text-[12px] font-semibold text-[#59ecb0]">
+          <span className="mt-3 block text-[12px] font-semibold text-accent">
             {PROJECT_DETAIL_CONTENT.applicationOpenLabel} <AppIcon name="arrow-up-right" className="size-3.5" />
           </span>
         </a>

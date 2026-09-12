@@ -1,5 +1,21 @@
 @import 'tailwindcss';
 
+@theme {
+  --color-accent: #59ecb0;
+  --color-accent-bright: #71f6b5;
+  --color-page: #07110f;
+  --color-page-deep: #030d0a;
+  --color-text-primary: #f2f4ee;
+  --color-panel-border: #176746;
+  --color-muted-border: #20362f;
+  --breakpoint-phone: 40.625rem;
+  --breakpoint-hero: 43.75rem;
+  --breakpoint-nav: 47.5rem;
+  --breakpoint-content: 50rem;
+  --breakpoint-wide: 56.25rem;
+  --breakpoint-desktop: 68.75rem;
+}
+
 :root {
   color-scheme: dark;
   background: #030d0a;

@@ -48,7 +48,7 @@ export const ProjectCard = ({
       </div>
       <Link
         aria-label={`Read ${title}`}
-        className="mt-5 inline-flex text-[13px] font-semibold text-[#59ecb0]"
+        className="mt-5 inline-flex text-[13px] font-semibold text-accent"
         href={ROUTES.project(slug)}
       >
         View project&nbsp; <AppIcon name="arrow-right" className="size-4" />

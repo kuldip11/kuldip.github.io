@@ -10,14 +10,14 @@ export const SectionHeader = ({ index, eyebrow, title, copy, theme = 'dark' }: S
   const indexClassName =
     theme === 'light'
       ? 'mb-2.5 block font-mono text-[12px] text-[#087a4b]'
-      : 'mb-2.5 block font-mono text-[12px] text-[#71f6b5]';
+      : 'mb-2.5 block font-mono text-[12px] text-accent-bright';
   const eyebrowClassName =
     theme === 'light'
       ? 'm-0 font-mono text-[12px] leading-[1.4] font-semibold tracking-[.12em] text-[#526159] uppercase'
       : 'm-0 font-mono text-[12px] leading-[1.4] font-semibold tracking-[.12em] text-[#a5b7ae] uppercase';
 
   return (
-    <div className="mb-16 grid grid-cols-[1fr_1.7fr_1fr] items-end gap-10 max-[1000px]:grid-cols-[1fr_2fr] max-[650px]:grid-cols-1 max-[650px]:gap-[22px]">
+    <div className="mb-16 grid grid-cols-[1fr_1.7fr_1fr] items-end gap-10 max-[1000px]:grid-cols-[1fr_2fr] max-phone:grid-cols-1 max-phone:gap-[22px]">
       <div>
         <span className={indexClassName}>{index}</span>
         <p className={eyebrowClassName}>{eyebrow}</p>
@@ -26,9 +26,7 @@ export const SectionHeader = ({ index, eyebrow, title, copy, theme = 'dark' }: S
         {title}
       </h2>
       {copy ? (
-        <p className="text-[15px] leading-[1.65] text-[#8fa29a] max-[1000px]:col-start-2 max-[650px]:col-auto">
-          {copy}
-        </p>
+        <p className="text-[15px] leading-[1.65] text-[#8fa29a] max-[1000px]:col-start-2 max-phone:col-auto">{copy}</p>
       ) : null}
     </div>
   );

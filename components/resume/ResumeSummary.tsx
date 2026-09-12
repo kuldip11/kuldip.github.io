@@ -5,7 +5,7 @@ import { INNER_PAGE_PANEL_CLASS } from '@/constants/styles/component-styles.cons
 export const ResumeSummary = () => (
   <section className={`${INNER_PAGE_PANEL_CLASS} p-5`} id="overview">
     <h2 className="flex items-center gap-2 text-[20px] font-bold">
-      <AppIcon name="summary" className="size-5 text-[#59ecb0]" />
+      <AppIcon name="summary" className="size-5 text-accent" />
       Professional Summary
     </h2>
     <p className="mt-4 text-[14px] leading-[1.65] text-[#b5c4bd]">
@@ -15,7 +15,7 @@ export const ResumeSummary = () => (
     </p>
     <div className="mt-5 flex flex-wrap gap-2">
       {RESUME_TRAITS.map((trait) => (
-        <span className="rounded-full border border-[#27775a] px-3 py-1.5 text-[11px] text-[#59ecb0]" key={trait}>
+        <span className="rounded-full border border-[#27775a] px-3 py-1.5 text-[11px] text-accent" key={trait}>
           {trait}
         </span>
       ))}

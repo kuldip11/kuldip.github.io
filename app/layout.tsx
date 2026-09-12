@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (
     <html lang="en">
-      <body className="m-0 bg-[#07110f] antialiased">
+      <body className="m-0 bg-page antialiased">
         {children}
         <PortfolioChat />
       </body>

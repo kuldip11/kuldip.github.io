@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import ArticlesPage, { metadata } from '@/app/articles/page';
+import ArticlesPage, { metadata } from '@/app/(portfolio)/articles/page';
 describe('Articles page', () => {
   it('renders article cards', () => {
     render(<ArticlesPage />);

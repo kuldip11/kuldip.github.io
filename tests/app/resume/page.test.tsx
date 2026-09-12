@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import ResumePage, { metadata } from '@/app/resume/page';
+import ResumePage, { metadata } from '@/app/(portfolio)/resume/page';
 describe('Resume page', () => {
   it('renders downloadable résumé and redesigned sections', () => {
     render(<ResumePage />);

@@ -14,7 +14,7 @@ export const ResumeBeyondWork = () => (
       </p>
     </div>
     <a
-      className="inline-flex items-center gap-2 rounded-full border border-[#59ecb0] px-5 py-3 text-[12px] font-semibold text-[#59ecb0]"
+      className="inline-flex items-center gap-2 rounded-full border border-accent px-5 py-3 text-[12px] font-semibold text-accent"
       href={siteConfig.contactHref}
     >
       Let&apos;s Connect <AppIcon name="arrow-right" className="size-4" />

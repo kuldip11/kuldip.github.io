@@ -36,8 +36,11 @@ describe('Header', () => {
     const menuButton = screen.getByRole('button', { name: 'Open navigation menu' });
     fireEvent.click(menuButton);
     expect(screen.getByRole('complementary', { name: 'Mobile navigation' })).toBeInTheDocument();
+    expect(document.body.style.overflow).toBe('hidden');
     fireEvent.keyDown(document, { key: 'Escape' });
     expect(screen.queryByRole('complementary', { name: 'Mobile navigation' })).not.toBeInTheDocument();
+    expect(document.body.style.overflow).toBe('');
+    expect(menuButton).toHaveFocus();
   });
 
   it('closes the mobile drawer after navigation is selected', () => {
@@ -46,5 +49,24 @@ describe('Header', () => {
     const mobileNavigation = screen.getByRole('navigation', { name: 'Mobile main navigation' });
     fireEvent.click(within(mobileNavigation).getByRole('link', { name: /Home01/ }));
     expect(mobileNavigation).not.toBeInTheDocument();
+  });
+
+  it('keeps keyboard focus inside the open mobile drawer', () => {
+    render(<Header />);
+    fireEvent.click(screen.getByRole('button', { name: 'Open navigation menu' }));
+
+    const drawer = screen.getByRole('complementary', { name: 'Mobile navigation' });
+    const focusable = within(drawer).getAllByRole('link');
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    expect(first).toHaveFocus();
+    last.focus();
+    fireEvent.keyDown(document, { key: 'Tab' });
+    expect(first).toHaveFocus();
+
+    first.focus();
+    fireEvent.keyDown(document, { key: 'Tab', shiftKey: true });
+    expect(last).toHaveFocus();
   });
 });

@@ -5,11 +5,12 @@ export const askGemini = async (apiKey: string, message: string, systemInstructi
   const response = await fetch('https://generativelanguage.googleapis.com/v1beta/interactions', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
+    signal: AbortSignal.timeout(10_000),
     body: JSON.stringify({
       model: chatbotConfig.model,
       input: message,
       system_instruction: systemInstruction,
-      store: true,
+      store: false,
       generation_config: { max_output_tokens: 420 },
     }),
   });

@@ -9,7 +9,7 @@ export const ProjectOverview = ({ project }: { project: ProjectDefinition }) => 
   <section className="mt-5 grid gap-4 xl:grid-cols-[1.2fr_.8fr]" id="overview">
     <div className={`${INNER_PAGE_PANEL_CLASS} p-5 sm:p-6`}>
       <h2 className="flex items-center gap-2 text-[20px] font-bold">
-        <AppIcon name="apps" className="size-5 text-[#59ecb0]" />
+        <AppIcon name="apps" className="size-5 text-accent" />
         {PROJECT_DETAIL_CONTENT.overviewTitle}
       </h2>
       <p className="mt-4 text-[14px] leading-[1.65] text-[#b6c4bd]">
@@ -26,7 +26,7 @@ export const ProjectOverview = ({ project }: { project: ProjectDefinition }) => 
     </div>
     <div className={`${INNER_PAGE_PANEL_CLASS} p-5 sm:p-6`}>
       <h2 className="flex items-center gap-2 text-[20px] font-bold">
-        <AppIcon name="featured" className="size-5 text-[#59ecb0]" />
+        <AppIcon name="featured" className="size-5 text-accent" />
         {PROJECT_DETAIL_CONTENT.highlightsTitle}
       </h2>
       <div className="mt-4 space-y-4">

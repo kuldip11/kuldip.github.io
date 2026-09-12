@@ -11,7 +11,7 @@ export const ComingSoonProject = () => (
     <div className="relative flex h-full min-h-[220px] flex-col justify-between">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <span className="inline-flex rounded-full border border-[#27775a] bg-[#071713] px-3 py-1.5 font-mono text-[9px] tracking-[.12em] text-[#71f6b5]">
+          <span className="inline-flex rounded-full border border-[#27775a] bg-[#071713] px-3 py-1.5 font-mono text-[9px] tracking-[.12em] text-accent-bright">
             {PROJECTS_PAGE_CONTENT.comingSoon.label}
           </span>
           <h2 className="mt-4 text-[24px] font-bold tracking-[-.03em] sm:text-[28px]">
@@ -21,7 +21,7 @@ export const ComingSoonProject = () => (
             {PROJECTS_PAGE_CONTENT.comingSoon.copy}
           </p>
         </div>
-        <div className="grid size-14 shrink-0 place-items-center rounded-[16px] border border-[#27775a] bg-[#092018] text-[#59ecb0] shadow-[0_0_28px_rgba(89,236,176,.1)]">
+        <div className="grid size-14 shrink-0 place-items-center rounded-[16px] border border-[#27775a] bg-[#092018] text-accent shadow-[0_0_28px_rgba(89,236,176,.1)]">
           <AppIcon name="plus" className="size-6" />
         </div>
       </div>

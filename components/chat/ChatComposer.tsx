@@ -24,7 +24,7 @@ export const ChatComposer = ({
     >
       <input
         aria-label="Message Kuldip's portfolio assistant"
-        className="min-w-0 flex-1 bg-transparent py-2 text-[13px] text-[#f2f4ee] outline-none placeholder:text-[#6f8179]"
+        className="min-w-0 flex-1 bg-transparent py-2 text-[13px] text-text-primary outline-none placeholder:text-[#6f8179]"
         maxLength={chatbotConfig.maxMessageLength}
         onChange={(event) => onInput(event.target.value)}
         placeholder={chatbotConfig.placeholder}
@@ -33,7 +33,7 @@ export const ChatComposer = ({
       />
       <button
         aria-label="Send message"
-        className="grid size-10 shrink-0 place-items-center rounded-xl bg-[#71f6b5] text-lg font-bold text-[#07110f] transition hover:scale-[1.03] disabled:cursor-not-allowed disabled:opacity-40"
+        className="grid size-10 shrink-0 place-items-center rounded-xl bg-accent-bright text-lg font-bold text-[#07110f] transition hover:scale-[1.03] disabled:cursor-not-allowed disabled:opacity-40"
         disabled={!input.trim() || loading}
         type="submit"
       >

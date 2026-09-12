@@ -6,7 +6,7 @@ export const MetricCard = ({ value, label, icon }: { value: string; label: strin
   if (icon) {
     return (
       <div className={`${INNER_PAGE_PANEL_CLASS} p-4`}>
-        <div className="text-[#59ecb0]">
+        <div className="text-accent">
           <GlyphIcon glyph={icon} className="size-6" />
         </div>
         <strong className="mt-3 block text-[18px]">{value}</strong>

@@ -11,7 +11,7 @@ export const ProjectsPageContent = () => (
       <div className="grid gap-8 lg:grid-cols-[1fr_.85fr] lg:items-center">
         <div>
           <Eyebrow>{PROJECTS_PAGE_CONTENT.eyebrow}</Eyebrow>
-          <h1 className="mt-2 text-[clamp(2.8rem,5vw,4.9rem)] leading-none font-bold tracking-[-.055em] text-[#59ecb0]">
+          <h1 className="mt-2 text-[clamp(2.8rem,5vw,4.9rem)] leading-none font-bold tracking-[-.055em] text-accent">
             {PROJECTS_PAGE_CONTENT.title}
           </h1>
           <h2 className="mt-2 text-[24px] font-bold tracking-[-.03em] sm:text-[30px]">
@@ -21,8 +21,8 @@ export const ProjectsPageContent = () => (
             {PROJECTS_PAGE_CONTENT.description}
           </p>
         </div>
-        <div className="grid grid-cols-[1fr_.8fr] items-center gap-5 rounded-[20px] border border-[#176746] bg-[#071713]/80 p-5">
-          <div className="grid min-h-[180px] place-items-center rounded-[16px] border border-[#245b45] bg-[#081d17] text-center font-mono text-[24px] leading-tight text-[#59ecb0]">
+        <div className="grid grid-cols-[1fr_.8fr] items-center gap-5 rounded-[20px] border border-panel-border bg-[#071713]/80 p-5">
+          <div className="grid min-h-[180px] place-items-center rounded-[16px] border border-[#245b45] bg-[#081d17] text-center font-mono text-[24px] leading-tight text-accent">
             {PROJECTS_PAGE_CONTENT.heroWords[0]}
             <br />
             {PROJECTS_PAGE_CONTENT.heroWords[1]}
@@ -34,7 +34,7 @@ export const ProjectsPageContent = () => (
           <ul className="space-y-5 text-[14px] font-semibold text-[#dbe6e0]">
             {PROJECTS_PAGE_CONTENT.heroPoints.map((point) => (
               <li className="flex items-center gap-2" key={point}>
-                <AppIcon name="apps" className="size-4 text-[#59ecb0]" />
+                <AppIcon name="apps" className="size-4 text-accent" />
                 {point}
               </li>
             ))}
@@ -48,16 +48,16 @@ export const ProjectsPageContent = () => (
         <ProjectCard {...PROJECTS_PAGE_CONTENT.featuredCard} />
         <ComingSoonProject />
       </div>
-      <div className="mt-5 flex flex-col gap-4 rounded-[18px] border border-[#176746] bg-[#071713]/90 p-5 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-5 flex flex-col gap-4 rounded-[18px] border border-panel-border bg-[#071713]/90 p-5 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h3 className="flex items-center gap-2 text-[17px] font-bold">
-            <AppIcon name="performance" className="size-[18px] text-[#59ecb0]" />
+            <AppIcon name="performance" className="size-[18px] text-accent" />
             {PROJECTS_PAGE_CONTENT.footerCta.title}
           </h3>
           <p className="mt-1 text-[13px] text-[#aebdb6]">{PROJECTS_PAGE_CONTENT.footerCta.copy}</p>
         </div>
         <a
-          className="rounded-full border border-[#45dba4] px-5 py-3 text-[12px] font-semibold text-[#59ecb0]"
+          className="rounded-full border border-[#45dba4] px-5 py-3 text-[12px] font-semibold text-accent"
           href={ROUTES.articles}
         >
           {PROJECTS_PAGE_CONTENT.footerCta.linkLabel} <AppIcon name="arrow-right" className="size-4" />

@@ -16,4 +16,23 @@ describe('ResumeSkills', () => {
     expect(screen.queryByText('React')).not.toBeInTheDocument();
     expect(screen.getByRole('tab', { name: 'Backend' })).toHaveAttribute('aria-selected', 'true');
   });
+
+  it('supports keyboard navigation across skill tabs', () => {
+    render(<ResumeSkills />);
+    const frontend = screen.getByRole('tab', { name: 'Frontend' });
+    frontend.focus();
+
+    fireEvent.keyDown(frontend, { key: 'ArrowRight' });
+    expect(screen.getByRole('tab', { name: 'Backend' })).toHaveFocus();
+    expect(screen.getByText('Node.js')).toBeInTheDocument();
+
+    fireEvent.keyDown(screen.getByRole('tab', { name: 'Backend' }), { key: 'End' });
+    expect(screen.getByRole('tab', { name: 'Others' })).toHaveFocus();
+
+    fireEvent.keyDown(screen.getByRole('tab', { name: 'Others' }), { key: 'Home' });
+    expect(frontend).toHaveFocus();
+
+    fireEvent.keyDown(frontend, { key: 'ArrowLeft' });
+    expect(screen.getByRole('tab', { name: 'Others' })).toHaveFocus();
+  });
 });

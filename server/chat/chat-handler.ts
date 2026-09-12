@@ -3,15 +3,32 @@ import { NextResponse } from 'next/server';
 import { chatbotInstructions } from '@/constants/chatbot';
 
 import { aiResponse } from './chat-response';
+import {
+  enforceChatRateLimit,
+  readChatRequestBody,
+  rejectCrossOriginChatRequest,
+  rejectOversizedChatRequest,
+} from './chat-security';
 import { CHALLENGE_TTL_MS, createStateToken, PRIVATE_TTL_MS, readStateToken } from './chat-state';
 import { getChatTriggers, normalizeChatValue, validateChatRequestBody } from './chat-validation';
 
 export const handleChatRequest = async (request: Request) => {
+  const crossOriginResponse = rejectCrossOriginChatRequest(request);
+  if (crossOriginResponse) return crossOriginResponse;
+
+  const oversizedResponse = rejectOversizedChatRequest(request);
+  if (oversizedResponse) return oversizedResponse;
+
+  const rateLimitResponse = enforceChatRateLimit(request);
+  if (rateLimitResponse) return rateLimitResponse;
+
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) return NextResponse.json({ error: 'The portfolio assistant is not configured yet.' }, { status: 503 });
 
-  const body: unknown = await request.json().catch(() => null);
-  const validation = validateChatRequestBody(body);
+  const bodyRead = await readChatRequestBody(request);
+  if (!bodyRead.ok) return bodyRead.response;
+
+  const validation = validateChatRequestBody(bodyRead.body);
   if (!validation.valid) return NextResponse.json({ error: validation.error }, { status: validation.status });
 
   const { message, stateToken } = validation.value;

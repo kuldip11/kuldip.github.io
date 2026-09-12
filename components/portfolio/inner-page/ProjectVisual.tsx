@@ -21,7 +21,7 @@ export const ProjectVisual = ({ variant, compact = false }: { variant: ProjectVi
         </div>
         <div className="absolute top-4 right-4 rounded-xl border border-[#2c7e60] bg-[#09221a]/95 px-3 py-2">
           <span className="block text-[11px] text-[#b6c9c0]">Performance</span>
-          <strong className="text-[18px] text-[#59ecb0]">60 FPS</strong>
+          <strong className="text-[18px] text-accent">60 FPS</strong>
         </div>
       </div>
     );

@@ -7,7 +7,7 @@ export const ResumeNavigation = () => (
   >
     {RESUME_NAVIGATION.map((item, index) => (
       <a
-        className={`px-4 py-3 ${index === 0 ? 'border border-[#59ecb0] text-[#59ecb0]' : ''}`}
+        className={`px-4 py-3 ${index === 0 ? 'border border-accent text-accent' : ''}`}
         href={`#${item.toLowerCase()}`}
         key={item}
       >

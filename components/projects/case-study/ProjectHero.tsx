@@ -12,7 +12,7 @@ export const ProjectHero = ({ project }: { project: ProjectDefinition }) => {
   return (
     <section className="mt-6 grid gap-7 lg:grid-cols-[.82fr_1.18fr] lg:items-center">
       <div>
-        <span className="rounded-full border border-[#42dca2] px-3 py-1.5 text-[11px] text-[#59ecb0]">
+        <span className="rounded-full border border-[#42dca2] px-3 py-1.5 text-[11px] text-accent">
           {PROJECT_DETAIL_CONTENT.featuredLabel}
         </span>
         <h1
@@ -20,7 +20,7 @@ export const ProjectHero = ({ project }: { project: ProjectDefinition }) => {
           className="mt-4 text-[clamp(2.45rem,5vw,4.8rem)] leading-[.96] font-bold tracking-[-.055em]"
         >
           <>
-            <span className="text-[#59ecb0]">{caseStudy.heroAccent}</span>
+            <span className="text-accent">{caseStudy.heroAccent}</span>
             {firstLineRemainder}
             <br />
             {caseStudy.heroLines[1]}

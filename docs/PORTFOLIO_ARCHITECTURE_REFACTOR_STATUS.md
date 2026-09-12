@@ -30,6 +30,27 @@
 
 **All implementation/refactor tasks are complete. The only open items are browser-based baseline/E2E/visual verification, which are blocked by the execution environment's Chromium policy (`ERR_BLOCKED_BY_ADMINISTRATOR` for localhost).**
 
+## Independent Application Review Follow-up
+
+The subsequent application-wide review was also implemented. These items extend the original structural refactor while preserving the established visual design and public behavior, except where stale/unintended project definitions were explicitly removed.
+
+| ID      | Task                                                                                                    | Status      | Verification / Notes                                                                                                                                                                                 |
+| ------- | ------------------------------------------------------------------------------------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| APP-001 | Move shared portfolio Header/Footer/skip-link chrome into an App Router route-group layout              | `COMPLETED` | `(portfolio)/layout.tsx` owns the shared shell; public URLs are unchanged; focused layout test passes                                                                                                |
+| APP-002 | Remove stale non-Servora project definitions while retaining generic data-driven `[slug]` routing       | `COMPLETED` | Production build generates only `/projects/servora`; project domain/route/sitemap tests pass                                                                                                         |
+| APP-003 | Remove superseded legacy homepage components/tests/constants                                            | `COMPLETED` | Dead presentation branch removed; live-code test suite re-measured                                                                                                                                   |
+| APP-004 | Decompose the remaining large landing showcase into meaningful section components                       | `COMPLETED` | `LandingShowcase` is orchestration-only; existing classes/content retained                                                                                                                           |
+| APP-005 | Complete keyboard/focus accessibility for mobile navigation, résumé tabs, assistant and skip navigation | `COMPLETED` | Header, résumé and assistant focused tests pass; browser E2E remains environment-blocked                                                                                                             |
+| APP-006 | Centralize repeated static-page metadata creation                                                       | `COMPLETED` | Shared metadata helper is used; metadata consistency tests pass                                                                                                                                      |
+| APP-007 | Introduce semantic design tokens and named responsive breakpoints without changing rendered values      | `COMPLETED` | Tokens defined in `globals.css`; typecheck/lint/format/build pass                                                                                                                                    |
+| APP-008 | Vendor existing My Tech Stack Simple Icons locally                                                      | `COMPLETED` | Runtime `cdn.simpleicons.org` dependency removed; visual icon artwork remains the same                                                                                                               |
+| APP-009 | Harden `/api/chat` for production abuse/failure scenarios                                               | `COMPLETED` | 8 KiB streaming body cap, same-origin enforcement, process-local rate limit, strict validation, 10 s timeout, signed state and sanitized failures; chat route tests pass                             |
+| APP-010 | Remove populated environment secrets from deliverables and provide `.env.example`                       | `COMPLETED` | Only empty `.env.example` is present; README documents credential rotation requirement                                                                                                               |
+| APP-011 | Improve tests/coverage around live route, chat, layout, navigation and accessibility behavior           | `COMPLETED` | 31 test files / 62 tests pass; current coverage: 93.03% statements, 80.93% branches, 94.81% functions, 95.14% lines                                                                                  |
+| APP-012 | Evaluate raster asset optimization without visual degradation                                           | `COMPLETED` | Lossless recompression of hero/OG PNGs produced no size reduction with available encoders, so original pixel-identical sources were retained; Next Image continues to optimize runtime hero delivery |
+
+> Security follow-up outside source control: credentials that appeared in an earlier distributed archive must be rotated in their provider dashboards. Source cleanup cannot revoke already-exposed credentials.
+
 ---
 
 # Detailed Tracker
@@ -142,9 +163,10 @@ The stale tests were corrected to assert the already-existing application behavi
 - `npm run typecheck`: **PASS**.
 - `npm run lint`: **PASS**.
 - `npm run format:check`: **PASS**.
-- `npm run test`: **PASS — 40 files, 59 tests**.
-- `NEXT_PUBLIC_SITE_URL=https://example.com npm run build`: **PASS**; all expected routes are generated, including 2 article slugs and 3 project slugs.
-- `npm run test:e2e`: **BLOCKED BY EXECUTION ENVIRONMENT**. A Bun-compatible verification shim was used only because Bun is absent; Playwright launches system Chromium, but Chromium refuses `http://localhost:3000/` with `net::ERR_BLOCKED_BY_ADMINISTRATOR`. `curl` to the same running Next.js server returns HTTP 200, confirming the app server itself is healthy.
+- `npm run test`: **PASS — 31 files, 62 tests**.
+- `npm run test:coverage`: **PASS — 93.03% statements, 80.93% branches, 94.81% functions, 95.14% lines**.
+- `NEXT_PUBLIC_SITE_URL=https://example.com npm run build`: **PASS**; all expected routes are generated, including 2 article slugs and exactly 1 public project slug (`servora`).
+- `npm run test:e2e`: **BLOCKED BY EXECUTION ENVIRONMENT**. A temporary Bun-compatible verification shim was used only because Bun is absent; Playwright successfully launches system Chromium and the Next.js server, but Chromium refuses `http://localhost:3000/` with `net::ERR_BLOCKED_BY_ADMINISTRATOR` (the browser displays “Your organization doesn’t allow you to view this site”). This is a sandbox browser policy, not an application assertion failure.
 - Desktop/tablet/mobile screenshot comparison: **BLOCKED BY THE SAME CHROMIUM LOCALHOST POLICY**. Source-to-source regression checks, unit/component tests, route/build output and preserved Tailwind class/markup checks were used as the available non-browser safeguards.
 
 ### Genuine remaining blockers

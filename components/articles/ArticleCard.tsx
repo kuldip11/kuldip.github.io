@@ -8,11 +8,11 @@ import type { ArticleCardDefinition } from '@/types/article.types';
 
 export const ArticleCard = ({ article, index }: { article: ArticleCardDefinition; index: number }) => (
   <article className={`${INNER_PAGE_PANEL_CLASS} overflow-hidden`}>
-    <div className="relative grid min-h-[150px] place-items-center border-b border-[#176746] bg-[#081914]">
+    <div className="relative grid min-h-[150px] place-items-center border-b border-panel-border bg-[#081914]">
       <span className="grid size-14 place-items-center text-[#42dfab]">
         <GlyphIcon glyph={article.glyph} className="size-12" />
       </span>
-      <span className="absolute top-4 right-4 rounded-full border border-[#27775a] px-3 py-1 text-[10px] text-[#59ecb0]">
+      <span className="absolute top-4 right-4 rounded-full border border-[#27775a] px-3 py-1 text-[10px] text-accent">
         {article.kind}
       </span>
     </div>
@@ -30,7 +30,7 @@ export const ArticleCard = ({ article, index }: { article: ArticleCardDefinition
         <span className="rounded-full border border-[#27775a] px-2.5 py-1 text-[10px]">{article.kind}</span>
         <span className="rounded-full border border-[#27775a] px-2.5 py-1 text-[10px]">Frontend</span>
       </div>
-      <Link className="mt-5 inline-flex text-[13px] font-semibold text-[#59ecb0]" href={ROUTES.article(article.slug)}>
+      <Link className="mt-5 inline-flex text-[13px] font-semibold text-accent" href={ROUTES.article(article.slug)}>
         Read Article <AppIcon name="arrow-right" className="size-4" />
       </Link>
     </div>

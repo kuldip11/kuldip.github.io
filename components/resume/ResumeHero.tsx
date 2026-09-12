@@ -9,7 +9,7 @@ export const ResumeHero = () => (
     <div>
       <Eyebrow># Professional Resume</Eyebrow>
       <h1 className="mt-4 text-[clamp(2.8rem,5vw,4.8rem)] leading-[.98] font-bold tracking-[-.055em]">
-        <span className="text-[#59ecb0]">Experience</span>
+        <span className="text-accent">Experience</span>
         <br />
         Skills. Real Impact.
       </h1>
@@ -26,7 +26,7 @@ export const ResumeHero = () => (
     </div>
     <div className={`${INNER_PAGE_PANEL_CLASS} p-5 sm:p-6`}>
       <div className="grid gap-5 sm:grid-cols-[100px_1fr_auto] sm:items-center">
-        <div className="grid size-24 place-items-center overflow-hidden rounded-full border border-[#48e9ae]">
+        <div className="grid size-24 place-items-center overflow-hidden rounded-full border border-[#48e9ae] text-[28px]">
           <Image
             src="/kuldip.jpg"
             alt="Kuldip Kumar Sah"
@@ -39,35 +39,35 @@ export const ResumeHero = () => (
         </div>
         <div>
           <h2 className="text-[24px] font-bold">Kuldip Kumar Sah</h2>
-          <p className="text-[#59ecb0]">Senior Frontend Engineer</p>
+          <p className="text-accent">Senior Frontend Engineer</p>
           <div className="mt-4 space-y-2 text-[12px] text-[#b5c4bd]">
             <div className="flex items-center gap-2">
-              <AppIcon name="apps" className="size-3.5 text-[#59ecb0]" />
+              <AppIcon name="apps" className="size-3.5 text-accent" />
               India
             </div>
             <div className="flex items-center gap-2">
-              <AppIcon name="mail" className="size-3.5 text-[#59ecb0]" />
+              <AppIcon name="mail" className="size-3.5 text-accent" />
               {siteConfig.email}
             </div>
             <div className="flex items-center gap-2">
-              <AppIcon name="arrow-up-right" className="size-3.5 text-[#59ecb0]" />
+              <AppIcon name="arrow-up-right" className="size-3.5 text-accent" />
               linkedin.com/in/kuldip-kumar-sah
             </div>
           </div>
         </div>
         <div className="rounded-xl border border-[#245b45] bg-[#092219] p-4 text-[12px]">
-          <strong className="text-[#59ecb0]">Open to opportunities</strong>
+          <strong className="text-accent">Open to opportunities</strong>
           <div className="mt-3 space-y-2 text-[#c3d0ca]">
             <div className="flex items-center gap-2">
-              <AppIcon name="briefcase" className="size-3.5 text-[#59ecb0]" />
+              <AppIcon name="briefcase" className="size-3.5 text-accent" />
               Full-time
             </div>
             <div className="flex items-center gap-2">
-              <AppIcon name="apps" className="size-3.5 text-[#59ecb0]" />
+              <AppIcon name="apps" className="size-3.5 text-accent" />
               Remote / Hybrid
             </div>
             <div className="flex items-center gap-2">
-              <AppIcon name="apps" className="size-3.5 text-[#59ecb0]" />
+              <AppIcon name="apps" className="size-3.5 text-accent" />
               Relocation OK
             </div>
           </div>

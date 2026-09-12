@@ -51,7 +51,7 @@ export const seoCopy = {
   projects: {
     title: 'Frontend Engineering Case Studies',
     description:
-      'Selected frontend engineering case studies covering multi-tenant product architecture, Mapbox performance and enterprise workflow design.',
+      'Selected frontend engineering case studies covering multi-tenant product architecture, restaurant operations and production-focused frontend engineering.',
   },
   articles: {
     title: 'Frontend Engineering Articles',

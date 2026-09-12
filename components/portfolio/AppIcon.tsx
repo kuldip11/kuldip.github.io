@@ -18,6 +18,7 @@ export type AppIconName =
   | 'mail'
   | 'performance'
   | 'plus'
+  | 'refresh'
   | 'summary'
   | 'testing';
 
@@ -106,6 +107,12 @@ export const AppIcon = ({ name, className = 'size-4', strokeWidth = 1.8 }: AppIc
       </>
     ),
     plus: <path d="M12 5v14M5 12h14" />,
+    refresh: (
+      <>
+        <path d="M20 6v5h-5" />
+        <path d="M19 11a7 7 0 1 0 .2 3" />
+      </>
+    ),
     summary: (
       <>
         <rect x="4" y="3" width="16" height="18" rx="2" />

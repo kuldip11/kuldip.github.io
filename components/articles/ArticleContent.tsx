@@ -1,8 +1,6 @@
 import Link from 'next/link';
 
 import { AppIcon } from '@/components/portfolio/AppIcon';
-import { Footer } from '@/components/portfolio/Footer';
-import { Header } from '@/components/portfolio/Header';
 import { ARTICLE_DETAIL_BACK_LABEL } from '@/constants/pages/article-details.constants';
 import { ROUTES } from '@/constants/routes';
 import { siteConfig } from '@/constants/site';
@@ -34,14 +32,16 @@ export const ArticleContent = ({ article }: { article: ArticleDefinition }) => {
   };
 
   return (
-    <main className="min-h-screen bg-[#07110f] text-[#f2f4ee]">
+    <main id="main-content" className="min-h-screen bg-page text-text-primary">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
       />
-      <Header />
-      <article className="mx-auto max-w-[880px] px-12 py-24 max-[650px]:px-5">
-        <Link className="inline-flex items-center gap-2 font-mono text-[11px] text-[#71f6b5]" href={ROUTES.articles}>
+      <article className="mx-auto max-w-[880px] px-12 py-24 max-phone:px-5">
+        <Link
+          className="inline-flex items-center gap-2 font-mono text-[11px] text-accent-bright"
+          href={ROUTES.articles}
+        >
           <AppIcon name="arrow-left" className="size-4" />
           {ARTICLE_DETAIL_BACK_LABEL}
         </Link>
@@ -57,14 +57,13 @@ export const ArticleContent = ({ article }: { article: ArticleDefinition }) => {
         <p className="mt-8 text-xl leading-9 text-[#9cafa6]">{article.description}</p>
         <div className="mt-20">
           {article.sections.map(([title, copy]) => (
-            <section className="border-t border-[#20362f] py-10" key={title}>
+            <section className="border-t border-muted-border py-10" key={title}>
               <h2 className="text-3xl font-medium tracking-[-.04em]">{title}</h2>
               <p className="mt-5 text-lg leading-8 text-[#aebdb6]">{copy}</p>
             </section>
           ))}
         </div>
       </article>
-      <Footer />
     </main>
   );
 };

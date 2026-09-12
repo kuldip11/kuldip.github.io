@@ -7,7 +7,7 @@ export const ProjectNavigation = ({ items }: { items: readonly string[] }) => (
   >
     {items.map((item, index) => (
       <a
-        className={index === 0 ? 'border-b border-[#59ecb0] pb-2 text-[#59ecb0]' : ''}
+        className={index === 0 ? 'border-b border-accent pb-2 text-accent' : ''}
         href={index === 0 ? '#overview' : '#details'}
         key={item}
       >

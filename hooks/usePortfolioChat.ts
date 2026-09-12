@@ -20,6 +20,7 @@ export const usePortfolioChat = () => {
   const endRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
+  const launcherRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!open) return;
@@ -33,9 +34,24 @@ export const usePortfolioChat = () => {
 
   useEffect(() => {
     if (!open) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setOpen(false);
+        queueMicrotask(() => launcherRef.current?.focus());
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
 
     const handlePointerDown = (event: PointerEvent) => {
-      if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
+      if (!rootRef.current?.contains(event.target as Node)) {
+        setOpen(false);
+        queueMicrotask(() => launcherRef.current?.focus());
+      }
     };
 
     document.addEventListener('pointerdown', handlePointerDown);
@@ -90,8 +106,12 @@ export const usePortfolioChat = () => {
     rootRef,
     endRef,
     inputRef,
+    launcherRef,
     setInput,
-    close: () => setOpen(false),
+    close: () => {
+      setOpen(false);
+      queueMicrotask(() => launcherRef.current?.focus());
+    },
     toggleOpen: () => setOpen((current) => !current),
     sendMessage,
     handleSubmit,

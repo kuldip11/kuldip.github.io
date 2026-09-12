@@ -2,8 +2,8 @@ import { readFileSync } from 'node:fs';
 
 import { describe, expect, it } from 'vitest';
 
-const projectRouteSource = readFileSync('app/projects/[slug]/page.tsx', 'utf8');
-const projectShowcaseSource = readFileSync('components/portfolio/Projects.tsx', 'utf8');
+const projectRouteSource = readFileSync('app/(portfolio)/projects/[slug]/page.tsx', 'utf8');
+const projectShowcaseSource = readFileSync('components/projects/ProjectsPageContent.tsx', 'utf8');
 
 describe('project route architecture', () => {
   it('keeps generic project rendering free of project-specific slug equality branches', () => {
