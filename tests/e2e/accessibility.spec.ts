@@ -83,7 +83,7 @@ test.describe('Accessibility basics', () => {
 
     await page.keyboard.press('Shift+Tab');
     const activeElementWithinDrawer = await page.evaluate(() => {
-      const drawerElement = document.querySelector('nav[aria-label="Mobile main navigation"]');
+      const drawerElement = document.querySelector('#mobile-navigation-drawer');
       return Boolean(drawerElement?.contains(document.activeElement));
     });
     expect(activeElementWithinDrawer).toBeTruthy();
