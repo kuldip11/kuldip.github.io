@@ -21,8 +21,11 @@
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:report": "playwright show-report",
     "typecheck": "tsc --noEmit",
-    "verify": "bun run typecheck && bun run lint && bun run format:check && bun run test && bun run build",
-    "audit": "bun audit"
+    "verify": "bun run typecheck && bun run lint && bun run format:check && bun run check:colors && bun run check:content && bun run test && bun run build",
+    "audit": "bun audit",
+    "check:colors": "node scripts/check-colors.mjs",
+    "check:content": "node scripts/check-content.mjs",
+    "verify:full": "bun run typecheck && bun run lint && bun run format:check && bun run check:colors && bun run check:content && bun run test:coverage && bun run build && bun run test:e2e"
   },
   "dependencies": {
     "next": "16.3.4",

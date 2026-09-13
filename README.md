@@ -1,104 +1,106 @@
 # Kuldip Kumar Sah — Portfolio
 
-Personal portfolio of **Kuldip Kumar Sah**, Senior Frontend Engineer focused on React, Next.js, TypeScript, frontend architecture, performance, testing, accessibility, and product-quality user experiences.
+Next.js 16 + React 19 + TypeScript portfolio for **Kuldip Kumar Sah**, Senior Frontend Engineer focused on frontend architecture, scalable product systems, performance, accessibility, testing, and product-quality user experiences.
 
-The portfolio showcases real projects, engineering case studies, technical articles, and selected experience across frontend and full-stack product development.
+The portfolio uses a restrained editorial design system and includes project case studies, engineering articles, résumé content, professional light/dark themes, and a server-backed portfolio assistant.
 
-## Live Portfolio
+## Highlights
 
-[Visit Portfolio](YOUR_PORTFOLIO_URL)
+- Responsive desktop, tablet, and mobile layouts
+- Semantic design tokens with professional light and dark themes
+- Data-driven homepage, résumé, project, article, navigation, footer, and chat content
+- Generic project/article slug routes with static params and metadata
+- Detailed Servora and TallyLite engineering case studies
+- Accessible keyboard navigation, skip link, mobile focus management, and reduced-motion support
+- SEO metadata, sitemap, canonical URLs, OpenGraph/Twitter metadata, and structured data
+- Server-side chat validation, origin protection, state signing, and rate limiting
+- Hardcoded-color and hardcoded-content regression guards
+- Vitest component/unit coverage and Playwright E2E coverage
 
-## About Me
-
-I’m a Senior Frontend Engineer with 5+ years of experience building scalable web applications and product interfaces.
-
-My core areas of work include:
-
-- React and Next.js
-- TypeScript
-- Frontend architecture
-- Performance optimization
-- Accessibility
-- Testing and CI/CD
-- API and backend integration
-- Product-focused engineering
-
-## Featured Projects
+## Featured Work
 
 ### Servora
 
-Servora is my flagship project — a multi-application restaurant platform covering:
-
-- Admin / POS
-- Kitchen display
-- Waiter workflows
-- Customer ordering
-- Multi-tenant business management
-- Role-based access control
-- Server-authoritative pricing
-- Realtime operational updates
-- Shared contracts across applications
-
-The portfolio includes a detailed architecture and engineering case study.
+Servora is the flagship project: a multi-application restaurant platform spanning Admin/POS, Kitchen, Waiter, Customer, Website, shared packages, and a server-authoritative API. The case study covers multi-tenancy, pricing/availability authority, realtime behavior, permissions, shared contracts, testing, and operational architecture.
 
 ### TallyLite
 
-TallyLite is a lightweight business application designed around Google Sheets as a user-owned datastore.
+TallyLite is a lightweight business application built around Google Sheets as a user-owned datastore. Its case study covers inventory, invoicing, payments, GST handling, imports/exports, backup/recovery, and repository-driven persistence architecture.
 
-It includes:
+## Main Stack
 
-- Inventory
-- Invoicing
-- Payments
-- GST handling
-- Imports / exports
-- Backup and recovery
-- Repository-driven persistence architecture
-
-Live app: https://tallylite.netlify.app/
-
-## Engineering Articles
-
-The portfolio includes engineering articles based on real problems solved while building Servora and TallyLite, including:
-
-- React monorepo boundaries
-- Server-authoritative business rules
-- Google Sheets as a datastore
-- Money and GST modeling in TypeScript
-- Testing architectural seams
-
-## Tech Stack
-
-- Next.js
-- React
+- Next.js 16
+- React 19
 - TypeScript
-- Tailwind CSS
+- Tailwind CSS 4
 - Bun
 - Vitest
 - Playwright
 - Node.js
-- PostgreSQL
-- Git / GitHub
-- Vercel
-- Netlify
-
-## Portfolio Features
-
-- Responsive desktop, tablet and mobile UI
-- Data-driven project and article routes
-- Accessible keyboard navigation
-- SEO metadata, sitemap and structured data
-- Interactive résumé skill sections
-- Portfolio assistant
-- Animated technical article diagrams
-- Project architecture case studies
-- Server-side chat security and validation
 
 ## Run Locally
 
+The repository is Bun-first.
+
 ```bash
 bun install
-
 cp .env.example .env.local
-
 bun run dev
+```
+
+A production build requires a canonical site URL:
+
+```bash
+NEXT_PUBLIC_SITE_URL=https://your-domain.example bun run build
+bun run start
+```
+
+## Quality Commands
+
+```bash
+bun run typecheck
+bun run lint
+bun run format:check
+bun run check:colors
+bun run check:content
+bun run test
+bun run test:coverage
+bun run build
+bun run test:e2e
+```
+
+The standard verification command runs the main non-browser release checks:
+
+```bash
+bun run verify
+```
+
+For the complete release gate, including coverage and Playwright:
+
+```bash
+bun run verify:full
+```
+
+`check:colors` prevents raw presentation colors from drifting back into application TS/TSX. `check:content` prevents user-facing portfolio copy and accessibility/presentation labels from being hardcoded directly in TSX instead of the typed constants/data layer.
+
+## Environment
+
+Copy `.env.example` to `.env.local` and provide only the values needed for the features you are running. `NEXT_PUBLIC_SITE_URL` is required for production builds so canonical URLs and social metadata are correct.
+
+The portfolio assistant also uses server-side environment variables for provider access, signed challenge state, optional private-mode behavior, and optional shared Redis rate limiting. Do not expose server secrets through `NEXT_PUBLIC_*` variables.
+
+## Architecture
+
+The application keeps content and presentation intentionally separate:
+
+- `app/` — Next.js routes and metadata entry points
+- `components/` — structural, feature, and reusable UI components
+- `constants/data/` — projects, articles, experience, skills, social/profile data
+- `constants/pages/` — page-specific presentation copy/configuration
+- `constants/ui/` — accessibility, system-page, and theme constants
+- `lib/` — route/data/SEO helpers
+- `server/` — portfolio assistant server/security logic
+- `tests/` — unit/component and Playwright E2E coverage
+- `docs/` — architecture/refactor history and the UI redesign plan/status tracker
+
+See [`docs/PORTFOLIO_UI_REDESIGN_PLAN.md`](./docs/PORTFOLIO_UI_REDESIGN_PLAN.md) for the redesign specification and [`docs/PORTFOLIO_UI_REDESIGN_STATUS.md`](./docs/PORTFOLIO_UI_REDESIGN_STATUS.md) for the implementation tracker.

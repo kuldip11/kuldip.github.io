@@ -1,7 +1,12 @@
 import { chatbotConfig } from '@/constants/chatbot';
 import type { GeminiInteractionResponse } from '@/types/chat.types';
 
-export const askGemini = async (apiKey: string, message: string, systemInstruction: string) => {
+export const askGemini = async (
+  apiKey: string,
+  message: string,
+  systemInstruction: string,
+  storeInteraction = true,
+) => {
   const response = await fetch('https://generativelanguage.googleapis.com/v1beta/interactions', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
@@ -10,7 +15,7 @@ export const askGemini = async (apiKey: string, message: string, systemInstructi
       model: chatbotConfig.model,
       input: message,
       system_instruction: systemInstruction,
-      store: true,
+      store: storeInteraction,
       generation_config: { max_output_tokens: 420 },
     }),
   });

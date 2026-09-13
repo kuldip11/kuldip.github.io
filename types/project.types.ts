@@ -1,9 +1,20 @@
 export type ProjectVisualVariant = 'servora' | 'tallylite' | 'other';
 export type ProjectMockVariant = 'saas' | 'fintech';
 
-export type ProjectMetric = readonly [value: string, label: string, icon: string];
-export type ProjectFeature = readonly [title: string, description: string];
-export type ProjectHighlight = readonly [title: string, description: string, icon: string];
+export type ProjectMetric = {
+  readonly value: string;
+  readonly label: string;
+  readonly icon: string;
+};
+export type ProjectFeature = {
+  readonly title: string;
+  readonly description: string;
+};
+export type ProjectHighlight = {
+  readonly title: string;
+  readonly description: string;
+  readonly icon: string;
+};
 export type ProjectSection = {
   readonly id: string;
   readonly eyebrow?: string;
@@ -19,6 +30,20 @@ export type ProjectLink = {
 export type ProjectArchitectureNode = {
   readonly label: string;
   readonly detail: string;
+};
+export type ProjectContextBlock = {
+  readonly eyebrow: string;
+  readonly title: string;
+  readonly copy: string;
+  readonly points?: readonly string[];
+};
+export type ProjectEcosystemDefinition = {
+  readonly eyebrow: string;
+  readonly title: string;
+  readonly copy: string;
+  readonly hubLabel: string;
+  readonly hubDetail: string;
+  readonly nodes: readonly ProjectArchitectureNode[];
 };
 export type ProjectDecision = {
   readonly title: string;
@@ -47,6 +72,8 @@ export type ProjectCaseStudyDefinition = {
   readonly metrics: readonly ProjectMetric[];
   readonly navigation: readonly { readonly label: string; readonly href: string }[];
   readonly overviewItems: readonly ProjectFeature[];
+  readonly context?: ProjectContextBlock;
+  readonly ecosystem?: ProjectEcosystemDefinition;
   readonly highlights: readonly ProjectHighlight[];
   readonly architectureTitle: string;
   readonly architectureCopy: string;

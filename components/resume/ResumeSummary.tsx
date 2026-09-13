@@ -1,21 +1,18 @@
-import { AppIcon } from '@/components/portfolio/AppIcon';
-import { RESUME_TRAITS } from '@/constants/pages/resume.constants';
-import { INNER_PAGE_PANEL_CLASS } from '@/constants/styles/component-styles.constants';
+import { RESUME_PAGE_CONTENT, RESUME_TRAITS } from '@/constants/pages/resume.constants';
 
 export const ResumeSummary = () => (
-  <section className={`${INNER_PAGE_PANEL_CLASS} p-5`} id="overview">
-    <h2 className="flex items-center gap-2 text-[20px] font-bold">
-      <AppIcon name="summary" className="size-5 text-accent" />
-      Professional Summary
-    </h2>
-    <p className="mt-4 text-[14px] leading-[1.65] text-[#b5c4bd]">
-      Results-driven Senior Frontend Engineer with 5+ years of experience building modern web applications using React,
-      Next.js, TypeScript and cloud technologies. I enjoy solving real-world problems and building scalable,
-      user-focused products.
+  <section className="scroll-mt-32 border-b border-border pb-10" id="overview">
+    <p className="text-[12px] font-bold tracking-[.14em] text-primary uppercase">
+      {RESUME_PAGE_CONTENT.sections.summaryEyebrow}
     </p>
-    <div className="mt-5 flex flex-wrap gap-2">
+    <h2 className="mt-3 text-[30px] font-semibold tracking-[-.04em]">{RESUME_PAGE_CONTENT.sections.summaryTitle}</h2>
+    <p className="mt-5 max-w-[760px] text-[16px] leading-8 text-foreground-secondary">{RESUME_PAGE_CONTENT.summary}</p>
+    <div className="mt-6 flex flex-wrap gap-2">
       {RESUME_TRAITS.map((trait) => (
-        <span className="rounded-full border border-[#27775a] px-3 py-1.5 text-[11px] text-accent" key={trait}>
+        <span
+          className="rounded-full border border-border bg-surface px-3 py-1.5 text-[12px] text-foreground-secondary"
+          key={trait}
+        >
           {trait}
         </span>
       ))}

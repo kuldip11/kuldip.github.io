@@ -1,39 +1,50 @@
+export const RESUME_PAGE_CONTENT = {
+  eyebrow: 'Professional profile',
+  title: 'Senior frontend engineering across product, architecture and delivery.',
+  intro:
+    'I build scalable React and TypeScript products, design maintainable frontend systems and stay close to the details that shape performance, accessibility and user experience.',
+  summary:
+    'Results-driven Senior Frontend Engineer with 5+ years of experience building modern web applications using React, Next.js and TypeScript. I enjoy solving product problems that require clear architecture, reusable systems and close collaboration across design, backend and product teams.',
+  beyondWork:
+    'I enjoy exploring new technologies, writing technical notes and building side projects that turn architectural ideas into working products.',
+  education: {
+    degree: "Bachelor's Degree",
+    detail: 'Electronics & Instrumentation · India',
+  },
+  certifications: ['AWS / Cloud Fundamentals', 'Frontend Engineering', 'JavaScript & Algorithms'],
+  availability: ['Full-time', 'Remote / Hybrid', 'Relocation OK'],
+  availabilityLabel: 'Open to opportunities',
+  metricsLabel: 'Career highlights',
+  actions: {
+    downloadLabel: 'Download PDF',
+    linkedinLabel: 'LinkedIn',
+    contactLabel: "Let's connect",
+  },
+  sections: {
+    summaryEyebrow: 'Overview',
+    summaryTitle: 'Professional summary',
+    highlightsEyebrow: 'Selected impact',
+    highlightsTitle: 'What I bring to a product team',
+    experienceEyebrow: 'Experience',
+    experienceTitle: 'Career timeline',
+    currentLabel: 'Current',
+    skillsEyebrow: 'Technical expertise',
+    skillsTitle: 'Tools I use to ship products',
+    skillTabsLabel: 'Core skill categories',
+    educationLabel: 'Education',
+    certificationsLabel: 'Certifications',
+    selectedProjectEyebrow: 'Selected project',
+    beyondEyebrow: 'Beyond the résumé',
+    beyondTitle: 'I keep learning by building.',
+  },
+} as const;
+
 export const RESUME_SKILLS = {
-  Frontend: [
-    ['React', '95%'],
-    ['Next.js', '90%'],
-    ['TypeScript', '90%'],
-    ['JavaScript', '95%'],
-    ['Tailwind CSS', '88%'],
-  ],
-  Backend: [
-    ['Node.js', '82%'],
-    ['Bun', '82%'],
-    ['Elysia.js', '78%'],
-    ['REST APIs', '88%'],
-    ['Backend Integration', '90%'],
-  ],
-  'Tools & DevOps': [
-    ['Git & GitHub', '92%'],
-    ['Docker', '80%'],
-    ['CI/CD', '86%'],
-    ['Vercel', '90%'],
-    ['Vitest & Playwright', '88%'],
-  ],
-  Databases: [
-    ['PostgreSQL', '84%'],
-    ['Redis', '76%'],
-    ['Drizzle ORM', '82%'],
-    ['SQL & Data Modeling', '82%'],
-    ['Multi-tenant Data Design', '85%'],
-  ],
-  Others: [
-    ['Frontend Architecture', '92%'],
-    ['Performance', '90%'],
-    ['Accessibility', '86%'],
-    ['Monorepos', '88%'],
-    ['Cross-functional Collaboration', '92%'],
-  ],
+  Frontend: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'Tailwind CSS'],
+  Backend: ['Node.js', 'Bun', 'Elysia.js', 'REST APIs', 'Backend Integration'],
+  'Tools & DevOps': ['Git & GitHub', 'Docker', 'CI/CD', 'Vercel', 'Vitest & Playwright'],
+  Databases: ['PostgreSQL', 'Redis', 'Drizzle ORM', 'SQL & Data Modeling', 'Multi-tenant Data Design'],
+  Others: ['Frontend Architecture', 'Performance', 'Accessibility', 'Monorepos', 'Cross-functional Collaboration'],
 } as const;
 
 export type ResumeSkillTab = keyof typeof RESUME_SKILLS;
@@ -41,18 +52,23 @@ export type ResumeSkillTab = keyof typeof RESUME_SKILLS;
 export const RESUME_SKILL_TABS = Object.keys(RESUME_SKILLS) as ResumeSkillTab[];
 
 export const RESUME_METRICS = [
-  ['5+', 'Years Experience'],
-  ['20+', 'Projects'],
-  ['5+', 'Teams Collaborated'],
-  ['100%', 'Commitment'],
+  { value: '5+', label: 'Years experience' },
+  { value: '20+', label: 'Projects' },
+  { value: '5+', label: 'Teams collaborated' },
+  { value: '4', label: 'Product domains' },
 ] as const;
 
-export const RESUME_NAVIGATION = ['Overview', 'Experience', 'Skills', 'Education', 'Certifications'] as const;
+export const RESUME_NAVIGATION = [
+  { label: 'Overview', href: '#overview' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Education', href: '#education' },
+] as const;
+
 export const RESUME_TRAITS = ['Problem Solver', 'Team Player', 'Fast Learner', 'Product Mindset'] as const;
 export const RESUME_HIGHLIGHTS = [
-  'Built and shipped real-world products',
-  'SaaS, POS and multi-tenant systems',
-  'Strong focus on performance and UX',
-  'Cross-functional collaboration',
-  'Continuous learning and technical depth',
+  'Built and shipped real-world products across SaaS, fintech, proptech and restaurant operations.',
+  'Designed reusable frontend systems for dense, role-based and multi-surface workflows.',
+  'Strong focus on performance, accessibility, testing and maintainable product architecture.',
+  'Collaborated closely with product, design and backend teams from discovery through delivery.',
 ] as const;

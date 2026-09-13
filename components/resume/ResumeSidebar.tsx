@@ -1,25 +1,22 @@
-import { AppIcon } from '@/components/portfolio/AppIcon';
-import { INNER_PAGE_PANEL_CLASS } from '@/constants/styles/component-styles.constants';
+import { RESUME_PAGE_CONTENT } from '@/constants/pages/resume.constants';
 
 export const ResumeSidebar = () => (
-  <div className="space-y-4">
-    <section className={`${INNER_PAGE_PANEL_CLASS} p-5`} id="education">
-      <h2 className="flex items-center gap-2 text-[18px] font-bold">
-        <AppIcon name="education" className="size-[18px] text-accent" />
-        Education
-      </h2>
-      <p className="mt-4 text-[13px] font-semibold">Bachelor&apos;s Degree</p>
-      <p className="mt-1 text-[11px] text-[#9fb2a9]">Electronics & Instrumentation · India</p>
+  <div className="grid gap-8 sm:grid-cols-2" id="education">
+    <section className="border-t border-border pt-5">
+      <p className="text-[12px] font-bold tracking-[.14em] text-primary uppercase">
+        {RESUME_PAGE_CONTENT.sections.educationLabel}
+      </p>
+      <h2 className="mt-4 text-[19px] font-semibold">{RESUME_PAGE_CONTENT.education.degree}</h2>
+      <p className="mt-2 text-[13px] leading-6 text-foreground-secondary">{RESUME_PAGE_CONTENT.education.detail}</p>
     </section>
-    <section className={`${INNER_PAGE_PANEL_CLASS} p-5`} id="certifications">
-      <h2 className="flex items-center gap-2 text-[18px] font-bold">
-        <AppIcon name="testing" className="size-[18px] text-accent" />
-        Certifications
-      </h2>
-      <ul className="mt-4 space-y-3 text-[12px]">
-        <li>AWS / Cloud Fundamentals</li>
-        <li>Frontend Engineering</li>
-        <li>JavaScript & Algorithms</li>
+    <section className="border-t border-border pt-5">
+      <p className="text-[12px] font-bold tracking-[.14em] text-primary uppercase">
+        {RESUME_PAGE_CONTENT.sections.certificationsLabel}
+      </p>
+      <ul className="mt-4 grid list-none gap-2.5 p-0 text-[13px] text-foreground-secondary">
+        {RESUME_PAGE_CONTENT.certifications.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
       </ul>
     </section>
   </div>

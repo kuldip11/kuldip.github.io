@@ -1,29 +1,29 @@
-import { AppIcon } from '@/components/portfolio/AppIcon';
 import { PROJECT_DETAIL_CONTENT } from '@/constants/pages/projects.constants';
-import { INNER_PAGE_PANEL_CLASS } from '@/constants/styles/component-styles.constants';
 import type { ProjectStackGroup } from '@/types/project.types';
 
 export const ProjectStack = ({ groups }: { groups: readonly ProjectStackGroup[] }) => (
-  <section className={`${INNER_PAGE_PANEL_CLASS} mt-4 p-5 sm:p-6`}>
-    <h2 className="flex items-center gap-2 text-[20px] font-bold">
-      <AppIcon name="code" className="size-5 text-accent" />
+  <section className="py-16 sm:py-20">
+    <p className="text-[12px] font-bold tracking-[.14em] text-secondary uppercase">
       {PROJECT_DETAIL_CONTENT.stackTitle}
+    </p>
+    <h2 className="mt-3 text-[clamp(2rem,3.5vw,3.3rem)] font-semibold tracking-[-.05em] text-foreground">
+      {PROJECT_DETAIL_CONTENT.stackHeading}
     </h2>
-    <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+    <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
       {groups.map((group) => (
-        <div className="rounded-[14px] border border-[#245b45] bg-[#081b16] p-4" key={group.label}>
-          <span className="font-mono text-[9px] tracking-[.12em] text-accent uppercase">{group.label}</span>
-          <div className="mt-3 flex flex-wrap gap-1.5">
+        <article className="rounded-[18px] border border-border bg-surface p-5" key={group.label}>
+          <h3 className="text-[11px] font-bold tracking-[.12em] text-primary uppercase">{group.label}</h3>
+          <ul className="mt-4 flex list-none flex-wrap gap-2 p-0">
             {group.items.map((item) => (
-              <span
-                className="rounded-full border border-[#285a47] bg-[#0a211a] px-2.5 py-1 text-[10px] text-[#cbd7d1]"
+              <li
+                className="rounded-full bg-surface-muted px-3 py-1.5 text-[11px] font-medium text-foreground-secondary"
                 key={item}
               >
                 {item}
-              </span>
+              </li>
             ))}
-          </div>
-        </div>
+          </ul>
+        </article>
       ))}
     </div>
   </section>

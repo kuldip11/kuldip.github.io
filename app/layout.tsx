@@ -1,4 +1,5 @@
 import { PortfolioChat } from '@/components/chat/PortfolioChat';
+import { ThemeScript } from '@/components/theme/ThemeScript';
 import { siteConfig, socialImage } from '@/constants/site';
 
 import type { Metadata } from 'next';
@@ -41,7 +42,10 @@ export const metadata: Metadata = {
 
 const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
       <body className="m-0 bg-page antialiased">
         {children}
         <PortfolioChat />

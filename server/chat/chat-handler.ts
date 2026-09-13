@@ -39,19 +39,34 @@ export const handleChatRequest = async (request: Request) => {
     const state = await readStateToken(stateToken, signingSecret);
 
     if (state?.mode === 'private') {
-      return aiResponse(apiKey, message, privateInstructions, {
-        stateToken: await createStateToken({ mode: 'private', expiresAt: Date.now() + PRIVATE_TTL_MS }, signingSecret),
-      });
-    }
-
-    if (state?.mode === 'challenge') {
-      if (normalizeChatValue(secretCode) === normalizedMessage) {
-        return aiResponse(apiKey, state.pendingMessage, privateInstructions, {
+      return aiResponse(
+        apiKey,
+        message,
+        privateInstructions,
+        {
           stateToken: await createStateToken(
             { mode: 'private', expiresAt: Date.now() + PRIVATE_TTL_MS },
             signingSecret,
           ),
-        });
+        },
+        false,
+      );
+    }
+
+    if (state?.mode === 'challenge') {
+      if (normalizeChatValue(secretCode) === normalizedMessage) {
+        return aiResponse(
+          apiKey,
+          state.pendingMessage,
+          privateInstructions,
+          {
+            stateToken: await createStateToken(
+              { mode: 'private', expiresAt: Date.now() + PRIVATE_TTL_MS },
+              signingSecret,
+            ),
+          },
+          false,
+        );
       }
       return aiResponse(apiKey, message, chatbotInstructions, { clearState: true });
     }

@@ -2,9 +2,12 @@
 
 import { useRef, useState } from 'react';
 
-import { AppIcon } from '@/components/portfolio/AppIcon';
-import { RESUME_SKILLS, RESUME_SKILL_TABS, type ResumeSkillTab } from '@/constants/pages/resume.constants';
-import { INNER_PAGE_PANEL_CLASS } from '@/constants/styles/component-styles.constants';
+import {
+  RESUME_PAGE_CONTENT,
+  RESUME_SKILLS,
+  RESUME_SKILL_TABS,
+  type ResumeSkillTab,
+} from '@/constants/pages/resume.constants';
 
 export const ResumeSkills = () => {
   const [activeTab, setActiveTab] = useState<ResumeSkillTab>(RESUME_SKILL_TABS[0]);
@@ -18,15 +21,18 @@ export const ResumeSkills = () => {
   };
 
   return (
-    <section className={`${INNER_PAGE_PANEL_CLASS} p-5`} id="skills">
-      <h2 className="flex items-center gap-2 text-[20px] font-bold">
-        <AppIcon name="code" className="size-[19px] text-accent" />
-        Core Skills
-      </h2>
-      <div className="mt-5 flex flex-wrap gap-2" role="tablist" aria-label="Core skill categories">
+    <section className="min-w-0 scroll-mt-32" id="skills">
+      <p className="text-[12px] font-bold tracking-[.14em] text-primary uppercase">
+        {RESUME_PAGE_CONTENT.sections.skillsEyebrow}
+      </p>
+      <h2 className="mt-3 text-[30px] font-semibold tracking-[-.04em]">{RESUME_PAGE_CONTENT.sections.skillsTitle}</h2>
+      <div
+        className="mt-6 flex gap-2 overflow-x-auto pb-2"
+        role="tablist"
+        aria-label={RESUME_PAGE_CONTENT.sections.skillTabsLabel}
+      >
         {RESUME_SKILL_TABS.map((item, index) => {
           const isActive = item === activeTab;
-
           return (
             <button
               ref={(element) => {
@@ -34,7 +40,7 @@ export const ResumeSkills = () => {
               }}
               aria-controls="resume-skill-panel"
               aria-selected={isActive}
-              className={`rounded-lg border px-3 py-2 text-[10px] transition-colors ${isActive ? 'border-accent bg-accent text-black' : 'border-[#27775a] hover:border-accent hover:text-accent'}`}
+              className={`min-h-11 shrink-0 rounded-full border px-3.5 py-2 text-[12px] font-semibold transition ${isActive ? 'border-primary bg-primary-soft text-primary' : 'border-border bg-surface text-foreground-secondary hover:border-border-strong hover:text-foreground'}`}
               key={item}
               onClick={() => setActiveTab(item)}
               onKeyDown={(event) => {
@@ -54,17 +60,14 @@ export const ResumeSkills = () => {
           );
         })}
       </div>
-      <div aria-live="polite" className="mt-6 space-y-5" id="resume-skill-panel" role="tabpanel">
-        {activeSkills.map(([skill, percent]) => (
-          <div key={skill}>
-            <div className="flex justify-between text-[12px]">
-              <span>{skill}</span>
-              <span>{percent}</span>
-            </div>
-            <div className="mt-2 h-2 rounded-full bg-[#103a2d]">
-              <div className="h-full rounded-full bg-[#46eeb0]" style={{ width: percent }} />
-            </div>
-          </div>
+      <div aria-live="polite" className="mt-5 flex flex-wrap gap-2.5" id="resume-skill-panel" role="tabpanel">
+        {activeSkills.map((skill) => (
+          <span
+            className="rounded-xl border border-border bg-surface px-3.5 py-2.5 text-[13px] text-foreground-secondary"
+            key={skill}
+          >
+            {skill}
+          </span>
         ))}
       </div>
     </section>

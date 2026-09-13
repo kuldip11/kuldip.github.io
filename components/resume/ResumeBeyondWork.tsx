@@ -1,23 +1,23 @@
 import { AppIcon } from '@/components/portfolio/AppIcon';
+import { RESUME_PAGE_CONTENT } from '@/constants/pages/resume.constants';
 import { siteConfig } from '@/constants/site';
-import { INNER_PAGE_PANEL_CLASS } from '@/constants/styles/component-styles.constants';
 
 export const ResumeBeyondWork = () => (
-  <section
-    className={`${INNER_PAGE_PANEL_CLASS} mt-4 flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between`}
-  >
+  <section className="rounded-feature bg-surface-muted p-7 sm:flex sm:items-end sm:justify-between sm:gap-8 sm:p-9">
     <div>
-      <h2 className="text-[18px] font-bold">“ Beyond Work</h2>
-      <p className="mt-2 max-w-[760px] text-[12px] text-[#aebdb6]">
-        I enjoy exploring new technologies, contributing to open source, writing technical articles and building side
-        projects.
+      <p className="text-[12px] font-bold tracking-[.14em] text-primary uppercase">
+        {RESUME_PAGE_CONTENT.sections.beyondEyebrow}
+      </p>
+      <h2 className="mt-3 text-[27px] font-semibold tracking-[-.04em]">{RESUME_PAGE_CONTENT.sections.beyondTitle}</h2>
+      <p className="mt-3 max-w-[720px] text-[14px] leading-7 text-foreground-secondary">
+        {RESUME_PAGE_CONTENT.beyondWork}
       </p>
     </div>
     <a
-      className="inline-flex items-center gap-2 rounded-full border border-accent px-5 py-3 text-[12px] font-semibold text-accent"
+      className="mt-6 inline-flex min-h-11 shrink-0 items-center gap-2 rounded-xl border border-border-strong bg-surface px-4 text-[13px] font-semibold text-foreground transition hover:text-primary sm:mt-0"
       href={siteConfig.contactHref}
     >
-      Let&apos;s Connect <AppIcon name="arrow-right" className="size-4" />
+      {RESUME_PAGE_CONTENT.actions.contactLabel} <AppIcon name="arrow-right" className="size-4" />
     </a>
   </section>
 );
