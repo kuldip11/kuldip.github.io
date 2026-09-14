@@ -40,7 +40,7 @@ export const socialImage = {
   url: siteConfig.image,
   width: 1200,
   height: 630,
-  type: 'image/jpeg',
+  // type: 'image/jpeg',
   alt: `${siteConfig.name} — ${siteConfig.role}`,
 } as const;
 
