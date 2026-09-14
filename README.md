@@ -67,6 +67,7 @@ bun run test
 bun run test:coverage
 bun run build
 bun run test:e2e
+bun run visual:qa
 ```
 
 The standard verification command runs the main non-browser release checks:
@@ -80,6 +81,8 @@ For the complete release gate, including coverage and Playwright:
 ```bash
 bun run verify:full
 ```
+
+`bun run visual:qa` captures the main public routes at mobile (390×844), tablet (820×1180), and desktop (1440×1000) widths in both light and dark themes. Review the generated `visual-qa/` screenshots for the final subjective visual sign-off.
 
 `check:colors` prevents raw presentation colors from drifting back into application TS/TSX. `check:content` prevents user-facing portfolio copy and accessibility/presentation labels from being hardcoded directly in TSX instead of the typed constants/data layer.
 

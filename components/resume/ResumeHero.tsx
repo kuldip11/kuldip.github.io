@@ -46,16 +46,6 @@ export const ResumeHero = () => (
           <p className="mt-2 text-[13px] text-foreground-muted">{siteConfig.location}</p>
         </div>
       </div>
-      <div className="mt-6 border-t border-border pt-5">
-        <span className="inline-flex rounded-full bg-primary-soft px-3 py-1.5 text-[12px] font-semibold text-primary">
-          {RESUME_PAGE_CONTENT.availabilityLabel}
-        </span>
-        <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-[12px] text-foreground-secondary">
-          {RESUME_PAGE_CONTENT.availability.map((item) => (
-            <span key={item}>{item}</span>
-          ))}
-        </div>
-      </div>
     </aside>
   </section>
 );

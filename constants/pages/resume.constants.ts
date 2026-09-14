@@ -12,8 +12,6 @@ export const RESUME_PAGE_CONTENT = {
     detail: 'Electronics & Instrumentation · India',
   },
   certifications: ['AWS / Cloud Fundamentals', 'Frontend Engineering', 'JavaScript & Algorithms'],
-  availability: ['Full-time', 'Remote / Hybrid', 'Relocation OK'],
-  availabilityLabel: 'Open to opportunities',
   metricsLabel: 'Career highlights',
   actions: {
     downloadLabel: 'Download PDF',

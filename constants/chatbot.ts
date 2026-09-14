@@ -8,8 +8,7 @@ import { servoraLinks, siteConfig } from './site';
 export const chatbotConfig = {
   title: 'Ask about Kuldip',
   eyebrow: 'Portfolio assistant',
-  greeting:
-    'Hi — I can help you explore Kuldip’s experience, projects, technical strengths, résumé, and availability for senior frontend roles.',
+  greeting: 'Hi — I can help you explore Kuldip’s experience, projects, technical strengths, and résumé.',
   placeholder: 'Ask about experience, Servora, TallyLite, React…',
   maxMessageLength: 600,
   model: 'gemini-3.5-flash-lite',
