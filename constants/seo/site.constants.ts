@@ -37,7 +37,7 @@ I came across your portfolio and wanted to get in touch.
 } as const;
 
 export const socialImage = {
-  url: `${siteConfig.url}${siteConfig.image}`,
+  url: siteConfig.image,
   width: 1200,
   height: 630,
   alt: `${siteConfig.name} — ${siteConfig.role}`,

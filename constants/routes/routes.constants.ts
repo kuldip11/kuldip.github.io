@@ -12,6 +12,7 @@ export const ROUTES = {
   articles: '/articles',
   article: (slug: string) => `/articles/${slug}`,
   resume: '/resume',
+  resumeDownload: '/resume.pdf',
 } as const;
 
 export const staticSitemapRoutes = [

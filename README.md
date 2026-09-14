@@ -107,6 +107,42 @@ When disabled:
 
 The flag is intentionally `NEXT_PUBLIC_*` because the same build-time value is needed by both server-rendered routes and client navigation. It contains no secret information.
 
+## Managed résumé with Vercel Blob
+
+The public résumé URL is intentionally stable:
+
+```text
+/resume.pdf
+```
+
+The UI never links directly to a Blob URL. `app/resume.pdf/route.ts` reads the current PDF from `RESUME_BLOB_URL` and streams it back as a download. If Blob is not configured or temporarily unavailable, the route falls back to the bundled `public/Kuldip_Kumar_Sah.pdf`.
+
+### One-time Vercel setup
+
+1. Create a **public Vercel Blob** store and connect it to this Vercel project.
+2. Upload the résumé using a stable pathname such as:
+
+   ```text
+   resume/Kuldip_Kumar_Sah.pdf
+   ```
+
+3. Do not add a random suffix to that pathname. Copy the resulting public Blob URL.
+4. Add that URL to the Vercel project environment:
+
+   ```env
+   RESUME_BLOB_URL=https://<store>.public.blob.vercel-storage.com/resume/Kuldip_Kumar_Sah.pdf
+   ```
+
+5. Redeploy once so the initial environment variable is available.
+
+### Updating the résumé later
+
+Overwrite the same Blob pathname (`resume/Kuldip_Kumar_Sah.pdf`) with the new PDF. Keep `allowOverwrite: true` when using the Blob SDK. Because the pathname and Blob URL stay the same, the portfolio continues serving `/resume.pdf` without a source-code change or redeploy.
+
+Vercel Blob/CDN caches can take roughly a minute to reflect an overwrite. The portfolio route itself uses `no-store`, but a recently overwritten public Blob can still take a short time to propagate at the Blob edge.
+
+`RESUME_BLOB_URL` is server-only and must **not** use the `NEXT_PUBLIC_` prefix.
+
 ## Portfolio assistant environment
 
 The assistant is optional. The relevant environment variables are documented in `.env.example`.

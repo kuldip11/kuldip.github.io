@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 import { AppIcon } from '@/components/portfolio/AppIcon';
 import { RESUME_PAGE_CONTENT } from '@/constants/pages/resume.constants';
+import { ROUTES } from '@/constants/routes';
 import { siteConfig } from '@/constants/site';
 
 export const ResumeHero = () => (
@@ -20,7 +21,7 @@ export const ResumeHero = () => (
       <div className="mt-7 flex flex-wrap gap-3">
         <a
           className="inline-flex min-h-12 items-center gap-2 rounded-xl bg-primary px-5 text-[14px] font-semibold text-primary-foreground transition hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-          href="/Kuldip_Kumar_Sah.pdf"
+          href={ROUTES.resumeDownload}
         >
           {RESUME_PAGE_CONTENT.actions.downloadLabel} <AppIcon name="arrow-right" className="size-4" />
         </a>
@@ -38,7 +39,14 @@ export const ResumeHero = () => (
     <aside className="rounded-feature border border-border bg-surface p-6 shadow-card sm:p-7">
       <div className="flex items-center gap-4">
         <div className="relative size-20 shrink-0 overflow-hidden rounded-2xl bg-surface-muted">
-          <Image src="/kuldip.png" alt={siteConfig.name} fill sizes="80px" className="object-cover object-[50%_22%]" priority />
+          <Image
+            src="/kuldip.png"
+            alt={siteConfig.name}
+            fill
+            sizes="80px"
+            className="object-cover object-[50%_22%]"
+            priority
+          />
         </div>
         <div>
           <h2 className="text-[21px] font-semibold tracking-[-.03em]">{siteConfig.name}</h2>

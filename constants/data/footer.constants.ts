@@ -22,7 +22,7 @@ export const footerFeaturedLinks = [
 export const footerMoreLinks = [
   ...(FEATURE_FLAGS.articles ? [{ label: 'Articles', href: ROUTES.articles }] : []),
   { label: 'Resume', href: ROUTES.resume },
-  { label: 'Download CV', href: '/Kuldip_Kumar_Sah.pdf', download: true },
+  { label: 'Download CV', href: ROUTES.resumeDownload, download: true },
   { label: 'Privacy Policy' },
   { label: 'Terms of Use' },
 ] as const satisfies readonly FooterLink[];

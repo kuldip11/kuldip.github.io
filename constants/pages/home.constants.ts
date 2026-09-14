@@ -9,7 +9,7 @@ export const HOME_PAGE_CONTENT = {
     description:
       'I design and build scalable React and Next.js products, from frontend architecture and design systems to performance, testing and delivery.',
     primaryAction: { label: 'View projects', href: ROUTES.projects },
-    secondaryAction: { label: 'Download résumé', href: '/Kuldip_Kumar_Sah.pdf' },
+    secondaryAction: { label: 'Download résumé', href: ROUTES.resumeDownload },
     tertiaryAction: { label: 'GitHub', href: siteConfig.github },
     portraitAlt: `${siteConfig.name}, ${siteConfig.role}`,
     locationLabel: `Based in ${siteConfig.location}`,

@@ -23,7 +23,7 @@ test.describe('Resume page', () => {
 
     await expect(resumeLink).toBeVisible();
 
-    await expect(resumeLink).toHaveAttribute('href', '/Kuldip_Kumar_Sah.pdf');
+    await expect(resumeLink).toHaveAttribute('href', '/resume.pdf');
   });
 
   test('includes Servora project and live applications', async ({ page }) => {
@@ -81,6 +81,6 @@ test.describe('Resume page', () => {
         name: 'Download PDF',
         exact: true,
       }),
-    ).toHaveAttribute('href', '/Kuldip_Kumar_Sah.pdf');
+    ).toHaveAttribute('href', '/resume.pdf');
   });
 });
