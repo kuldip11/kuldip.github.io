@@ -32,7 +32,7 @@ I came across your portfolio and wanted to get in touch.
 
   url: configuredSiteUrl ?? 'http://localhost:3000',
 
-  image: '/og.png',
+  image: '/og.jpg',
   personId: '#person',
 } as const;
 
@@ -40,6 +40,7 @@ export const socialImage = {
   url: siteConfig.image,
   width: 1200,
   height: 630,
+  type: 'image/jpeg',
   alt: `${siteConfig.name} — ${siteConfig.role}`,
 } as const;
 
