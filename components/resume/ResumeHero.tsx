@@ -38,7 +38,7 @@ export const ResumeHero = () => (
     <aside className="rounded-feature border border-border bg-surface p-6 shadow-card sm:p-7">
       <div className="flex items-center gap-4">
         <div className="relative size-20 shrink-0 overflow-hidden rounded-2xl bg-surface-muted">
-          <Image src="/kuldip.jpg" alt={siteConfig.name} fill sizes="80px" className="object-cover" priority />
+          <Image src="/kuldip.png" alt={siteConfig.name} fill sizes="80px" className="object-cover object-[50%_22%]" priority />
         </div>
         <div>
           <h2 className="text-[21px] font-semibold tracking-[-.03em]">{siteConfig.name}</h2>

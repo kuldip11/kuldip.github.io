@@ -13,7 +13,7 @@ export const AboutPageContent = () => (
           <div className="lg:sticky lg:top-28">
             <div className="relative aspect-[4/5] overflow-hidden rounded-feature bg-surface-muted shadow-card">
               <Image
-                src="/kuldip.jpg"
+                src="/kuldip.png"
                 alt={`${siteConfig.name}, ${siteConfig.role}`}
                 fill
                 sizes="(max-width:1024px) 92vw, 470px"
