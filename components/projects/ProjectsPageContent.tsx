@@ -1,6 +1,7 @@
 import { ProjectVisual } from '@/components/portfolio/InnerPageUi';
 import { ProjectCard } from '@/components/projects/ProjectCard';
 import { ActionLink, Badge, PageContainer, Section, SectionHeading, SurfaceCard } from '@/components/ui';
+import { FEATURE_FLAGS } from '@/constants/config/feature-flags.constants';
 import { projects } from '@/constants/data/projects';
 import { PROJECTS_PAGE_CONTENT } from '@/constants/pages/projects.constants';
 import { ROUTES } from '@/constants/routes';
@@ -97,20 +98,22 @@ export const ProjectsPageContent = () => (
       </PageContainer>
     </Section>
 
-    <Section className="py-16 sm:py-16 lg:py-16">
-      <PageContainer className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-        <div>
-          <h2 className="text-[24px] font-semibold tracking-[-.035em] text-foreground">
-            {PROJECTS_PAGE_CONTENT.footerCta.title}
-          </h2>
-          <p className="mt-2 max-w-[680px] text-[14px] leading-[1.7] text-foreground-secondary">
-            {PROJECTS_PAGE_CONTENT.footerCta.copy}
-          </p>
-        </div>
-        <ActionLink href={ROUTES.articles} variant="text">
-          {PROJECTS_PAGE_CONTENT.footerCta.linkLabel}
-        </ActionLink>
-      </PageContainer>
-    </Section>
+    {FEATURE_FLAGS.articles ? (
+      <Section className="py-16 sm:py-16 lg:py-16">
+        <PageContainer className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+          <div>
+            <h2 className="text-[24px] font-semibold tracking-[-.035em] text-foreground">
+              {PROJECTS_PAGE_CONTENT.footerCta.title}
+            </h2>
+            <p className="mt-2 max-w-[680px] text-[14px] leading-[1.7] text-foreground-secondary">
+              {PROJECTS_PAGE_CONTENT.footerCta.copy}
+            </p>
+          </div>
+          <ActionLink href={ROUTES.articles} variant="text">
+            {PROJECTS_PAGE_CONTENT.footerCta.linkLabel}
+          </ActionLink>
+        </PageContainer>
+      </Section>
+    ) : null}
   </main>
 );

@@ -1,4 +1,7 @@
+import { notFound } from 'next/navigation';
+
 import { ArticlesPageContent } from '@/components/articles/ArticlesPageContent';
+import { FEATURE_FLAGS } from '@/constants/config/feature-flags.constants';
 import { seoCopy } from '@/constants/seo';
 import { createStaticPageMetadata } from '@/lib/seo/createStaticPageMetadata';
 
@@ -11,10 +14,9 @@ export const metadata: Metadata = createStaticPageMetadata({
   type: 'website',
 });
 
-const ArticlesPage = () => (
-  <>
-    <ArticlesPageContent />
-  </>
-);
+const ArticlesPage = () => {
+  if (!FEATURE_FLAGS.articles) notFound();
+  return <ArticlesPageContent />;
+};
 
 export default ArticlesPage;

@@ -1,3 +1,5 @@
+import { FEATURE_FLAGS } from '@/constants/config/feature-flags.constants';
+
 export const ROUTES = {
   home: '/',
   homeTop: '/#top',
@@ -12,4 +14,10 @@ export const ROUTES = {
   resume: '/resume',
 } as const;
 
-export const staticSitemapRoutes = ['', ROUTES.about, ROUTES.resume, ROUTES.projects, ROUTES.articles] as const;
+export const staticSitemapRoutes = [
+  '',
+  ROUTES.about,
+  ROUTES.resume,
+  ROUTES.projects,
+  ...(FEATURE_FLAGS.articles ? [ROUTES.articles] : []),
+] as const;

@@ -1,3 +1,4 @@
+import { FEATURE_FLAGS } from '@/constants/config/feature-flags.constants';
 import { ROUTES } from '@/constants/routes';
 import { siteConfig } from '@/constants/site';
 import type { FooterLink } from '@/types/navigation.types';
@@ -5,7 +6,7 @@ import type { FooterLink } from '@/types/navigation.types';
 export const footerQuickLinks = [
   { label: 'Home', href: ROUTES.homeTop },
   { label: 'Projects', href: ROUTES.projects },
-  { label: 'Articles', href: ROUTES.articles },
+  ...(FEATURE_FLAGS.articles ? [{ label: 'Articles', href: ROUTES.articles }] : []),
   { label: 'About', href: ROUTES.about },
   { label: 'Résumé', href: ROUTES.resume },
 ] as const satisfies readonly FooterLink[];
@@ -13,13 +14,13 @@ export const footerQuickLinks = [
 export const footerFeaturedLinks = [
   { label: 'Servora · Restaurant OS', href: ROUTES.project('servora') },
   { label: 'TallyLite · Business App', href: ROUTES.project('tallylite') },
-  { label: 'Engineering Articles', href: ROUTES.articles },
+  ...(FEATURE_FLAGS.articles ? [{ label: 'Engineering Articles', href: ROUTES.articles }] : []),
   { label: 'GitHub', href: siteConfig.github, external: true },
   { label: 'View All Projects', href: ROUTES.projects },
 ] as const satisfies readonly FooterLink[];
 
 export const footerMoreLinks = [
-  { label: 'Articles', href: ROUTES.articles },
+  ...(FEATURE_FLAGS.articles ? [{ label: 'Articles', href: ROUTES.articles }] : []),
   { label: 'Resume', href: ROUTES.resume },
   { label: 'Download CV', href: '/Kuldip_Kumar_Sah.pdf', download: true },
   { label: 'Privacy Policy' },

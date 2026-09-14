@@ -1,44 +1,61 @@
-# Kuldip Kumar Sah — Portfolio
+# Kuldip Kumar Sah — Senior Frontend Engineer
 
-Next.js 16 + React 19 + TypeScript portfolio for **Kuldip Kumar Sah**, Senior Frontend Engineer focused on frontend architecture, scalable product systems, performance, accessibility, testing, and product-quality user experiences.
+This repository powers my personal portfolio: a place where I document the products I build, the frontend decisions behind them, and the kind of engineering work I enjoy doing.
 
-The portfolio uses a restrained editorial design system and includes project case studies, engineering articles, résumé content, professional light/dark themes, and a server-backed portfolio assistant.
+I’m **Kuldip Kumar Sah**, a Senior Frontend Engineer working primarily with **React, Next.js and TypeScript**. My focus is not only on building screens; I care about how frontend systems stay understandable as products grow—component boundaries, shared contracts, performance, accessibility, testing, security and the small product details that make software easier to use.
 
-## Highlights
+I currently work at **Software Workshop**, where I work on enterprise product delivery and frontend architecture. Before that I built frontend products across restaurant operations and other workflow-heavy applications. My portfolio reflects that progression: from implementing product flows to thinking more deeply about system boundaries, reusable architecture and end-to-end product quality.
 
-- Responsive desktop, tablet, and mobile layouts
-- Semantic design tokens with professional light and dark themes
-- Data-driven homepage, résumé, project, article, navigation, footer, and chat content
-- Generic project/article slug routes with static params and metadata
-- Detailed Servora and TallyLite engineering case studies
-- Accessible keyboard navigation, skip link, mobile focus management, and reduced-motion support
-- SEO metadata, sitemap, canonical URLs, OpenGraph/Twitter metadata, and structured data
-- Server-side chat validation, origin protection, state signing, and rate limiting
-- Hardcoded-color and hardcoded-content regression guards
-- Vitest component/unit coverage and Playwright E2E coverage
+## What you’ll find here
 
-## Featured Work
+The portfolio is intentionally more than a résumé page.
 
-### Servora
+- **Servora** — my flagship restaurant operations platform spanning Admin/POS, Kitchen, Waiter, Customer and Website experiences around a server-authoritative API.
+- **TallyLite** — a business application that uses a user-owned Google Sheet as its datastore while keeping persistence concerns behind repository boundaries.
+- **Résumé and experience** — the work I’ve done, the responsibilities I’ve taken on and the technologies I use most.
+- **Engineering articles** — practical notes from building these products. This entire section is feature-flagged and can be disabled for a deployment without changing the code.
+- **Portfolio assistant** — a server-backed assistant that answers questions using portfolio data only.
 
-Servora is the flagship project: a multi-application restaurant platform spanning Admin/POS, Kitchen, Waiter, Customer, Website, shared packages, and a server-authoritative API. The case study covers multi-tenancy, pricing/availability authority, realtime behavior, permissions, shared contracts, testing, and operational architecture.
+## The engineering approach behind the portfolio
 
-### TallyLite
+A few rules used in the projects also shape this repository:
 
-TallyLite is a lightweight business application built around Google Sheets as a user-owned datastore. Its case study covers inventory, invoicing, payments, GST handling, imports/exports, backup/recovery, and repository-driven persistence architecture.
+- Components render structure; portfolio copy and data live in typed constants/data files.
+- Raw presentation colors do not live inside components; semantic design tokens control the visual system.
+- Reusable abstractions are added when they represent a real shared concept, not simply because two class strings look alike.
+- Accessibility, responsive behavior and SEO are covered as product requirements rather than cleanup tasks.
+- Critical browser flows are protected with Playwright, while smaller behavior is kept in faster unit/component tests.
 
-## Main Stack
+The UI uses a restrained editorial design with professional light and dark themes. It is designed intentionally for desktop, tablet and mobile instead of treating mobile as a compressed desktop layout.
+
+## Main stack
 
 - Next.js 16
 - React 19
-- TypeScript
+- TypeScript 5
 - Tailwind CSS 4
 - Bun
 - Vitest
 - Playwright
 - Node.js
 
-## Run Locally
+## Project structure
+
+```text
+app/                 Next.js routes, metadata, sitemap and API entry points
+components/          Reusable UI and feature components
+constants/
+  config/            Feature flags and deploy-time configuration
+  data/              Projects, articles, experience, skills and profile data
+  pages/             Page-specific copy and presentation configuration
+  ui/                Theme, accessibility and system UI constants
+lib/                 Domain helpers, route helpers and SEO utilities
+server/              Portfolio-assistant server and security logic
+tests/               Unit/component tests, Playwright E2E and visual QA
+docs/                Architecture history and redesign documentation
+```
+
+## Run locally
 
 The repository is Bun-first.
 
@@ -48,14 +65,69 @@ cp .env.example .env.local
 bun run dev
 ```
 
-A production build requires a canonical site URL:
+The default `.env.example` keeps all public portfolio sections enabled.
+
+A production build requires the canonical deployment URL:
 
 ```bash
 NEXT_PUBLIC_SITE_URL=https://your-domain.example bun run build
+```
+
+Then run:
+
+```bash
 bun run start
 ```
 
-## Quality Commands
+## Article feature flag
+
+The Articles area is controlled by one public build-time flag:
+
+```env
+NEXT_PUBLIC_ARTICLES_ENABLED=true
+```
+
+To remove Articles from a deployment, change it to:
+
+```env
+NEXT_PUBLIC_ARTICLES_ENABLED=false
+```
+
+and redeploy/rebuild the application.
+
+When disabled:
+
+- Articles disappears from the desktop and mobile navigation.
+- Article links are removed from the footer.
+- The Projects page no longer promotes Engineering Articles.
+- Article URLs are removed from the sitemap.
+- The portfolio assistant receives no article context and does not advertise article knowledge.
+- `/articles` returns 404.
+- `/articles/[slug]` returns 404.
+
+The flag is intentionally `NEXT_PUBLIC_*` because the same build-time value is needed by both server-rendered routes and client navigation. It contains no secret information.
+
+## Portfolio assistant environment
+
+The assistant is optional. The relevant environment variables are documented in `.env.example`.
+
+At minimum, provider-backed chat requires server-side credentials such as:
+
+```env
+GEMINI_API_KEY=
+CHAT_SESSION_SECRET=
+```
+
+Do not place secrets in `NEXT_PUBLIC_*` variables.
+
+Optional Redis settings support shared rate limiting across deployments:
+
+```env
+UPSTASH_REDIS_REST_URL=
+UPSTASH_REDIS_REST_TOKEN=
+```
+
+## Quality commands
 
 ```bash
 bun run typecheck
@@ -65,45 +137,82 @@ bun run check:colors
 bun run check:content
 bun run test
 bun run test:coverage
-bun run build
+NEXT_PUBLIC_SITE_URL=https://your-domain.example bun run build
 bun run test:e2e
 bun run visual:qa
 ```
 
-The standard verification command runs the main non-browser release checks:
+Run the main non-browser verification with:
 
 ```bash
 bun run verify
 ```
 
-For the complete release gate, including coverage and Playwright:
+Run the full release gate, including coverage and Playwright, with:
 
 ```bash
 bun run verify:full
 ```
 
-`bun run visual:qa` captures the main public routes at mobile (390×844), tablet (820×1180), and desktop (1440×1000) widths in both light and dark themes. Review the generated `visual-qa/` screenshots for the final subjective visual sign-off.
+The browser suite uses a clean Next.js dev cache and serial Playwright execution so route compilation is deterministic under Next.js dev mode.
 
-`check:colors` prevents raw presentation colors from drifting back into application TS/TSX. `check:content` prevents user-facing portfolio copy and accessibility/presentation labels from being hardcoded directly in TSX instead of the typed constants/data layer.
+## Visual QA
 
-## Environment
+```bash
+bun run visual:qa
+```
 
-Copy `.env.example` to `.env.local` and provide only the values needed for the features you are running. `NEXT_PUBLIC_SITE_URL` is required for production builds so canonical URLs and social metadata are correct.
+This captures the main public routes at:
 
-The portfolio assistant also uses server-side environment variables for provider access, signed challenge state, optional private-mode behavior, and optional shared Redis rate limiting. Do not expose server secrets through `NEXT_PUBLIC_*` variables.
+- Mobile — `390 × 844`
+- Tablet — `820 × 1180`
+- Desktop — `1440 × 1000`
 
-## Architecture
+for both light and dark themes. Screenshots are written to `visual-qa/` for manual review.
 
-The application keeps content and presentation intentionally separate:
+## Design and content guards
 
-- `app/` — Next.js routes and metadata entry points
-- `components/` — structural, feature, and reusable UI components
-- `constants/data/` — projects, articles, experience, skills, social/profile data
-- `constants/pages/` — page-specific presentation copy/configuration
-- `constants/ui/` — accessibility, system-page, and theme constants
-- `lib/` — route/data/SEO helpers
-- `server/` — portfolio assistant server/security logic
-- `tests/` — unit/component and Playwright E2E coverage
-- `docs/` — architecture/refactor history and the UI redesign plan/status tracker
+Two small repository checks protect the design architecture:
 
-See [`docs/PORTFOLIO_UI_REDESIGN_PLAN.md`](./docs/PORTFOLIO_UI_REDESIGN_PLAN.md) for the redesign specification and [`docs/PORTFOLIO_UI_REDESIGN_STATUS.md`](./docs/PORTFOLIO_UI_REDESIGN_STATUS.md) for the implementation tracker.
+```bash
+bun run check:colors
+bun run check:content
+```
+
+`check:colors` prevents raw presentation colors from drifting back into application components.
+
+`check:content` protects the data-driven architecture by catching portfolio copy and presentation labels that are hardcoded directly in TSX instead of being supplied from the typed content layer.
+
+## SEO and accessibility
+
+The portfolio includes:
+
+- route-specific metadata and canonical URLs
+- OpenGraph and Twitter metadata
+- JSON-LD structured data
+- sitemap and robots output
+- keyboard-accessible navigation
+- skip-link support
+- mobile focus trapping and focus restoration
+- reduced-motion support
+- responsive overflow regression checks
+
+## Documentation
+
+The UI redesign was planned and tracked in the repository rather than being implemented as an undocumented visual rewrite.
+
+- [`docs/PORTFOLIO_UI_REDESIGN_PLAN.md`](./docs/PORTFOLIO_UI_REDESIGN_PLAN.md)
+- [`docs/PORTFOLIO_UI_REDESIGN_STATUS.md`](./docs/PORTFOLIO_UI_REDESIGN_STATUS.md)
+- [`docs/PORTFOLIO_UI_REDESIGN_FINAL_HANDOFF.md`](./docs/PORTFOLIO_UI_REDESIGN_FINAL_HANDOFF.md)
+
+## Contact
+
+If you want to discuss a frontend role, product engineering work, or one of the projects in this portfolio:
+
+- **LinkedIn:** https://linkedin.com/in/kuldip-kumar-sah
+- **GitHub:** https://github.com/kuldip11
+- **Email:** kuldipkumarsah112@gmail.com
+
+---
+
+Built with Next.js, React and TypeScript — and maintained with the same standards I expect from production frontend work.
