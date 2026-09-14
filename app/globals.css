@@ -1,98 +1,119 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-accent: #59ecb0;
-  --color-accent-bright: #71f6b5;
-  --color-page: #07110f;
-  --color-page-deep: #030d0a;
-  --color-text-primary: #f2f4ee;
-  --color-panel-border: #176746;
-  --color-muted-border: #20362f;
+  /* Redesign semantic palette */
+  --color-page: #f7f9f8;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f1f5f3;
+  --color-surface-raised: #fafcfb;
+  --color-foreground: #17211d;
+  --color-foreground-secondary: #475650;
+  --color-foreground-muted: #728079;
+  --color-border: #dfe7e3;
+  --color-border-strong: #cad7d1;
+  --color-primary: #167a5b;
+  --color-primary-hover: #11654b;
+  --color-primary-soft: #e7f4ef;
+  --color-primary-muted: #b8ded0;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #315c72;
+  --color-secondary-soft: #eaf1f5;
+  --color-success: #167a5b;
+  --color-warning: #a86516;
+  --color-danger: #b84444;
+  --color-info: #315c72;
+  --radius-control: 0.75rem;
+  --radius-card: 1.5rem;
+  --radius-feature: 2rem;
+  --shadow-card: 0 16px 45px rgba(23, 33, 29, 0.06);
+  --shadow-feature: 0 24px 80px rgba(23, 33, 29, 0.1);
+
   --breakpoint-phone: 40.625rem;
   --breakpoint-hero: 43.75rem;
-  --breakpoint-nav: 47.5rem;
+  --breakpoint-nav: 61.25rem;
   --breakpoint-content: 50rem;
   --breakpoint-wide: 56.25rem;
   --breakpoint-desktop: 68.75rem;
 }
 
 :root {
+  color-scheme: light;
+  background: var(--color-page);
+}
+
+[data-theme='dark'] {
   color-scheme: dark;
-  background: #030d0a;
+  --color-page: #111713;
+  --color-surface: #17201c;
+  --color-surface-muted: #1c2722;
+  --color-surface-raised: #202c27;
+  --color-foreground: #e7eeea;
+  --color-foreground-secondary: #b5c2bc;
+  --color-foreground-muted: #87968f;
+  --color-border: #2c3933;
+  --color-border-strong: #3a4a43;
+  --color-primary: #62b997;
+  --color-primary-hover: #7bc9aa;
+  --color-primary-soft: #203a31;
+  --color-primary-muted: #315e4e;
+  --color-primary-foreground: #0e1713;
+  --color-secondary: #7da8bd;
+  --color-secondary-soft: #20323a;
+  --color-success: #62b997;
+  --color-warning: #d6a156;
+  --color-danger: #dc7d7d;
+  --color-info: #7da8bd;
+  --shadow-card: 0 16px 45px rgba(0, 0, 0, 0.2);
+  --shadow-feature: 0 24px 80px rgba(0, 0, 0, 0.28);
 }
 
 html {
   scroll-behavior: smooth;
-  background: #030d0a;
+  scroll-padding-top: 5.5rem;
+  background: var(--color-page);
 }
 
 body {
   margin: 0;
   min-width: 320px;
-  background: #030d0a;
-  color: #f5f7f3;
+  background: var(--color-page);
+  color: var(--color-foreground);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
 
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p,
+li {
+  text-wrap: pretty;
+}
+
+:where(a, button, input, textarea, select, summary):focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
 ::selection {
-  background: #59ecb0;
-  color: #04100c;
-}
-
-@keyframes article-float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-}
-
-@keyframes article-pulse {
-  0%,
-  100% {
-    opacity: 0.55;
-    transform: translateX(0);
-  }
-  50% {
-    opacity: 1;
-    transform: translateX(4px);
-  }
-}
-
-@keyframes article-scan {
-  0% {
-    top: 24%;
-    opacity: 0;
-  }
-  20% {
-    opacity: 0.8;
-  }
-  80% {
-    opacity: 0.8;
-  }
-  100% {
-    top: 82%;
-    opacity: 0;
-  }
-}
-
-.article-float {
-  animation: article-float 4.8s ease-in-out infinite;
-}
-.article-pulse {
-  animation: article-pulse 1.8s ease-in-out infinite;
-}
-.article-scan {
-  animation: article-scan 4s ease-in-out infinite;
+  background: var(--color-primary-muted);
+  color: var(--color-foreground);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .article-float,
-  .article-pulse,
-  .article-scan {
-    animation: none;
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

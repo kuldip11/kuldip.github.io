@@ -15,7 +15,7 @@ export const JsonLd = () => {
       name: siteConfig.name,
       jobTitle: siteConfig.role,
       url: siteConfig.url,
-      image: `${siteConfig.url}/kuldip.jpg`,
+      image: `${siteConfig.url}/kuldip.png`,
       email: `mailto:${siteConfig.email}`,
       sameAs: [siteConfig.github, siteConfig.linkedin],
       knowsAbout: [...landingPageKeywords],

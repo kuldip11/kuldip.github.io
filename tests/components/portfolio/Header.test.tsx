@@ -19,7 +19,8 @@ describe('Header', () => {
     expect(screen.getByRole('link', { name: 'Home' })).toHaveAttribute('href', '/');
     expect(screen.getByRole('link', { name: 'Projects' })).toHaveAttribute('href', '/projects');
     expect(screen.getByRole('link', { name: 'Articles' })).toHaveAttribute('href', '/articles');
-    expect(screen.getByRole('link', { name: 'Resume' })).toHaveAttribute('href', '/resume');
+    expect(screen.getByRole('link', { name: 'About' })).toHaveAttribute('href', '/about');
+    expect(screen.getByRole('link', { name: 'Résumé' })).toHaveAttribute('href', '/resume');
     expect(screen.getByRole('link', { name: /Let's Connect/i })).toBeInTheDocument();
   });
 
@@ -56,16 +57,16 @@ describe('Header', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Open navigation menu' }));
 
     const drawer = screen.getByRole('complementary', { name: 'Mobile navigation' });
-    const focusable = within(drawer).getAllByRole('link');
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
+    const closeButton = within(drawer).getByRole('button', { name: 'Close navigation menu' });
+    const links = within(drawer).getAllByRole('link');
+    const last = links[links.length - 1];
 
-    expect(first).toHaveFocus();
+    expect(closeButton).toHaveFocus();
     last.focus();
     fireEvent.keyDown(document, { key: 'Tab' });
-    expect(first).toHaveFocus();
+    expect(closeButton).toHaveFocus();
 
-    first.focus();
+    closeButton.focus();
     fireEvent.keyDown(document, { key: 'Tab', shiftKey: true });
     expect(last).toHaveFocus();
   });

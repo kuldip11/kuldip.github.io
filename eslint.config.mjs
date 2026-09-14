@@ -40,6 +40,16 @@ export default tseslint.config(
     },
   },
   {
+    files: ['scripts/**/*.{js,mjs,cjs}'],
+    languageOptions: {
+      globals: {
+        console: 'readonly',
+        process: 'readonly',
+      },
+    },
+  },
+
+  {
     files: ['components/**/*.{ts,tsx}'],
     rules: {
       'no-restricted-imports': [

@@ -1,13 +1,13 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
 import ProjectsPage, { metadata } from '@/app/(portfolio)/projects/page';
 
 describe('Projects page', () => {
   it('renders both source-backed project cards', () => {
-    render(<ProjectsPage />);
-    expect(screen.getByRole('link', { name: /Read Servora/i })).toHaveAttribute('href', '/projects/servora');
-    expect(screen.getByRole('link', { name: /Read TallyLite/i })).toHaveAttribute('href', '/projects/tallylite');
+    const { container } = render(<ProjectsPage />);
+    expect(container.querySelector('a[href="/projects/servora"]')).toBeInTheDocument();
+    expect(container.querySelector('a[href="/projects/tallylite"]')).toBeInTheDocument();
     expect(metadata.alternates).toEqual({ canonical: '/projects' });
   });
 });

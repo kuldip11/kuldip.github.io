@@ -1,3 +1,4 @@
+import { CHAT_UI_COPY } from '@/constants/pages/chat.constants';
 import type { ChatMessage as ChatMessageType } from '@/types/chat.types';
 
 import { ChatComposer } from './ChatComposer';
@@ -36,13 +37,13 @@ export const ChatPanel = ({
 }: ChatPanelProps) => (
   <section
     id="portfolio-assistant-dialog"
-    aria-label="Portfolio assistant"
+    aria-label={CHAT_UI_COPY.dialogLabel}
     aria-modal="false"
     role="dialog"
-    className="flex h-[min(650px,calc(100vh-96px))] w-[min(430px,calc(100vw-24px))] flex-col overflow-hidden rounded-[30px] border border-[#71f6b52e] bg-transparent shadow-[0_32px_90px_rgba(0,0,0,.55)] backdrop-blur-2xl"
+    className="flex h-[min(650px,calc(100dvh-92px))] w-[min(430px,calc(100vw-24px))] flex-col overflow-hidden rounded-feature border border-border bg-surface shadow-feature max-phone:w-[calc(100vw-24px)]"
   >
     <ChatHeader onClose={onClose} />
-    <div className="flex-1 space-y-4 overflow-y-auto px-5 py-5 [scrollbar-color:#39524a_transparent] [scrollbar-width:thin]">
+    <div className="flex-1 space-y-4 overflow-y-auto bg-surface-raised px-5 py-5 [scrollbar-color:var(--color-border-strong)_transparent] [scrollbar-width:thin] sm:px-6">
       {messages.map((message) => (
         <ChatMessage message={message} key={message.id} />
       ))}

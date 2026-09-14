@@ -5,6 +5,8 @@ import { tallyLiteLinks } from './tallylite.constants';
 
 const projectNavigation = [
   { label: 'Overview', href: '#overview' },
+  { label: 'Context', href: '#context' },
+  { label: 'System', href: '#ecosystem' },
   { label: 'Architecture', href: '#architecture' },
   { label: 'Decisions', href: '#decisions' },
   { label: 'Engineering', href: '#engineering' },
@@ -44,47 +46,87 @@ export const projects = [
       liveDemoExternal: true,
       sourceHref: 'https://github.com/kuldip11/servora',
       metrics: [
-        ['12', 'Monorepo workspaces', '⌘'],
-        ['6', 'Applications', '▦'],
-        ['9', 'System roles', '♙'],
-        ['78', 'SQL migrations', '◉'],
-        ['Realtime', 'Order workflows', 'ϟ'],
+        { value: '12', label: 'Monorepo workspaces', icon: '⌘' },
+        { value: '6', label: 'Applications', icon: '▦' },
+        { value: '9', label: 'System roles', icon: '♙' },
+        { value: '78', label: 'SQL migrations', icon: '◉' },
+        { value: 'Realtime', label: 'Order workflows', icon: 'ϟ' },
       ],
       navigation: projectNavigation,
       overviewItems: [
-        ['Admin / POS', 'Menus, orders, business context, staff, analytics and restaurant operations.'],
-        ['Kitchen Display', 'Station-aware ticket flow for preparation and ready-state operations.'],
-        ['Waiter App', 'Fast table-side ordering and service workflows for floor staff.'],
-        ['Customer App', 'Customer ordering experience connected to the same menu and availability rules.'],
-        ['Marketing Website', 'Public-facing product surface separated from operational applications.'],
-        ['Backend API', 'Authorization, pricing, orders, tenancy, inventory, realtime and persistence authority.'],
+        {
+          title: 'Admin / POS',
+          description: 'Menus, orders, business context, staff, analytics and restaurant operations.',
+        },
+        {
+          title: 'Kitchen Display',
+          description: 'Station-aware ticket flow for preparation and ready-state operations.',
+        },
+        { title: 'Waiter App', description: 'Fast table-side ordering and service workflows for floor staff.' },
+        {
+          title: 'Customer App',
+          description: 'Customer ordering experience connected to the same menu and availability rules.',
+        },
+        {
+          title: 'Marketing Website',
+          description: 'Public-facing product surface separated from operational applications.',
+        },
+        {
+          title: 'Backend API',
+          description: 'Authorization, pricing, orders, tenancy, inventory, realtime and persistence authority.',
+        },
       ],
+      context: {
+        eyebrow: 'Context / problem',
+        title: 'Restaurant software breaks when each surface invents its own truth.',
+        copy: 'A restaurant order moves through customer choice, staff permissions, pricing, availability, kitchen preparation and service. Building those as disconnected applications creates drift exactly where operational consistency matters most.',
+        points: [
+          'Different roles need very different interfaces without duplicating business rules.',
+          'Pricing and availability must remain authoritative across POS, waiter and customer ordering.',
+          'Tenant and branch context has to travel through authorization and persistence, not only UI filters.',
+        ],
+      },
+      ecosystem: {
+        eyebrow: 'Product ecosystem',
+        title: 'One operational backbone, multiple focused experiences.',
+        copy: 'Servora separates the interfaces by role while the API and shared contracts keep orders, tenancy, pricing, availability and realtime semantics aligned.',
+        hubLabel: 'Servora API',
+        hubDetail: 'Auth · tenancy · orders · pricing · inventory · realtime',
+        nodes: [
+          { label: 'Admin / POS', detail: 'Business configuration and operational control' },
+          { label: 'Kitchen', detail: 'Preparation and ready-state workflow' },
+          { label: 'Waiter', detail: 'Table-side ordering and service' },
+          { label: 'Customer', detail: 'QR ordering on shared menu rules' },
+          { label: 'Website', detail: 'Public marketing surface' },
+          { label: 'Shared packages', detail: 'Types · validation · UI · API client · realtime' },
+        ],
+      },
       highlights: [
-        [
-          'Role-focused applications',
-          'Each restaurant role gets a purpose-built surface without duplicating the domain model.',
-          'apps',
-        ],
-        [
-          'Server-authoritative decisions',
-          'Pricing, permissions and operational rules are validated at the backend boundary.',
-          'architecture',
-        ],
-        [
-          'Multi-tenant by design',
-          'Organization → tenant/franchise → branch context flows through data and authorization.',
-          'layers',
-        ],
-        [
-          'Realtime operations',
-          'Kitchen, waiter and order experiences react to shared operational events.',
-          'realtime',
-        ],
-        [
-          'Shared contracts',
-          'Types, validation, API client, UI and realtime primitives live in dedicated packages.',
-          'code',
-        ],
+        {
+          title: 'Role-focused applications',
+          description: 'Each restaurant role gets a purpose-built surface without duplicating the domain model.',
+          icon: 'apps',
+        },
+        {
+          title: 'Server-authoritative decisions',
+          description: 'Pricing, permissions and operational rules are validated at the backend boundary.',
+          icon: 'architecture',
+        },
+        {
+          title: 'Multi-tenant by design',
+          description: 'Organization → tenant/franchise → branch context flows through data and authorization.',
+          icon: 'layers',
+        },
+        {
+          title: 'Realtime operations',
+          description: 'Kitchen, waiter and order experiences react to shared operational events.',
+          icon: 'realtime',
+        },
+        {
+          title: 'Shared contracts',
+          description: 'Types, validation, API client, UI and realtime primitives live in dedicated packages.',
+          icon: 'code',
+        },
       ],
       architectureTitle: 'Different applications. One domain contract.',
       architectureCopy:
@@ -223,39 +265,86 @@ export const projects = [
       liveDemoExternal: true,
       sourceHref: 'https://github.com/kuldip11/TallyLite',
       metrics: [
-        ['12', 'Primary app areas', '▦'],
-        ['58', 'Test files', '✓'],
-        ['Google', 'Sheets datastore', '◫'],
-        ['GST', 'Invoice rules', '%'],
-        ['Browser', 'Backup & export', '⇩'],
+        { value: '12', label: 'Primary app areas', icon: '▦' },
+        { value: '58', label: 'Test files', icon: '✓' },
+        { value: 'Google', label: 'Sheets datastore', icon: '◫' },
+        { value: 'GST', label: 'Invoice rules', icon: '%' },
+        { value: 'Browser', label: 'Backup & export', icon: '⇩' },
       ],
       navigation: projectNavigation,
       overviewItems: [
-        ['Customers', 'Profiles, transaction context, outstanding balances and customer ledger workflows.'],
-        ['Products & Inventory', 'Stock movements, adjustments, receiving, returns and serialized inventory support.'],
-        ['Sales & Invoices', 'GST and non-GST invoicing with draft/finalized workflows and invoice numbering.'],
-        ['Payments', 'Cash, UPI, card, bank transfer, cheque and other payment tracking.'],
-        ['Reports & Ledger', 'Persisted transaction views, outstanding balances and business reporting.'],
-        ['Data portability', 'CSV/XLSX import/export plus browser-generated backup and restore workflows.'],
+        {
+          title: 'Customers',
+          description: 'Profiles, transaction context, outstanding balances and customer ledger workflows.',
+        },
+        {
+          title: 'Products & Inventory',
+          description: 'Stock movements, adjustments, receiving, returns and serialized inventory support.',
+        },
+        {
+          title: 'Sales & Invoices',
+          description: 'GST and non-GST invoicing with draft/finalized workflows and invoice numbering.',
+        },
+        { title: 'Payments', description: 'Cash, UPI, card, bank transfer, cheque and other payment tracking.' },
+        {
+          title: 'Reports & Ledger',
+          description: 'Persisted transaction views, outstanding balances and business reporting.',
+        },
+        {
+          title: 'Data portability',
+          description: 'CSV/XLSX import/export plus browser-generated backup and restore workflows.',
+        },
       ],
+      context: {
+        eyebrow: 'Context / problem',
+        title: 'A familiar spreadsheet is useful only if the application respects its constraints.',
+        copy: 'TallyLite keeps business data in a user-owned Google Sheet, which means persistence can be slower, rate-limited and externally edited. The product therefore needs explicit domain rules, observable writes and recovery behavior instead of pretending the spreadsheet is a local database.',
+        points: [
+          'Financial calculations must remain deterministic and testable outside the UI.',
+          'Remote spreadsheet mutations need honest saving, retry and reconciliation states.',
+          'Imports, exports and backups are core ownership features rather than secondary utilities.',
+        ],
+      },
+      ecosystem: {
+        eyebrow: 'System model',
+        title: 'Business rules stay independent from the spreadsheet adapter.',
+        copy: 'The UI calls application services and domain rules through repository contracts. Google Sheets is one persistence implementation at the outside edge, so invoice, GST and inventory behavior can be tested without network access.',
+        hubLabel: 'Domain + application',
+        hubDetail: 'Money · GST · invoices · inventory · ledger · reconciliation',
+        nodes: [
+          { label: 'React UI', detail: 'Business workflows and feedback states' },
+          { label: 'Repository contracts', detail: 'Persistence-independent boundary' },
+          { label: 'Google Sheets', detail: 'User-owned remote datastore' },
+          { label: 'Import / export', detail: 'CSV · XLSX · PDF · backup archives' },
+        ],
+      },
       highlights: [
-        [
-          'User-owned data',
-          'Google Sheets is the persistent V1 datastore instead of a hidden vendor database.',
-          'spreadsheet',
-        ],
-        ['Layered domain design', 'Business rules remain independent from the Google Sheets adapter.', 'architecture'],
-        [
-          'Money-safe calculations',
-          'Decimal.js and dedicated invoice/GST rules avoid casual floating-point arithmetic.',
-          'money',
-        ],
-        [
-          'Persistence recovery',
-          'Mutation lifecycle, reconciliation and recovery code make remote spreadsheet writes observable.',
-          'refresh',
-        ],
-        ['Portable by default', 'Imports, exports, PDFs and backups are first-class product workflows.', 'download'],
+        {
+          title: 'User-owned data',
+          description: 'Google Sheets is the persistent V1 datastore instead of a hidden vendor database.',
+          icon: 'spreadsheet',
+        },
+        {
+          title: 'Layered domain design',
+          description: 'Business rules remain independent from the Google Sheets adapter.',
+          icon: 'architecture',
+        },
+        {
+          title: 'Money-safe calculations',
+          description: 'Decimal.js and dedicated invoice/GST rules avoid casual floating-point arithmetic.',
+          icon: 'money',
+        },
+        {
+          title: 'Persistence recovery',
+          description:
+            'Mutation lifecycle, reconciliation and recovery code make remote spreadsheet writes observable.',
+          icon: 'refresh',
+        },
+        {
+          title: 'Portable by default',
+          description: 'Imports, exports, PDFs and backups are first-class product workflows.',
+          icon: 'download',
+        },
       ],
       architectureTitle: 'Treat the spreadsheet as an adapter, not the domain.',
       architectureCopy:

@@ -1,79 +1,51 @@
 import Image from 'next/image';
 
 import { AppIcon } from '@/components/portfolio/AppIcon';
-import { ActionLink, Eyebrow } from '@/components/portfolio/InnerPageUi';
+import { RESUME_PAGE_CONTENT } from '@/constants/pages/resume.constants';
 import { siteConfig } from '@/constants/site';
-import { INNER_PAGE_PANEL_CLASS } from '@/constants/styles/component-styles.constants';
 
 export const ResumeHero = () => (
-  <section className="grid gap-7 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
+  <section className="grid min-w-0 gap-10 border-b border-border pb-12 lg:grid-cols-[1.2fr_.8fr] lg:items-end lg:pb-16">
     <div>
-      <Eyebrow># Professional Resume</Eyebrow>
-      <h1 className="mt-4 text-[clamp(2.8rem,5vw,4.8rem)] leading-[.98] font-bold tracking-[-.055em]">
-        <span className="text-accent">Experience</span>
-        <br />
-        Skills. Real Impact.
+      <p className="text-[12px] font-bold tracking-[.16em] text-primary uppercase">{RESUME_PAGE_CONTENT.eyebrow}</p>
+      <h1 className="mt-4 text-[clamp(2.2rem,4vw,3.8rem)] leading-[1] font-semibold tracking-[-.055em] text-foreground">
+        {siteConfig.name}
       </h1>
-      <p className="mt-4 max-w-[620px] text-[14px] leading-[1.65] text-[#b4c2bb] sm:text-[16px]">
-        Senior Frontend Engineer building scalable React and TypeScript products, frontend architecture and
-        high-performance user experiences.
+      <h2 className="mt-4 max-w-[850px] text-[clamp(2.6rem,5.8vw,5.7rem)] leading-[.98] font-semibold tracking-[-.06em] text-foreground">
+        {RESUME_PAGE_CONTENT.title}
+      </h2>
+      <p className="mt-6 max-w-[760px] text-[17px] leading-8 text-foreground-secondary sm:text-[19px]">
+        {RESUME_PAGE_CONTENT.intro}
       </p>
-      <div className="mt-5 flex flex-wrap gap-3">
-        <ActionLink href="/Kuldip_Kumar_Sah.pdf">Download PDF</ActionLink>
-        <ActionLink href={siteConfig.linkedin} secondary external>
-          View on LinkedIn
-        </ActionLink>
+      <div className="mt-7 flex flex-wrap gap-3">
+        <a
+          className="inline-flex min-h-12 items-center gap-2 rounded-xl bg-primary px-5 text-[14px] font-semibold text-primary-foreground transition hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          href="/Kuldip_Kumar_Sah.pdf"
+        >
+          {RESUME_PAGE_CONTENT.actions.downloadLabel} <AppIcon name="arrow-right" className="size-4" />
+        </a>
+        <a
+          className="inline-flex min-h-12 items-center gap-2 rounded-xl border border-border-strong bg-surface px-5 text-[14px] font-semibold text-foreground transition hover:border-primary-muted hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          href={siteConfig.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {RESUME_PAGE_CONTENT.actions.linkedinLabel} <AppIcon name="arrow-up-right" className="size-4" />
+        </a>
       </div>
     </div>
-    <div className={`${INNER_PAGE_PANEL_CLASS} p-5 sm:p-6`}>
-      <div className="grid gap-5 sm:grid-cols-[100px_1fr_auto] sm:items-center">
-        <div className="grid size-24 place-items-center overflow-hidden rounded-full border border-[#48e9ae] text-[28px]">
-          <Image
-            src="/kuldip.jpg"
-            alt="Kuldip Kumar Sah"
-            width={96}
-            height={96}
-            className="size-full object-cover"
-            priority
-            quality={100}
-          />
+
+    <aside className="rounded-feature border border-border bg-surface p-6 shadow-card sm:p-7">
+      <div className="flex items-center gap-4">
+        <div className="relative size-20 shrink-0 overflow-hidden rounded-2xl bg-surface-muted">
+          <Image src="/kuldip.png" alt={siteConfig.name} fill sizes="80px" className="object-cover object-[50%_22%]" priority />
         </div>
         <div>
-          <h2 className="text-[24px] font-bold">Kuldip Kumar Sah</h2>
-          <p className="text-accent">Senior Frontend Engineer</p>
-          <div className="mt-4 space-y-2 text-[12px] text-[#b5c4bd]">
-            <div className="flex items-center gap-2">
-              <AppIcon name="apps" className="size-3.5 text-accent" />
-              India
-            </div>
-            <div className="flex items-center gap-2">
-              <AppIcon name="mail" className="size-3.5 text-accent" />
-              {siteConfig.email}
-            </div>
-            <div className="flex items-center gap-2">
-              <AppIcon name="arrow-up-right" className="size-3.5 text-accent" />
-              linkedin.com/in/kuldip-kumar-sah
-            </div>
-          </div>
-        </div>
-        <div className="rounded-xl border border-[#245b45] bg-[#092219] p-4 text-[12px]">
-          <strong className="text-accent">Open to opportunities</strong>
-          <div className="mt-3 space-y-2 text-[#c3d0ca]">
-            <div className="flex items-center gap-2">
-              <AppIcon name="briefcase" className="size-3.5 text-accent" />
-              Full-time
-            </div>
-            <div className="flex items-center gap-2">
-              <AppIcon name="apps" className="size-3.5 text-accent" />
-              Remote / Hybrid
-            </div>
-            <div className="flex items-center gap-2">
-              <AppIcon name="apps" className="size-3.5 text-accent" />
-              Relocation OK
-            </div>
-          </div>
+          <h2 className="text-[21px] font-semibold tracking-[-.03em]">{siteConfig.name}</h2>
+          <p className="mt-1 text-[14px] text-primary">{siteConfig.role}</p>
+          <p className="mt-2 text-[13px] text-foreground-muted">{siteConfig.location}</p>
         </div>
       </div>
-    </div>
+    </aside>
   </section>
 );

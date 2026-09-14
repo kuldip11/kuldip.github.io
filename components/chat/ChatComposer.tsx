@@ -1,4 +1,5 @@
 import { AppIcon } from '@/components/portfolio/AppIcon';
+import { Button } from '@/components/ui';
 import { chatbotConfig } from '@/constants/chatbot';
 import { CHAT_UI_COPY } from '@/constants/pages/chat.constants';
 
@@ -17,31 +18,24 @@ export const ChatComposer = ({
   onInput: (value: string) => void;
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
 }) => (
-  <div className="border-t border-[#71f6b51a] bg-[#07110f99] p-4">
+  <div className="border-t border-border bg-surface p-4 sm:p-5">
     <form
-      className="flex items-center gap-2 rounded-2xl border border-[#31453f] bg-[#0d1b18] p-1.5 pl-4 transition focus-within:border-[#71f6b58c]"
+      className="flex items-center gap-2 rounded-2xl border border-border-strong bg-surface-raised p-1.5 pl-4 transition focus-within:border-primary focus-within:ring-3 focus-within:ring-primary-soft"
       onSubmit={onSubmit}
     >
       <input
-        aria-label="Message Kuldip's portfolio assistant"
-        className="min-w-0 flex-1 bg-transparent py-2 text-[13px] text-text-primary outline-none placeholder:text-[#6f8179]"
+        aria-label={CHAT_UI_COPY.inputLabel}
+        className="min-w-0 flex-1 bg-transparent py-2 text-[14px] text-foreground outline-none placeholder:text-foreground-muted"
         maxLength={chatbotConfig.maxMessageLength}
         onChange={(event) => onInput(event.target.value)}
         placeholder={chatbotConfig.placeholder}
         ref={inputRef}
         value={input}
       />
-      <button
-        aria-label="Send message"
-        className="grid size-10 shrink-0 place-items-center rounded-xl bg-accent-bright text-lg font-bold text-[#07110f] transition hover:scale-[1.03] disabled:cursor-not-allowed disabled:opacity-40"
-        disabled={!input.trim() || loading}
-        type="submit"
-      >
+      <Button aria-label={CHAT_UI_COPY.sendLabel} disabled={!input.trim() || loading} size="icon" type="submit">
         <AppIcon name="arrow-up" className="size-[18px]" strokeWidth={2.2} />
-      </button>
+      </Button>
     </form>
-    <p className="mt-2 text-center font-mono text-[8px] tracking-[.08em] text-[#64766e] uppercase">
-      {CHAT_UI_COPY.disclaimer}
-    </p>
+    <p className="mt-2.5 text-center text-[10px] tracking-[.04em] text-foreground-muted">{CHAT_UI_COPY.disclaimer}</p>
   </div>
 );

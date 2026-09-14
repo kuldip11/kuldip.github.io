@@ -4,27 +4,23 @@ import { describe, expect, it } from 'vitest';
 import { Footer } from '@/components/portfolio/Footer';
 
 describe('Footer', () => {
-  it('uses the dark portfolio footer surface', () => {
+  it('uses the semantic portfolio footer surface', () => {
     const { container } = render(<Footer />);
-    expect(container.querySelector('footer')).toHaveClass('bg-[#091411]');
+    expect(container.querySelector('footer')).toHaveClass('bg-surface');
   });
 
-  it('links to all portfolio sections and real projects', () => {
+  it('links to the primary portfolio routes and selected work', () => {
     render(<Footer />);
-    expect(screen.getAllByRole('link', { name: 'Projects' })[0]).toHaveAttribute('href', '/projects');
+
+    expect(screen.getByRole('link', { name: 'Projects' })).toHaveAttribute('href', '/projects');
     expect(screen.getAllByRole('link', { name: 'Articles' })[0]).toHaveAttribute('href', '/articles');
-    expect(screen.getAllByRole('link', { name: 'Approach' })[0]).toHaveAttribute('href', '/#approach');
-    expect(screen.getAllByRole('link', { name: 'Resume' })[0]).toHaveAttribute('href', '/resume');
-    expect(
-      screen
-        .getAllByRole('link', { name: 'Servora · Restaurant OS' })
-        .every((link) => link.getAttribute('href') === '/projects/servora'),
-    ).toBe(true);
-    expect(
-      screen
-        .getAllByRole('link', { name: 'TallyLite · Business App' })
-        .every((link) => link.getAttribute('href') === '/projects/tallylite'),
-    ).toBe(true);
+    expect(screen.getByRole('link', { name: 'About' })).toHaveAttribute('href', '/about');
+    expect(screen.getByRole('link', { name: 'Résumé' })).toHaveAttribute('href', '/resume');
+    expect(screen.getByRole('link', { name: 'Servora · Restaurant OS' })).toHaveAttribute('href', '/projects/servora');
+    expect(screen.getByRole('link', { name: 'TallyLite · Business App' })).toHaveAttribute(
+      'href',
+      '/projects/tallylite',
+    );
   });
 
   it('links to personal profiles', () => {
@@ -40,8 +36,9 @@ describe('Footer', () => {
     );
   });
 
-  it('provides mobile navigation accordions', () => {
+  it('provides distinct navigation landmarks', () => {
     render(<Footer />);
-    expect(document.querySelectorAll('details')).toHaveLength(3);
+    expect(screen.getByRole('navigation', { name: 'Footer navigation' })).toBeInTheDocument();
+    expect(screen.getByRole('navigation', { name: 'Featured work' })).toBeInTheDocument();
   });
 });

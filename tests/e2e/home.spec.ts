@@ -10,7 +10,7 @@ test.describe('Home page', () => {
       }),
     ).toBeVisible();
 
-    await expect(page.getByText('Senior Frontend Engineer', { exact: true })).toBeVisible();
+    await expect(page.getByText('Senior Frontend Engineer', { exact: true }).first()).toBeVisible();
 
     await expect(page.getByRole('main')).toBeVisible();
   });
@@ -18,20 +18,11 @@ test.describe('Home page', () => {
   test('shows portfolio sections', async ({ page }) => {
     await page.goto('/');
 
-    await expect(
-      page.getByText('Featured Projects', {
-        exact: true,
-      }),
-    ).toBeVisible();
+    await expect(page.locator('#work').getByText('Featured Projects', { exact: true })).toBeVisible();
+    await expect(page.locator('#experience').getByText('Experience', { exact: true })).toBeVisible();
 
-    await expect(
-      page.getByText('Experience', {
-        exact: true,
-      }),
-    ).toBeVisible();
-
-    await expect(page.getByRole('heading', { name: 'What I can do' })).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'My Tech Stack' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Engineering products beyond the component layer.' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'A focused stack for modern product work.' })).toBeVisible();
   });
 
   test('shows profile image', async ({ page }) => {
@@ -50,7 +41,7 @@ test.describe('Portfolio assistant', () => {
     await page.goto('/');
 
     await page.getByRole('button', { name: 'Open portfolio assistant' }).click();
-    await expect(page.getByRole('region', { name: 'Portfolio assistant' })).toBeVisible();
+    await expect(page.getByRole('dialog', { name: 'Portfolio assistant' })).toBeVisible();
     await expect(page.getByText('What makes Kuldip a strong Senior React Engineer?')).toBeVisible();
     await expect(page.getByRole('textbox', { name: "Message Kuldip's portfolio assistant" })).toBeFocused();
   });
@@ -59,10 +50,10 @@ test.describe('Portfolio assistant', () => {
     await page.goto('/');
 
     await page.getByRole('button', { name: 'Open portfolio assistant' }).click();
-    await expect(page.getByRole('region', { name: 'Portfolio assistant' })).toBeVisible();
+    await expect(page.getByRole('dialog', { name: 'Portfolio assistant' })).toBeVisible();
 
     await page.getByRole('heading', { level: 1 }).click();
-    await expect(page.getByRole('region', { name: 'Portfolio assistant' })).toBeHidden();
+    await expect(page.getByRole('dialog', { name: 'Portfolio assistant' })).toBeHidden();
   });
 });
 
@@ -84,6 +75,6 @@ test.describe('Mobile navigation', () => {
       .getByRole('navigation', { name: 'Mobile main navigation' })
       .getByRole('link', { name: 'Projects' })
       .click();
-    await expect(page).toHaveURL(/#work$/);
+    await expect(page).toHaveURL(/\/projects$/);
   });
 });

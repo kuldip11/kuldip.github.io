@@ -1,109 +1,81 @@
 import Image from 'next/image';
 
+import { AppIcon } from '@/components/portfolio/AppIcon';
 import { ExpertiseIcon } from '@/components/portfolio/ExpertiseIcon';
-import { HOME_EXPERTISE } from '@/constants/pages/home.constants';
+import { ActionLink, PageContainer, Section, TextLink } from '@/components/ui';
+import { HOME_EXPERTISE, HOME_PAGE_CONTENT } from '@/constants/pages/home.constants';
 
-import { SectionLabel } from './SectionLabel';
-
-const ExpertiseChips = ({ mobile = false }: { mobile?: boolean }) => (
-  <ul
-    className={
-      mobile
-        ? 'col-span-2 mt-1 flex list-none flex-wrap gap-2 p-0 hero:hidden'
-        : 'mt-5 flex max-w-[790px] list-none flex-wrap gap-2.5 p-0 max-hero:hidden'
-    }
-    aria-label="Core expertise"
-  >
-    {HOME_EXPERTISE.map(({ label, icon }) => (
-      <li
-        className={
-          mobile
-            ? 'inline-flex min-h-[38px] items-center gap-2 rounded-full border border-[#176f50] bg-[#071814d9] px-3 text-[11px] font-medium text-[#e3ebe7]'
-            : 'inline-flex min-h-[42px] items-center gap-2 rounded-full border border-[#176f50] bg-[#071814d9] px-4 text-[13px] font-medium text-[#e3ebe7] shadow-[inset_0_0_18px_rgba(85,239,175,.02)]'
-        }
-        key={label}
-      >
-        <span className="flex size-5 shrink-0 items-center justify-center text-[#52ecac]" aria-hidden="true">
-          <ExpertiseIcon icon={icon} />
-        </span>
-        <span>{label}</span>
-      </li>
-    ))}
-  </ul>
-);
+const hero = HOME_PAGE_CONTENT.hero;
 
 export const LandingHero = () => (
-  <section className="relative w-full px-5 pt-6 pb-4 sm:px-8 desktop:px-12" id="top">
-    <div className="grid grid-cols-[minmax(0,.58fr)_minmax(0,.42fr)] items-start gap-0 hero:grid-cols-[minmax(0,1.02fr)_minmax(340px,.98fr)] hero:items-center hero:gap-3 desktop:grid-cols-[minmax(0,1.04fr)_minmax(540px,.96fr)] desktop:gap-4">
-      <div className="relative z-10 pt-3 hero:pt-5 desktop:pt-8">
-        <SectionLabel>Senior Frontend Engineer</SectionLabel>
-        <h1 className="mt-4 mb-4 max-w-[800px] text-[clamp(2.05rem,7.3vw,3.05rem)] leading-[.96] font-bold tracking-[-.055em] hero:text-[clamp(2.65rem,5.2vw,4rem)] desktop:text-[clamp(3.35rem,5.15vw,5.25rem)]">
-          I build scalable <span className="text-accent">React</span> products from interface to production.
-        </h1>
-        <p className="max-w-[780px] text-[13px] leading-[1.48] text-[#d6ded9] hero:text-[15px] desktop:text-[clamp(1.05rem,1.26vw,1.24rem)] desktop:leading-[1.55]">
-          Hi, I&apos;m <strong className="font-semibold text-white">Kuldip Kumar Sah</strong> — a Senior Frontend
-          Engineer focused on React, Next.js, TypeScript, frontend architecture, performance, and product-quality user
-          experiences. I also work comfortably across APIs, backend integration, testing, and deployment when needed.
-        </p>
-        <ExpertiseChips />
-      </div>
-
-      <div className="relative top-[-62px] isolate -mb-[62px] hidden h-[clamp(510px,36vw,610px)] w-full desktop:block">
-        <figure className="absolute inset-[-3%_-4%_-2%_-9%] -z-10 m-0">
-          <Image
-            src="/kuldip-hero-composite-v4.png"
-            alt="Kuldip Kumar Sah, Senior Frontend Engineer"
-            fill
-            priority
-            sizes="52vw"
-            className="origin-top scale-[1.27] [mask-image:linear-gradient(to_right,transparent_0%,black_21%,black_90%,transparent_100%),linear-gradient(to_bottom,black_0%,black_58%,rgba(0,0,0,.9)_64%,rgba(0,0,0,.55)_70%,rgba(0,0,0,.18)_76%,transparent_82%)] [mask-composite:intersect] object-cover object-[46%_top] [-webkit-mask-composite:source-in] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_21%,black_90%,transparent_100%),linear-gradient(to_bottom,black_0%,black_58%,rgba(0,0,0,.9)_64%,rgba(0,0,0,.55)_70%,rgba(0,0,0,.18)_76%,transparent_82%)]"
-          />
-        </figure>
-        <div className="absolute top-[29%] right-[18%] z-10 rotate-[-5deg] font-serif text-[19px] leading-[1.3] text-[#9bf4cb] italic opacity-90 [text-shadow:0_0_14px_rgba(68,239,170,.5)]">
-          Build
-          <br />
-          Ship
-          <br />
-          Improve
-          <br />
-          Repeat
-          <span className="mt-1 block h-px w-14 rotate-[-8deg] bg-[#63eeb1]" />
-        </div>
-        <div className="absolute top-[17%] right-0 z-20 w-[132px] rounded-[18px] border border-[#35b77f82] bg-[#061611e6] px-5 py-5 shadow-[0_0_42px_rgba(58,232,166,.13),inset_0_0_25px_rgba(66,237,171,.04)] backdrop-blur-md">
-          <span className="text-[30px] leading-none text-[#4ee9a7]">“</span>
-          <p className="mt-1 mb-3 text-[15px] leading-[1.5] text-[#dbe5e0]">
-            Better interfaces create a brighter tomorrow.
+  <Section className="relative pt-12 pb-16 sm:pt-16 sm:pb-20 desktop:pt-20 desktop:pb-24" id="top">
+    <PageContainer>
+      <div className="grid gap-10 wide:grid-cols-[minmax(0,1.08fr)_minmax(320px,.92fr)] wide:grid-rows-[auto_auto] wide:gap-x-10 wide:gap-y-8 desktop:grid-cols-[minmax(0,1.12fr)_minmax(420px,.88fr)] desktop:gap-x-16">
+        <div className="relative z-10 max-w-[760px] wide:col-start-1 wide:row-start-1">
+          <p className="mb-5 inline-flex items-center gap-2 text-[12px] font-bold tracking-[.16em] text-primary uppercase">
+            <span className="size-1.5 rounded-full bg-primary" aria-hidden="true" />
+            {hero.eyebrow}
           </p>
-          <span className="block h-[2px] w-5 bg-[#4fe8a7]" />
-        </div>
-      </div>
+          <h1 className="max-w-[780px] text-[clamp(2.5rem,7vw,5.25rem)] leading-[.98] font-semibold tracking-[-.06em] text-foreground">
+            {hero.title}
+          </h1>
+          <p className="mt-6 max-w-[680px] text-[16px] leading-[1.7] text-foreground-secondary sm:text-[18px]">
+            {hero.description}
+          </p>
 
-      <div className="relative top-1 mx-auto block h-[430px] w-full hero:h-[500px] desktop:hidden">
-        <div className="relative h-full">
-          <Image
-            src="/kuldip-hero-composite-v4.png"
-            alt="Kuldip Kumar Sah, Senior Frontend Engineer"
-            fill
-            priority
-            sizes="(max-width: 699px) 46vw, 48vw"
-            className="origin-top scale-[1.04] [mask-image:linear-gradient(to_right,transparent_0%,black_15%,black_94%,transparent_100%),linear-gradient(to_bottom,black_0%,black_72%,rgba(0,0,0,.72)_84%,transparent_98%)] [mask-composite:intersect] object-cover object-[62%_top] [-webkit-mask-composite:source-in] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_15%,black_94%,transparent_100%),linear-gradient(to_bottom,black_0%,black_72%,rgba(0,0,0,.72)_84%,transparent_98%)] hero:scale-100 hero:object-[59%_top]"
-          />
-          <div className="absolute top-[16%] right-[3%] rotate-[-5deg] font-serif text-[14px] leading-[1.25] text-[#9bf4cb] italic hero:right-[15%] hero:text-[17px]">
-            Build
-            <br />
-            Ship
-            <br />
-            Improve
-            <br />
-            Repeat
-          </div>
-          <div className="absolute top-[40%] right-[-5%] w-[92px] rounded-[12px] border border-[#35b77f82] bg-[#061611e6] p-3 text-[12px] leading-[1.4] text-[#dbe5e0] hero:right-0 hero:w-[112px] hero:p-4 hero:text-[14px]">
-            <span className="text-[24px] text-[#4ee9a7]">“</span>
-            <p>Better interfaces create a brighter tomorrow.</p>
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <ActionLink className="min-h-12 px-5" href={hero.primaryAction.href}>
+              {hero.primaryAction.label}
+            </ActionLink>
+            <a
+              className="inline-flex min-h-12 items-center gap-2 rounded-xl border border-border-strong bg-surface px-5 text-[14px] font-semibold text-foreground transition hover:border-primary-muted hover:bg-primary-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              href={hero.secondaryAction.href}
+              download
+            >
+              {hero.secondaryAction.label}
+              <AppIcon name="arrow-down" className="size-4" />
+            </a>
+            <TextLink className="min-h-12 px-2" href={hero.tertiaryAction.href} external>
+              {hero.tertiaryAction.label}
+            </TextLink>
           </div>
         </div>
+
+        <div className="relative mx-auto w-full max-w-[520px] wide:col-start-2 wide:row-span-2 wide:row-start-1 wide:self-center">
+          <div className="absolute -inset-5 -z-10 rounded-[40px] bg-primary-soft/70" aria-hidden="true" />
+          <figure className="relative m-0 aspect-[4/4.7] overflow-hidden rounded-feature bg-surface-muted shadow-feature">
+            <Image
+              src="/kuldip-hero-composite-v4.png"
+              alt={hero.portraitAlt}
+              fill
+              priority
+              sizes="(max-width: 899px) 92vw, (max-width: 1099px) 40vw, 42vw"
+              className="object-cover object-[54%_top]"
+            />
+            <figcaption className="absolute right-5 bottom-5 rounded-xl border border-border bg-surface/90 px-4 py-3 text-[12px] font-semibold text-foreground shadow-card backdrop-blur-md">
+              <span className="mr-2 inline-block size-2 rounded-full bg-primary" aria-hidden="true" />
+              {hero.locationLabel}
+            </figcaption>
+          </figure>
+        </div>
+
+        <ul
+          className="grid max-w-[680px] list-none gap-5 border-t border-border pt-6 sm:grid-cols-3 wide:col-start-1 wide:row-start-2"
+          aria-label={HOME_PAGE_CONTENT.expertiseLabel}
+        >
+          {HOME_EXPERTISE.map(({ label, icon }) => (
+            <li className="flex items-center gap-3" key={label}>
+              <span
+                className="grid size-9 shrink-0 place-items-center rounded-lg bg-primary-soft text-primary"
+                aria-hidden="true"
+              >
+                <ExpertiseIcon icon={icon} />
+              </span>
+              <span className="text-[13px] leading-[1.35] font-semibold text-foreground-secondary">{label}</span>
+            </li>
+          ))}
+        </ul>
       </div>
-      <ExpertiseChips mobile />
-    </div>
-  </section>
+    </PageContainer>
+  </Section>
 );

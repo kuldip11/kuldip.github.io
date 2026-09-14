@@ -38,8 +38,7 @@ test.describe('Servora project links', () => {
 
     await expect(
       page.getByRole('link', {
-        name: 'GitHub Source repository',
-        exact: true,
+        name: /GitHub Source repository/i,
       }),
     ).toBeVisible();
 
@@ -77,8 +76,7 @@ test.describe('Servora project links', () => {
 
     await expect(
       page.getByRole('link', {
-        name: 'GitHub Source repository',
-        exact: true,
+        name: /GitHub Source repository/i,
       }),
     ).toHaveAttribute('href', 'https://github.com/kuldip11/Servora');
   });

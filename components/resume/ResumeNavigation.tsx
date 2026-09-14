@@ -1,18 +1,21 @@
 import { RESUME_NAVIGATION } from '@/constants/pages/resume.constants';
-import { INNER_PAGE_PANEL_CLASS } from '@/constants/styles/component-styles.constants';
+import { ACCESSIBILITY_COPY } from '@/constants/ui/accessibility.constants';
 
 export const ResumeNavigation = () => (
   <nav
-    className={`${INNER_PAGE_PANEL_CLASS} mt-5 grid grid-cols-2 overflow-hidden text-center text-[11px] sm:grid-cols-5`}
+    className="sticky top-16 z-20 -mx-5 min-w-0 border-b border-border bg-page/95 px-5 py-3 backdrop-blur sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10"
+    aria-label={ACCESSIBILITY_COPY.resumeNavigationLabel}
   >
-    {RESUME_NAVIGATION.map((item, index) => (
-      <a
-        className={`px-4 py-3 ${index === 0 ? 'border border-accent text-accent' : ''}`}
-        href={`#${item.toLowerCase()}`}
-        key={item}
-      >
-        {item}
-      </a>
-    ))}
+    <div className="mx-auto flex max-w-[1280px] gap-5 overflow-x-auto text-[12px] font-semibold text-foreground-muted">
+      {RESUME_NAVIGATION.map((item) => (
+        <a
+          className="inline-flex min-h-11 shrink-0 items-center px-1 transition hover:text-primary"
+          href={item.href}
+          key={item.href}
+        >
+          {item.label}
+        </a>
+      ))}
+    </div>
   </nav>
 );

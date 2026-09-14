@@ -1,50 +1,43 @@
 import Link from 'next/link';
 
 import { AppIcon } from '@/components/portfolio/AppIcon';
-import { GlyphIcon } from '@/components/portfolio/GlyphIcon';
 import { ROUTES } from '@/constants/routes';
-import { INNER_PAGE_PANEL_CLASS } from '@/constants/styles/component-styles.constants';
 import type { ArticleCardDefinition } from '@/types/article.types';
 
-export const ArticleCard = ({ article }: { article: ArticleCardDefinition }) => (
-  <article
-    className={`${INNER_PAGE_PANEL_CLASS} group overflow-hidden transition hover:-translate-y-1 hover:border-[#2d8b67]`}
-  >
-    <div className="relative grid min-h-[160px] place-items-center overflow-hidden border-b border-panel-border bg-[#081914]">
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 [background-image:linear-gradient(rgba(89,236,176,.08)_1px,transparent_1px),linear-gradient(90deg,rgba(89,236,176,.08)_1px,transparent_1px)] [background-size:28px_28px] opacity-40"
-      />
-      <span className="relative grid size-16 place-items-center rounded-[18px] border border-[#2b7257] bg-[#0a211a] text-[#42dfab] shadow-[0_0_42px_rgba(89,236,176,.08)] transition group-hover:scale-105">
-        <GlyphIcon glyph={article.glyph} className="size-8" />
-      </span>
-      <span className="absolute top-4 right-4 rounded-full border border-[#27775a] bg-[#071713]/80 px-3 py-1 text-[10px] text-accent">
-        {article.category}
-      </span>
+export const ArticleCard = ({ article, index }: { article: ArticleCardDefinition; index: number }) => (
+  <article className="group grid gap-5 border-b border-border py-8 sm:grid-cols-[110px_1fr_auto] sm:items-start sm:py-10">
+    <div className="font-mono text-[11px] leading-5 text-foreground-muted">
+      <span className="block">0{index + 1}</span>
+      <time className="mt-2 block">{article.publishedAt}</time>
     </div>
-    <div className="p-5">
-      <div className="flex flex-wrap items-center gap-3 font-mono text-[10px] text-[#8ca198]">
-        <span className="inline-flex items-center gap-1">
-          <AppIcon name="article" className="size-3" />
-          {article.publishedAt}
-        </span>
+
+    <div>
+      <div className="flex flex-wrap items-center gap-3 text-[11px] font-semibold text-foreground-muted">
+        <span className="text-primary">{article.category}</span>
+        <span aria-hidden="true">·</span>
         <span>{article.readingTime}</span>
       </div>
-      <h2 className="mt-3 text-[21px] leading-[1.12] font-bold tracking-[-.025em]">{article.title}</h2>
-      <p className="mt-3 text-[13px] leading-[1.6] text-[#aebdb6]">{article.description}</p>
-      <div className="mt-4 flex flex-wrap gap-2">
+      <h2 className="mt-3 max-w-[760px] text-[clamp(1.65rem,3vw,2.4rem)] leading-[1.08] font-semibold tracking-[-.04em] text-foreground transition group-hover:text-primary">
+        <Link href={ROUTES.article(article.slug)}>{article.title}</Link>
+      </h2>
+      <p className="mt-4 max-w-[780px] text-[14px] leading-7 text-foreground-secondary sm:text-[15px]">
+        {article.description}
+      </p>
+      <div className="mt-5 flex flex-wrap gap-2">
         {article.tags.slice(0, 3).map((tag) => (
-          <span className="rounded-full border border-[#27775a] px-2.5 py-1 text-[10px]" key={tag}>
+          <span className="rounded-full bg-surface-muted px-3 py-1.5 text-[11px] text-foreground-secondary" key={tag}>
             {tag}
           </span>
         ))}
       </div>
-      <Link
-        className="mt-5 inline-flex items-center gap-1 text-[13px] font-semibold text-accent"
-        href={ROUTES.article(article.slug)}
-      >
-        Read Article <AppIcon name="arrow-right" className="size-4" />
-      </Link>
     </div>
+
+    <Link
+      className="inline-flex size-11 items-center justify-center rounded-full border border-border-strong text-foreground-secondary transition group-hover:border-primary-muted group-hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+      href={ROUTES.article(article.slug)}
+      aria-label={`Read ${article.title}`}
+    >
+      <AppIcon name="arrow-right" className="size-4" />
+    </Link>
   </article>
 );

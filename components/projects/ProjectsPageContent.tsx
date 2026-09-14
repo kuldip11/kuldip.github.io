@@ -1,76 +1,119 @@
-import { AppIcon } from '@/components/portfolio/AppIcon';
-import { Eyebrow, InnerPageBackdrop, Pills, ProjectCard } from '@/components/portfolio/InnerPageUi';
+import { ProjectVisual } from '@/components/portfolio/InnerPageUi';
+import { ProjectCard } from '@/components/projects/ProjectCard';
+import { ActionLink, Badge, PageContainer, Section, SectionHeading, SurfaceCard } from '@/components/ui';
+import { FEATURE_FLAGS } from '@/constants/config/feature-flags.constants';
 import { projects } from '@/constants/data/projects';
 import { PROJECTS_PAGE_CONTENT } from '@/constants/pages/projects.constants';
 import { ROUTES } from '@/constants/routes';
 
+const [featuredProject, ...otherProjects] = projects;
+
 export const ProjectsPageContent = () => (
-  <InnerPageBackdrop>
-    <section className="relative mx-auto max-w-[1500px] px-5 py-10 sm:px-8 sm:py-14 lg:px-12">
-      <div className="grid gap-8 lg:grid-cols-[1fr_.85fr] lg:items-center">
-        <div>
-          <Eyebrow>{PROJECTS_PAGE_CONTENT.eyebrow}</Eyebrow>
-          <h1 className="mt-2 text-[clamp(2.8rem,5vw,4.9rem)] leading-none font-bold tracking-[-.055em] text-accent">
-            {PROJECTS_PAGE_CONTENT.title}
-          </h1>
-          <h2 className="mt-2 text-[24px] font-bold tracking-[-.03em] sm:text-[30px]">
-            {PROJECTS_PAGE_CONTENT.subtitle}
-          </h2>
-          <p className="mt-4 max-w-[680px] text-[14px] leading-[1.65] text-[#b5c4bd] sm:text-[16px]">
+  <main id="main-content" tabIndex={-1} className="min-h-screen bg-page text-foreground">
+    <Section className="pt-16 pb-12 sm:pt-20 sm:pb-16 lg:pt-24">
+      <PageContainer>
+        <p className="text-[12px] font-bold tracking-[.16em] text-primary uppercase">{PROJECTS_PAGE_CONTENT.eyebrow}</p>
+        <div className="mt-3 grid gap-7 lg:grid-cols-[1.1fr_.9fr] lg:items-end">
+          <div>
+            <h1 className="max-w-[800px] text-[clamp(2.5rem,7vw,6.6rem)] leading-[.94] font-semibold tracking-[-.065em] text-foreground">
+              {PROJECTS_PAGE_CONTENT.title}
+            </h1>
+            <h2 className="mt-5 text-[clamp(1.45rem,2.6vw,2.3rem)] font-medium tracking-[-.035em] text-foreground-secondary">
+              {PROJECTS_PAGE_CONTENT.subtitle}
+            </h2>
+          </div>
+          <p className="max-w-[620px] text-[15px] leading-[1.75] text-foreground-secondary sm:text-[16px] lg:justify-self-end">
             {PROJECTS_PAGE_CONTENT.description}
           </p>
         </div>
-        <div className="grid grid-cols-[1fr_.8fr] items-center gap-5 rounded-[20px] border border-panel-border bg-[#071713]/80 p-5">
-          <div className="grid min-h-[180px] place-items-center rounded-[16px] border border-[#245b45] bg-[#081d17] text-center font-mono text-[24px] leading-tight text-accent">
-            {PROJECTS_PAGE_CONTENT.heroWords.map((word) => (
-              <span className="block" key={word}>
-                {word}
-              </span>
-            ))}
+      </PageContainer>
+    </Section>
+
+    {featuredProject ? (
+      <PageContainer className="pb-16 sm:pb-20">
+        <article className="overflow-hidden rounded-[30px] border border-border bg-surface shadow-card">
+          <div className="grid lg:grid-cols-[.82fr_1.18fr]">
+            <div className="flex flex-col p-6 sm:p-9 lg:p-11">
+              <div className="flex flex-wrap items-center gap-3">
+                <Badge>{PROJECTS_PAGE_CONTENT.featuredLabel}</Badge>
+                <span className="text-[12px] font-medium text-foreground-muted">{featuredProject.category}</span>
+              </div>
+              <h2 className="mt-6 text-[clamp(2.5rem,5vw,4.8rem)] leading-[.96] font-semibold tracking-[-.06em] text-foreground">
+                {featuredProject.name}
+              </h2>
+              <p className="mt-5 max-w-[620px] text-[15px] leading-[1.72] text-foreground-secondary sm:text-[16px]">
+                {featuredProject.description}
+              </p>
+              <ul className="mt-7 grid list-none gap-3 p-0 sm:grid-cols-3 lg:grid-cols-1">
+                {featuredProject.stats.map((stat) => (
+                  <li
+                    className="flex items-center gap-2 text-[13px] font-semibold text-foreground-secondary"
+                    key={stat}
+                  >
+                    <span className="size-1.5 rounded-full bg-primary" aria-hidden="true" />
+                    {stat}
+                  </li>
+                ))}
+              </ul>
+              <ActionLink className="mt-8 lg:mt-auto lg:self-start" href={ROUTES.project(featuredProject.slug)}>
+                {PROJECTS_PAGE_CONTENT.readCaseStudyLabel}
+              </ActionLink>
+            </div>
+            <div className="min-h-[340px] bg-primary-soft p-5 sm:min-h-[430px] sm:p-8 lg:min-h-[520px] lg:p-10">
+              <div className="h-full min-h-[300px] overflow-hidden rounded-[24px] border border-primary-muted bg-foreground p-3 shadow-feature sm:min-h-[360px] sm:p-5 lg:min-h-[440px]">
+                <ProjectVisual variant={featuredProject.caseStudy.visualVariant} />
+              </div>
+            </div>
           </div>
-          <ul className="space-y-5 text-[14px] font-semibold text-[#dbe6e0]">
-            {PROJECTS_PAGE_CONTENT.heroPoints.map((point) => (
-              <li className="flex items-center gap-2" key={point}>
-                <AppIcon name="apps" className="size-4 text-accent" />
-                {point}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-      <div className="mt-7 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-        <Pills items={PROJECTS_PAGE_CONTENT.filters} />
-      </div>
-      <div className="mt-6 grid gap-4 lg:grid-cols-2">
-        {projects.map((project) => (
-          <ProjectCard
-            key={project.slug}
-            slug={project.slug}
-            title={project.name}
-            copy={project.description}
-            variant={project.caseStudy.visualVariant}
-            tags={project.tags.slice(0, 4)}
-            badge={project.featured ? 'Featured' : undefined}
-            category={project.category}
-            ariaLabel={project.seoTitle}
+        </article>
+      </PageContainer>
+    ) : null}
+
+    <Section className="border-y border-border bg-surface-muted">
+      <PageContainer>
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <SectionHeading
+            eyebrow={PROJECTS_PAGE_CONTENT.moreWork.eyebrow}
+            title={PROJECTS_PAGE_CONTENT.moreWork.title}
+            description={PROJECTS_PAGE_CONTENT.moreWork.description}
           />
-        ))}
-      </div>
-      <div className="mt-5 flex flex-col gap-4 rounded-[18px] border border-panel-border bg-[#071713]/90 p-5 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h3 className="flex items-center gap-2 text-[17px] font-bold">
-            <AppIcon name="performance" className="size-[18px] text-accent" />
-            {PROJECTS_PAGE_CONTENT.footerCta.title}
-          </h3>
-          <p className="mt-1 text-[13px] text-[#aebdb6]">{PROJECTS_PAGE_CONTENT.footerCta.copy}</p>
         </div>
-        <a
-          className="inline-flex items-center gap-1 rounded-full border border-[#45dba4] px-5 py-3 text-[12px] font-semibold text-accent"
-          href={ROUTES.articles}
-        >
-          {PROJECTS_PAGE_CONTENT.footerCta.linkLabel} <AppIcon name="arrow-right" className="size-4" />
-        </a>
-      </div>
-    </section>
-  </InnerPageBackdrop>
+
+        <div className="mt-9 grid gap-6 md:grid-cols-2">
+          {otherProjects.map((project) => (
+            <ProjectCard key={project.slug} project={project} />
+          ))}
+          <SurfaceCard className="flex min-h-[320px] flex-col justify-end border-dashed bg-surface/60 p-6 sm:p-8">
+            <span className="text-[11px] font-bold tracking-[.14em] text-foreground-muted uppercase">
+              {PROJECTS_PAGE_CONTENT.comingSoon.eyebrow}
+            </span>
+            <h3 className="mt-3 max-w-[420px] text-[26px] font-semibold tracking-[-.04em] text-foreground">
+              {PROJECTS_PAGE_CONTENT.comingSoon.title}
+            </h3>
+            <p className="mt-3 max-w-[480px] text-[14px] leading-[1.7] text-foreground-secondary">
+              {PROJECTS_PAGE_CONTENT.comingSoon.description}
+            </p>
+          </SurfaceCard>
+        </div>
+      </PageContainer>
+    </Section>
+
+    {FEATURE_FLAGS.articles ? (
+      <Section className="py-16 sm:py-16 lg:py-16">
+        <PageContainer className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+          <div>
+            <h2 className="text-[24px] font-semibold tracking-[-.035em] text-foreground">
+              {PROJECTS_PAGE_CONTENT.footerCta.title}
+            </h2>
+            <p className="mt-2 max-w-[680px] text-[14px] leading-[1.7] text-foreground-secondary">
+              {PROJECTS_PAGE_CONTENT.footerCta.copy}
+            </p>
+          </div>
+          <ActionLink href={ROUTES.articles} variant="text">
+            {PROJECTS_PAGE_CONTENT.footerCta.linkLabel}
+          </ActionLink>
+        </PageContainer>
+      </Section>
+    ) : null}
+  </main>
 );

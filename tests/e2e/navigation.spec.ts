@@ -5,23 +5,26 @@ test.describe('Navigation', () => {
     await page.goto('/');
   });
 
-  test('navigates to projects section', async ({ page }) => {
-    await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Projects' }).click();
-    await expect(page).toHaveURL(/#work$/);
+  test('navigates to primary portfolio routes from the global navigation', async ({ page }) => {
+    const navigation = page.getByRole('navigation', { name: 'Main navigation' });
+
+    await navigation.getByRole('link', { name: 'Projects' }).click();
+    await expect(page).toHaveURL(/\/projects$/);
+
+    await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Articles' }).click();
+    await expect(page).toHaveURL(/\/articles$/);
+
+    await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'About' }).click();
+    await expect(page).toHaveURL(/\/about$/);
+
+    await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Résumé' }).click();
+    await expect(page).toHaveURL(/\/resume$/);
   });
 
-  test('navigates to experience section', async ({ page }) => {
-    await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Experience' }).click();
-    await expect(page).toHaveURL(/#experience$/);
-  });
-
-  test('navigates to approach section', async ({ page }) => {
-    await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Approach' }).click();
-    await expect(page).toHaveURL(/#approach$/);
-  });
-
-  test('returns to the top section', async ({ page }) => {
-    await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Home' }).click();
-    await expect(page).toHaveURL(/#top$/);
+  test('marks the active primary route', async ({ page }) => {
+    await page.goto('/projects/servora');
+    await expect(
+      page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Projects' }),
+    ).toHaveAttribute('aria-current', 'page');
   });
 });

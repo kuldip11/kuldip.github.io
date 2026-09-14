@@ -12,7 +12,7 @@ export const siteConfig = {
   description:
     'Kuldip Kumar Sah is a Senior Frontend Engineer specializing in React, Next.js, TypeScript, frontend architecture and high-performance web applications.',
 
-  socialDescription: 'I build frontend systems that stay fast as products get complex.',
+  socialDescription: 'Senior Frontend Engineer building frontend systems that stay fast as products get complex.',
 
   email: 'kuldipkumarsah112@gmail.com',
 

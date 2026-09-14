@@ -1,17 +1,26 @@
 import { defineConfig, devices } from '@playwright/test';
 
+const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? 'http://localhost:3000';
+
 export default defineConfig({
   testDir: './tests/e2e',
-  fullyParallel: true,
+  fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  workers: 1,
   reporter: 'html',
 
   use: {
-    baseURL: 'http://localhost:3000',
+    baseURL,
     ...(process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH
-      ? { launchOptions: { executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH } }
+      ? {
+          launchOptions: {
+            executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
+            args: process.env.PLAYWRIGHT_CHROMIUM_ARGS
+              ? process.env.PLAYWRIGHT_CHROMIUM_ARGS.split(' ').filter(Boolean)
+              : undefined,
+          },
+        }
       : {}),
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
@@ -19,9 +28,9 @@ export default defineConfig({
   },
 
   webServer: {
-    command: 'bun run dev',
-    url: 'http://localhost:3000',
-    reuseExistingServer: !process.env.CI,
+    command: process.env.PLAYWRIGHT_WEB_SERVER_COMMAND ?? 'bun run dev:e2e',
+    url: baseURL,
+    reuseExistingServer: false,
   },
 
   projects: [

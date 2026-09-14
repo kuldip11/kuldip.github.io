@@ -16,11 +16,15 @@ export type AppIconName =
   | 'experience'
   | 'featured'
   | 'mail'
+  | 'message-circle'
+  | 'moon'
   | 'performance'
   | 'plus'
   | 'refresh'
   | 'summary'
-  | 'testing';
+  | 'sun'
+  | 'testing'
+  | 'x';
 
 interface AppIconProps {
   name: AppIconName;
@@ -100,6 +104,13 @@ export const AppIcon = ({ name, className = 'size-4', strokeWidth = 1.8 }: AppIc
         <path d="m4 7 8 6 8-6" />
       </>
     ),
+    moon: <path d="M20 15.2A8 8 0 0 1 8.8 4 8.5 8.5 0 1 0 20 15.2Z" />,
+    'message-circle': (
+      <>
+        <path d="M21 11.5a8.4 8.4 0 0 1-9 8.5 8.7 8.7 0 0 1-4-.95L3 20l1.25-4.35A8.2 8.2 0 0 1 3 11.5a8.5 8.5 0 0 1 18 0Z" />
+        <path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01" />
+      </>
+    ),
     performance: (
       <>
         <path d="M4 16a8 8 0 1 1 16 0" />
@@ -111,6 +122,12 @@ export const AppIcon = ({ name, className = 'size-4', strokeWidth = 1.8 }: AppIc
       <>
         <path d="M20 6v5h-5" />
         <path d="M19 11a7 7 0 1 0 .2 3" />
+      </>
+    ),
+    sun: (
+      <>
+        <circle cx="12" cy="12" r="3.5" />
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42" />
       </>
     ),
     summary: (
@@ -125,6 +142,7 @@ export const AppIcon = ({ name, className = 'size-4', strokeWidth = 1.8 }: AppIc
         <path d="M8 13h8M8 3h8" />
       </>
     ),
+    x: <path d="M6 6l12 12M18 6 6 18" />,
   } satisfies Record<AppIconName, ReactNode>;
 
   return (

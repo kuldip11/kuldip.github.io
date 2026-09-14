@@ -31,7 +31,7 @@ test.describe('Resume page', () => {
 
     await expect(
       page.getByRole('heading', {
-        name: 'Servora · Full-Stack Restaurant OS',
+        name: 'Servora · SaaS / Restaurant POS',
         exact: true,
       }),
     ).toBeVisible();

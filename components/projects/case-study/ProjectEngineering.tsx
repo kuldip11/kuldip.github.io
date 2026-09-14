@@ -1,30 +1,30 @@
 import { AppIcon } from '@/components/portfolio/AppIcon';
-import { INNER_PAGE_PANEL_CLASS } from '@/constants/styles/component-styles.constants';
 import type { ProjectSection } from '@/types/project.types';
 
 export const ProjectEngineering = ({ sections }: { sections: readonly ProjectSection[] }) => (
-  <section className="mt-4 grid gap-4 lg:grid-cols-2" id="engineering">
-    {sections.map((section, index) => (
-      <article className={`${INNER_PAGE_PANEL_CLASS} relative overflow-hidden p-5 sm:p-6`} key={section.id}>
-        <div aria-hidden="true" className="absolute -top-20 -right-20 size-52 rounded-full bg-accent/5 blur-3xl" />
-        <p className="relative font-mono text-[9px] tracking-[.16em] text-accent uppercase">{section.eyebrow}</p>
-        <h2 className="relative mt-2 max-w-[580px] text-[24px] leading-[1.08] font-bold tracking-[-.035em]">
-          {section.title}
-        </h2>
-        <p className="relative mt-4 text-[13px] leading-[1.7] text-[#afc0b7]">{section.copy}</p>
-        {section.items ? (
-          <ul className="relative mt-5 space-y-3">
-            {section.items.map((item) => (
-              <li className="flex gap-3 text-[12px] leading-[1.55] text-[#c5d2cc]" key={item}>
-                <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full border border-[#2a7559] text-accent">
-                  <AppIcon name={index === 0 ? 'code' : 'summary'} className="size-3" />
-                </span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        ) : null}
-      </article>
-    ))}
+  <section className="scroll-mt-32 border-y border-border bg-surface-muted py-16 sm:py-20" id="engineering">
+    <div className="grid gap-8 lg:grid-cols-2 lg:gap-10">
+      {sections.map((section, index) => (
+        <article key={section.id}>
+          <p className="text-[11px] font-bold tracking-[.14em] text-primary uppercase">{section.eyebrow}</p>
+          <h2 className="mt-3 max-w-[600px] text-[clamp(1.8rem,3vw,3rem)] leading-[1.08] font-semibold tracking-[-.045em] text-foreground">
+            {section.title}
+          </h2>
+          <p className="mt-4 text-[14px] leading-[1.75] text-foreground-secondary">{section.copy}</p>
+          {section.items ? (
+            <ul className="mt-6 grid list-none gap-3 p-0">
+              {section.items.map((item) => (
+                <li className="flex gap-3 text-[13px] leading-[1.65] text-foreground-secondary" key={item}>
+                  <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-primary-soft text-primary">
+                    <AppIcon name={index === 0 ? 'code' : 'summary'} className="size-3.5" />
+                  </span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </article>
+      ))}
+    </div>
   </section>
 );

@@ -1,100 +1,145 @@
 import Link from 'next/link';
 
 import { AppIcon } from '@/components/portfolio/AppIcon';
+import { PageContainer, Section } from '@/components/ui';
 import { projects } from '@/constants/data/projects';
+import { HOME_PAGE_CONTENT } from '@/constants/pages/home.constants';
 import { ROUTES } from '@/constants/routes';
 
 import { ProjectMock } from './ProjectMock';
-import { SectionLabel } from './SectionLabel';
 
-const featuredProjects = projects.slice(0, 2);
+const [servora, secondaryProject] = projects;
+const featured = HOME_PAGE_CONTENT.featured;
 
 export const FeaturedWork = () => (
-  <>
-    <section
-      className="relative grid w-full grid-cols-2 gap-3 px-5 pb-5 sm:px-8 wide:grid-cols-[1.54fr_.74fr_.74fr] wide:gap-4 desktop:grid-cols-[1.54fr_.48fr_.48fr] desktop:px-12"
-      id="work"
-    >
-      <article className="col-span-2 rounded-[18px] border border-panel-border bg-[#061612e8] p-4 shadow-[0_18px_60px_rgba(0,0,0,.2)] wide:col-span-1">
-        <div className="mb-3 flex items-end justify-between gap-4">
-          <div>
-            <SectionLabel>Featured Projects</SectionLabel>
-            <h2 className="mt-1 mb-0 text-[clamp(2rem,2.8vw,3rem)] leading-none font-semibold tracking-[-.05em] max-hero:hidden">
-              Real projects. Real impact.
-            </h2>
-          </div>
-          <Link
-            className="hidden text-[13px] font-medium text-[#57eeb0] hover:text-white sm:block"
-            href={ROUTES.projects}
-          >
-            View all projects&nbsp; <AppIcon name="arrow-right" className="size-4" />
-          </Link>
-        </div>
-        <div className="grid grid-cols-2 gap-3">
-          {featuredProjects.map((project) => (
-            <Link
-              href={ROUTES.project(project.slug)}
-              className="group grid min-h-[132px] grid-cols-1 gap-3 rounded-[14px] border border-[#1f4e3c] bg-[#0a1b16] p-3 transition hover:border-[#4ae7a36b] sm:grid-cols-[.42fr_1fr]"
-              key={project.slug}
-            >
-              <div className="order-2 sm:order-1">
-                <ProjectMock variant={project.mockVariant} />
-              </div>
-              <div className="order-1 flex min-w-0 flex-col justify-center sm:order-2">
-                <span className="mb-1 w-max rounded-full border border-[#27775a] px-2 py-0.5 text-[10px] text-[#70eeb7]">
-                  {project.category}
-                </span>
-                <h3 className="m-0 text-[16px] font-semibold">{project.name}</h3>
-                <p className="my-1 line-clamp-3 text-[12px] leading-[1.4] text-[#aab9b2]">{project.description}</p>
-                <span className="mt-auto inline-flex items-center gap-1 text-[11px] font-medium text-[#57eeb0]">
-                  View project&nbsp; <AppIcon name="arrow-right" className="size-3.5" />
-                </span>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </article>
-      <article className="rounded-[18px] border border-panel-border bg-[#071813e8] p-4" id="experience">
-        <SectionLabel>Experience</SectionLabel>
-        <div className="mt-3 flex flex-col items-start gap-3 sm:flex-row">
-          <span className="grid size-9 shrink-0 place-items-center rounded-full border border-[#2a7659] text-[18px] text-[#55eeb0]">
-            <AppIcon name="briefcase" className="size-[18px]" />
-          </span>
-          <h2 className="m-0 text-[20px] leading-[1.12] font-semibold tracking-[-.03em]">
-            A journey of growth and impact.
+  <Section className="relative py-20 sm:py-24" id="work">
+    <PageContainer>
+      <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="text-[12px] font-bold tracking-[.16em] text-primary uppercase">{featured.eyebrow}</p>
+          <h2 className="mt-3 max-w-[760px] text-[clamp(2.25rem,4.6vw,4.2rem)] leading-[1.03] font-semibold tracking-[-.055em] text-foreground">
+            {featured.title}
           </h2>
         </div>
-        <p className="mt-4 text-[12px] leading-[1.5] text-[#aebdb6]">
-          From building features to owning products, I&apos;ve worked across diverse teams and challenging problems.
-        </p>
-        <a className="mt-4 inline-flex items-center text-[12px] font-medium text-[#55eeb0]" href="#experience-detail">
-          View timeline&nbsp; <AppIcon name="arrow-right" className="size-3.5" />
-        </a>
-      </article>
-      <article
-        className="rounded-[18px] border border-panel-border bg-[radial-gradient(circle_at_100%_100%,rgba(62,236,167,.12),transparent_45%),#071813e8] p-4"
-        id="approach"
-      >
-        <SectionLabel>My Approach</SectionLabel>
-        <div className="mt-3 flex flex-col items-start gap-3 sm:flex-row">
-          <span className="grid size-9 shrink-0 place-items-center rounded-full border border-[#2a7659] text-[18px] text-[#55eeb0]">
-            <AppIcon name="architecture" className="size-[18px]" />
-          </span>
-          <h2 className="m-0 text-[20px] leading-[1.12] font-semibold tracking-[-.03em]">
-            Thoughtful solutions, lasting results.
-          </h2>
-        </div>
-        <p className="mt-4 text-[12px] leading-[1.5] text-[#aebdb6]">
-          I care about user needs, clean architecture, accessibility and measurable impact.
-        </p>
-        <a className="mt-4 inline-flex items-center text-[12px] font-medium text-[#55eeb0]" href="/about">
-          Learn more&nbsp; <AppIcon name="arrow-right" className="size-3.5" />
-        </a>
-      </article>
-    </section>
+        <Link
+          className="inline-flex min-h-11 w-max items-center gap-2 text-[13px] font-semibold text-primary hover:text-primary-hover"
+          href={ROUTES.projects}
+        >
+          {featured.viewAllLabel} <AppIcon name="arrow-right" className="size-4" />
+        </Link>
+      </div>
 
-    <div id="experience-detail" className="sr-only">
-      Detailed experience is available from the Experience navigation and résumé page.
-    </div>
-  </>
+      <article className="mt-10 overflow-hidden rounded-[30px] border border-border bg-surface shadow-feature">
+        <div className="grid wide:grid-cols-[.86fr_1.14fr] desktop:grid-cols-[.82fr_1.18fr]">
+          <div className="flex flex-col p-6 sm:p-9 desktop:p-11">
+            <span className="w-max rounded-full bg-primary-soft px-3 py-1.5 text-[11px] font-bold tracking-[.08em] text-primary uppercase">
+              {servora.category}
+            </span>
+            <h3 className="mt-5 text-[clamp(2rem,4vw,3.5rem)] leading-none font-semibold tracking-[-.05em] text-foreground">
+              {servora.name}
+            </h3>
+            <p className="mt-5 text-[15px] leading-[1.7] text-foreground-secondary sm:text-[16px]">
+              {servora.description}
+            </p>
+            <ul className="mt-7 grid list-none gap-3 p-0 sm:grid-cols-3 desktop:grid-cols-1">
+              {servora.stats.map((stat) => (
+                <li className="flex items-center gap-2 text-[13px] font-semibold text-foreground-secondary" key={stat}>
+                  <span className="size-1.5 rounded-full bg-primary" aria-hidden="true" />
+                  {stat}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-8 flex flex-wrap gap-3 desktop:mt-auto desktop:pt-9">
+              <Link
+                className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-foreground px-4 text-[13px] font-semibold text-primary-foreground transition hover:bg-primary"
+                href={ROUTES.project(servora.slug)}
+              >
+                {featured.projectActionLabel} <AppIcon name="arrow-right" className="size-4" />
+              </Link>
+              <a
+                className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-border-strong px-4 text-[13px] font-semibold text-foreground transition hover:bg-surface-muted"
+                href={servora.caseStudy.liveDemoHref}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {featured.liveActionLabel} <AppIcon name="arrow-up-right" className="size-4" />
+              </a>
+            </div>
+          </div>
+          <div className="min-h-[320px] bg-primary-soft/55 p-5 sm:min-h-[420px] sm:p-8 desktop:min-h-[500px] desktop:p-10">
+            <div className="h-full min-h-[280px] overflow-hidden rounded-[22px] border border-primary-muted bg-foreground p-3 shadow-feature sm:min-h-[360px] sm:p-5 desktop:min-h-[420px]">
+              <ProjectMock variant={servora.mockVariant} />
+            </div>
+          </div>
+        </div>
+      </article>
+
+      {secondaryProject ? (
+        <div className="mt-6 grid gap-6 wide:grid-cols-[1.05fr_.95fr]">
+          <Link
+            href={ROUTES.project(secondaryProject.slug)}
+            className="group grid overflow-hidden rounded-[24px] border border-border bg-surface transition hover:-translate-y-0.5 hover:border-border-strong hover:shadow-card sm:grid-cols-[.9fr_1.1fr]"
+          >
+            <div className="min-h-[220px] bg-secondary-soft p-5">
+              <div className="h-full min-h-[180px] overflow-hidden rounded-[16px] bg-foreground p-3">
+                <ProjectMock variant={secondaryProject.mockVariant} />
+              </div>
+            </div>
+            <div className="flex flex-col p-6">
+              <span className="text-[11px] font-bold tracking-[.1em] text-secondary uppercase">
+                {secondaryProject.category}
+              </span>
+              <h3 className="mt-3 text-[26px] font-semibold tracking-[-.04em] text-foreground">
+                {secondaryProject.name}
+              </h3>
+              <p className="mt-3 text-[13px] leading-[1.65] text-foreground-secondary">
+                {secondaryProject.description}
+              </p>
+              <span className="mt-6 inline-flex items-center gap-2 text-[13px] font-semibold text-primary sm:mt-auto sm:pt-6">
+                {featured.projectActionLabel}{' '}
+                <AppIcon name="arrow-right" className="size-4 transition-transform group-hover:translate-x-1" />
+              </span>
+            </div>
+          </Link>
+
+          <div className="grid gap-6 sm:grid-cols-2 wide:grid-cols-1">
+            <article className="rounded-[24px] border border-border bg-surface p-6" id="experience">
+              <p className="text-[11px] font-bold tracking-[.12em] text-primary uppercase">
+                {HOME_PAGE_CONTENT.experience.eyebrow}
+              </p>
+              <h3 className="mt-3 text-[23px] leading-[1.12] font-semibold tracking-[-.04em] text-foreground">
+                {HOME_PAGE_CONTENT.experience.title}
+              </h3>
+              <p className="mt-4 text-[13px] leading-[1.65] text-foreground-secondary">
+                {HOME_PAGE_CONTENT.experience.description}
+              </p>
+              <Link
+                className="mt-5 inline-flex min-h-11 items-center gap-2 text-[13px] font-semibold text-primary"
+                href={HOME_PAGE_CONTENT.experience.actionHref}
+              >
+                {HOME_PAGE_CONTENT.experience.actionLabel} <AppIcon name="arrow-right" className="size-4" />
+              </Link>
+            </article>
+            <article className="rounded-[24px] border border-border bg-surface-muted p-6">
+              <p className="text-[11px] font-bold tracking-[.12em] text-secondary uppercase">
+                {HOME_PAGE_CONTENT.approach.eyebrow}
+              </p>
+              <h3 className="mt-3 text-[23px] leading-[1.12] font-semibold tracking-[-.04em] text-foreground">
+                {HOME_PAGE_CONTENT.approach.title}
+              </h3>
+              <p className="mt-4 text-[13px] leading-[1.65] text-foreground-secondary">
+                {HOME_PAGE_CONTENT.approach.description}
+              </p>
+              <Link
+                className="mt-5 inline-flex min-h-11 items-center gap-2 text-[13px] font-semibold text-primary"
+                href={HOME_PAGE_CONTENT.approach.actionHref}
+              >
+                {HOME_PAGE_CONTENT.approach.actionLabel} <AppIcon name="arrow-right" className="size-4" />
+              </Link>
+            </article>
+          </div>
+        </div>
+      ) : null}
+    </PageContainer>
+  </Section>
 );
