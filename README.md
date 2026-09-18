@@ -79,6 +79,45 @@ Then run:
 bun run start
 ```
 
+## Docker
+
+The portfolio includes a production multi-stage Docker build. Dependencies and the Next.js application are built with Bun, while the final container runs only the generated Next.js standalone server on Node.js as a non-root user.
+
+Build the image:
+
+```bash
+docker build \
+  --build-arg NEXT_PUBLIC_SITE_URL=http://localhost:3000 \
+  --build-arg NEXT_PUBLIC_ARTICLES_ENABLED=true \
+  -t kuldip-portfolio .
+```
+
+Run it:
+
+```bash
+docker run --rm -p 3000:3000 kuldip-portfolio
+```
+
+For server-side features, pass secrets only at runtime rather than baking them into the image:
+
+```bash
+docker run --rm -p 3000:3000 \
+  -e GEMINI_API_KEY \
+  -e CHAT_SESSION_SECRET \
+  -e RESUME_BLOB_URL \
+  -e UPSTASH_REDIS_REST_URL \
+  -e UPSTASH_REDIS_REST_TOKEN \
+  kuldip-portfolio
+```
+
+You can also use Docker Compose. Copy `.env.example` to `.env`, configure the values you need, then run:
+
+```bash
+docker compose up --build
+```
+
+`NEXT_PUBLIC_*` values are build-time settings. Server-only credentials are injected into the running container and are excluded from the Docker build context by `.dockerignore`.
+
 ## Article feature flag
 
 The Articles area is controlled by one public build-time flag:
